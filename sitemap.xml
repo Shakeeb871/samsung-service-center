@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Every <loc> is the canonical form: extension-less, with a trailing slash,
+  matching the <link rel="canonical"> each page prints. Listing a URL that
+  redirects wastes crawl budget.
+
+  Update the domain here at launch, along with SITE_URL in inc/config.php
+  and the Sitemap line in robots.txt.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://samsung.aiqonquickcool.com.my/</loc></url>
+  <url><loc>https://samsung.aiqonquickcool.com.my/services/</loc></url>
+  <url><loc>https://samsung.aiqonquickcool.com.my/services/samsung-refrigerator-repair/</loc></url>
+  <url><loc>https://samsung.aiqonquickcool.com.my/services/samsung-washing-machine-repair/</loc></url>
+  <url><loc>https://samsung.aiqonquickcool.com.my/services/samsung-ac-repair/</loc></url>
+  <url><loc>https://samsung.aiqonquickcool.com.my/services/samsung-dryer-repair/</loc></url>
+  <url><loc>https://samsung.aiqonquickcool.com.my/services/samsung-dishwasher-repair/</loc></url>
+  <url><loc>https://samsung.aiqonquickcool.com.my/services/samsung-oven-repair/</loc></url>
+  <url><loc>https://samsung.aiqonquickcool.com.my/about/</loc></url>
+  <url><loc>https://samsung.aiqonquickcool.com.my/contact/</loc></url>
+</urlset>

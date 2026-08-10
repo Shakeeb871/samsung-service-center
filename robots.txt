@@ -1,0 +1,14 @@
+# The site is on a staging subdomain. Every page sends a noindex header via
+# inc/config.php, and crawling is deliberately left open so that crawlers can
+# actually read that noindex. "Disallow: /" would block the crawl and the
+# noindex would never be seen, which is the opposite of what is wanted here.
+#
+# At launch: set IS_STAGING to false in inc/config.php and update the sitemap
+# line below to the live domain.
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /inc/
+
+Sitemap: https://samsung.aiqonquickcool.com.my/sitemap.xml
