@@ -1,0 +1,25 @@
+---
+# cPanel Git Version Control deployment.
+#
+# cPanel runs these tasks as your cPanel user when you click
+# "Deploy HEAD Commit" in cPanel > Files > Git Version Control.
+#
+# ---------------------------------------------------------------------
+# DEPLOYPATH must be the document root of samsung.aiqonquickcool.com.my.
+# Confirm the exact path in cPanel > Domains (it is shown next to the
+# subdomain) and change the line below if it differs. Common values:
+#
+#   $HOME/public_html/samsung
+#   $HOME/samsung.aiqonquickcool.com.my
+#
+# The trailing slash matters — without it cp can create a nested folder.
+# ---------------------------------------------------------------------
+#
+# Only site files are copied. README.md, .cpanel.yml and .git stay out of
+# the web root on purpose: the repo is cloned to ~/repositories/, never to
+# the document root itself, so nothing under .git is ever web-reachable.
+deployment:
+  tasks:
+    - export DEPLOYPATH=$HOME/public_html/samsung/
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -R index.html $DEPLOYPATH

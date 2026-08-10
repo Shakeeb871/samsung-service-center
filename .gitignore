@@ -1,0 +1,16 @@
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Local notes and scratch work that should not reach the server
+scratchpad/
+*.log
+
+# Never commit credentials — send.php style mail config, API keys, etc.
+.env
+config.local.php
