@@ -27,7 +27,7 @@ require __DIR__ . '/../inc/header.php';
         <div class="svc-body">
           <h3><?= $s['title'] ?></h3>
           <p><?= $s['body'] ?></p>
-          <a class="svc-link" href="/services/<?= $slug ?>/">View Service <?= icon('arrow', 17) ?></a>
+          <a class="btn btn-sm" href="/services/<?= $slug ?>/">View Service</a>
         </div>
       </article>
       <?php endforeach; ?>
