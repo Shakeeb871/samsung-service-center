@@ -178,14 +178,40 @@ ul { margin: 0; }
   color: #c2cee4;
   padding: 62px 0 0;
 }
-/* A faint dot field over the gradient. Flat colour across a block this
-   large looks unfinished; this gives it a surface without an image. */
+/* A faint dot field over the gradient, for when there is no photograph.
+   Flat colour across a block this large looks unfinished. */
 .hero::after {
   content: ""; position: absolute; inset: 0;
   background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px);
   background-size: 22px 22px;
   pointer-events: none;
 }
+
+/* --- Hero with a photograph ----------------------------------------
+   inc/media.php sets background-image only when the file exists, so
+   these rules simply do not apply until it does.
+
+   The overlay is a left-to-right gradient rather than a flat wash: it
+   stays opaque enough under the copy to keep the text at full contrast,
+   then thins across the right so the technician and the appliances are
+   actually visible. A photo darkened evenly is a photo nobody sees. */
+.hero[style*="background-image"] {
+  background-size: cover;
+  background-position: 72% center;
+  background-repeat: no-repeat;
+}
+.hero[style*="background-image"]::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg,
+    rgba(26,26,38,.95) 0%,
+    rgba(26,26,38,.90) 34%,
+    rgba(26,26,38,.62) 55%,
+    rgba(26,26,38,.28) 78%,
+    rgba(26,26,38,.18) 100%);
+  width: auto; height: auto; border-radius: 0;
+  pointer-events: none;
+}
+.hero[style*="background-image"]::after { opacity: .5; }
 /* One soft primary glow, off the right edge. It gives the flat dark
    panel some depth without needing a photograph. */
 .hero::before {
@@ -194,9 +220,12 @@ ul { margin: 0; }
   background: radial-gradient(circle, rgba(45,140,255,.42) 0%, rgba(45,140,255,0) 70%);
   pointer-events: none;
 }
-.hero .wrap { position: relative; z-index: 2; }
+.hero .wrap { position: relative; z-index: 3; }
 
-.hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 52px; align-items: center; }
+/* One column now. The ticks that used to sit on the right repeated the
+   two paragraphs almost word for word, and with a photograph behind the
+   hero that side belongs to the picture. */
+.hero-grid { max-width: 640px; }
 .hero h1 { color: #fff; margin-bottom: .5em; }
 .hero p { font-size: .96rem; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
@@ -553,7 +582,12 @@ ul { margin: 0; }
 }
 
 @media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  /* On a narrow screen the photo has no room to show beside the copy, so
+     the overlay closes up and the picture becomes texture behind it. */
+  .hero[style*="background-image"] { background-position: 62% center; }
+  .hero[style*="background-image"]::before {
+    background: linear-gradient(180deg, rgba(26,26,38,.94) 0%, rgba(26,26,38,.88) 60%, rgba(26,26,38,.92) 100%);
+  }
   .split, .media-split { grid-template-columns: 1fr; gap: 32px; }
   .foot-grid { grid-template-columns: 1fr 1fr; }
 }

@@ -31,3 +31,21 @@ function photo(string $path, string $alt, string $icon = 'tools'): string
          . '<span class="media-glyph">' . icon($icon, 96) . '</span>'
          . '</div>';
 }
+
+/**
+ * Background image for the hero, if one has been uploaded.
+ *
+ * Returns a style attribute or an empty string. When there is no file the
+ * hero keeps its gradient, so the section is never a grey box waiting on
+ * an upload.
+ */
+function hero_bg(string $path = '/assets/img/hero.jpg'): string
+{
+    $base = preg_replace('/\.[a-z0-9]+$/i', '', $path);
+    foreach (['.webp', '.jpg', '.jpeg', '.png'] as $ext) {
+        if (is_file(dirname(__DIR__) . $base . $ext)) {
+            return ' style="background-image:url(' . asset($base . $ext) . ')" data-has-photo="1"';
+        }
+    }
+    return '';
+}

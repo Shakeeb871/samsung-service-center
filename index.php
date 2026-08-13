@@ -5,7 +5,7 @@ $page_path  = '/';
 require __DIR__ . '/inc/header.php';
 ?>
 
-<section class="hero">
+<section class="hero"<?= hero_bg() ?>>
   <div class="wrap">
     <div class="hero-grid">
 
@@ -36,17 +36,6 @@ require __DIR__ . '/inc/header.php';
           <a class="btn" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 15) ?>Call Us</a>
           <a class="btn btn-outline" href="#book">Book Now</a>
         </div>
-      </div>
-
-      <div>
-        <ul class="hero-checks">
-          <li><?= icon('check', 14) ?><span>24/7 customer service, day or night</span></li>
-          <li><?= icon('check', 14) ?><span>Fast response within 1 hour on emergency call-outs</span></li>
-          <li><?= icon('check', 14) ?><span>Experienced Samsung specialist dispatched to your door</span></li>
-          <li><?= icon('check', 14) ?><span>Upfront quote on every repair, no hidden fees</span></li>
-          <li><?= icon('check', 14) ?><span>Full 90 day warranty on repairing</span></li>
-          <li><?= icon('check', 14) ?><span>Covering every state in the UAE</span></li>
-        </ul>
       </div>
 
     </div>
