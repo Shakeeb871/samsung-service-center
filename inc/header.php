@@ -27,7 +27,7 @@ $canonical  = SITE_URL . $page_path;
 <meta property="og:title" content="<?= htmlspecialchars($page_title) ?>">
 <meta property="og:description" content="<?= htmlspecialchars($page_desc) ?>">
 <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
-<meta name="theme-color" content="#1428A0">
+<meta name="theme-color" content="#2d8cff">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
