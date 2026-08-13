@@ -51,10 +51,10 @@ require __DIR__ . '/../inc/header.php';
 <section class="section section-grey">
   <div class="wrap">
     <div class="stats">
-      <div class="stat"><b>24/7</b><span>Customer service, day or night</span></div>
-      <div class="stat"><b>1 Hour</b><span>Emergency call-out response</span></div>
-      <div class="stat"><b>90 Day</b><span>Warranty on repairing</span></div>
-      <div class="stat"><b>7</b><span>Emirates covered</span></div>
+      <div class="stat"><?= icon('clock', 40) ?><b>24/7</b><span>Customer service, day or night</span></div>
+      <div class="stat"><?= icon('bolt', 40) ?><b>1 Hour</b><span>Emergency call-out response</span></div>
+      <div class="stat"><?= icon('shield', 40) ?><b>90 Day</b><span>Warranty on repairing</span></div>
+      <div class="stat"><?= icon('pin', 40) ?><b>7</b><span>Emirates covered</span></div>
     </div>
   </div>
 </section>
