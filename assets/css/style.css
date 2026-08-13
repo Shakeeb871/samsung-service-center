@@ -306,7 +306,7 @@ ul { margin: 0; }
    very narrow column of text.
    ------------------------------------------------------------------ */
 
-.svc-grid { display: flex; flex-wrap: wrap; gap: 26px; justify-content: center; }
+.svc-grid { display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; }
 
 .svc-card {
   display: flex; flex-direction: column;
@@ -319,28 +319,31 @@ ul { margin: 0; }
 }
 .svc-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); border-color: var(--primary); }
 
-.svc-media { margin: 14px 14px 0; border-radius: var(--r); overflow: hidden; background: #fff; }
+.svc-media { margin: 12px 12px 0; border-radius: var(--r); overflow: hidden; background: #fff; }
 .svc-media img,
 .svc-media .media-placeholder {
   display: block; width: 100%; aspect-ratio: 16 / 10;
   object-fit: cover; border-radius: var(--r);
 }
 /* The drawn stand-in, used per service until a photo is uploaded. */
+/* Plain panel, no glyph — the photograph is what goes here. */
 .svc-media .media-placeholder { border: 1px solid var(--primary-line); }
-.svc-media .media-placeholder .ico { width: 64px; height: 64px; }
 
 .svc-body {
   display: flex; flex-direction: column; flex: 1;
-  padding: 22px 24px 24px; text-align: center;
+  padding: 20px 22px 22px; text-align: center;
 }
-.svc-body h3 { margin-bottom: .6em; font-size: 1.14rem; }
+.svc-body h3 { margin-bottom: .55em; font-size: 1.05rem; }
 .svc-body h3 a { color: var(--secondary); text-decoration: none; }
 .svc-body h3 a:hover { color: var(--primary-ink); }
 /* The copy grows to fill, which keeps every button on the same baseline
    however long a description happens to be. */
-.svc-body p { font-size: .88rem; line-height: 1.78; margin-bottom: 1.4em; flex: 1; }
+/* Smaller and tighter than body copy elsewhere. Seven cards of five
+   sentences each at full size turned this into the longest section on
+   the page by a distance. */
+.svc-body p { font-size: .8rem; line-height: 1.68; margin-bottom: 1.25em; flex: 1; }
 
-.btn-block { width: 100%; padding: 12px 20px; }
+.btn-block { width: 100%; padding: 11px 18px; }
 
 /* --- Call bands ---------------------------------------------------- */
 

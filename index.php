@@ -118,7 +118,7 @@ require __DIR__ . '/inc/header.php';
       <?php foreach ($SERVICES as $slug => $s): ?>
       <article class="svc-card">
         <div class="svc-media">
-          <?= photo('/assets/img/services', $slug, strip_tags(html_entity_decode($s['title'])), $s['icon']) ?>
+          <?= photo('/assets/img/services', $slug, strip_tags(html_entity_decode($s['title'])), '') ?>
         </div>
         <div class="svc-body">
           <h3><a href="<?= url('/services/' . $slug . '/') ?>"><?= $s['title'] ?></a></h3>

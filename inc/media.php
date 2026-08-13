@@ -55,8 +55,12 @@ function photo(string $dir, string $name, string $alt, string $icon = 'tools'): 
              . htmlspecialchars($alt) . '" loading="lazy" decoding="async">';
     }
 
+    // An empty $icon gives a plain panel. The service cards use that:
+    // a drawn appliance where a photograph is going to be reads as the
+    // final design rather than as a space reserved for one.
+    $glyph = $icon === '' ? '' : icon($icon, 96);
     return '<div class="media-placeholder" role="img" aria-label="' . htmlspecialchars($alt) . '">'
-         . icon($icon, 96) . '</div>';
+         . $glyph . '</div>';
 }
 
 /**
