@@ -22,11 +22,13 @@ require __DIR__ . '/../inc/header.php';
     <div class="svc-grid">
       <?php foreach ($SERVICES as $slug => $s): ?>
       <article class="svc-card">
-        <div class="svc-figure"><?= icon($s['icon'], 56) ?></div>
+        <div class="svc-media">
+          <?= photo('/assets/img/services', $slug, strip_tags(html_entity_decode($s['title'])), $s['icon']) ?>
+        </div>
         <div class="svc-body">
-          <h3><?= $s['title'] ?></h3>
+          <h3><a href="<?= url('/services/' . $slug . '/') ?>"><?= $s['title'] ?></a></h3>
           <p><?= $s['body'] ?></p>
-          <a class="btn btn-sm" href="<?= url('/services/' . $slug . '/') ?>">View Service</a>
+          <a class="btn btn-block" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 16) ?>Call Us Now!</a>
         </div>
       </article>
       <?php endforeach; ?>

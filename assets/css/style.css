@@ -268,6 +268,7 @@ ul { margin: 0; }
    lightness, so the page gains structure without gaining a palette. */
 .section-tint  { background: var(--tint-1); }
 .section-grey  { background: var(--tint-grey); }
+.section-tint  { background: var(--tint-1); }
 .section-dark  { background: var(--secondary); color: #b8b8c8; }
 .section-dark h1, .section-dark h2, .section-dark h3 { color: #fff; }
 .section-dark /* The accent under each heading. With the eyebrow gone this is the only
@@ -294,43 +295,52 @@ ul { margin: 0; }
 
 /* --- Stats --------------------------------------------------------- */
 
-/* --- Service cards ------------------------------------------------- */
+/* --- Service cards -------------------------------------------------
+   Picture on top, then the title, the copy, and a call button running
+   the full width of the card. Flex rather than grid so the last row
+   centres itself — seven cards into rows of three would otherwise leave
+   the seventh stranded at the left edge.
 
-.svc-grid { display: grid; gap: 22px; grid-template-columns: repeat(2, 1fr); }
+   Three across, not four. The copy on these cards runs to four or five
+   sentences; at a quarter of the container that becomes a very tall,
+   very narrow column of text.
+   ------------------------------------------------------------------ */
+
+.svc-grid { display: flex; flex-wrap: wrap; gap: 26px; justify-content: center; }
 
 .svc-card {
-  position: relative; overflow: hidden;
-  display: grid; grid-template-columns: auto 1fr; gap: 22px;
-  background: #fff; border: 1px solid var(--line); border-radius: var(--r);
-  padding: 30px 28px;
-  box-shadow: var(--shadow-xs);
-  transition: box-shadow .22s, border-color .22s, transform .22s;
-}
-/* An accent that draws itself across the top on hover. It marks which
-   card has focus without moving anything the eye is already reading. */
-.svc-card::before {
-  content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 100%;
-  background: var(--primary);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform .28s ease;
-}
-.svc-card:hover { box-shadow: var(--shadow-md); border-color: var(--primary-line); transform: translateY(-4px); }
-.svc-card:hover::before { transform: scaleX(1); }
-/* Seven services into a two-column grid leaves the last one orphaned in
-   its own row. Spanning it reads as a deliberate close to the set rather
-   than a gap where an eighth card should be. */
-.svc-grid > .svc-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
-.svc-figure {
-  width: 74px; height: 74px;
-  display: grid; place-items: center;
-  background: linear-gradient(145deg, var(--primary) 0%, var(--primary-ink) 100%);
-  color: #fff;
+  display: flex; flex-direction: column;
+  flex: 1 1 320px; max-width: 380px;
+  background: var(--tint-1);
+  border: 1px solid var(--primary-line);
   border-radius: var(--r);
-  box-shadow: 0 6px 16px rgba(45,140,255,.30);
+  overflow: hidden;
+  transition: box-shadow .22s, transform .22s, border-color .22s;
 }
-.svc-figure .ico { width: 40px; height: 40px; }
-.svc-body h3 { margin-bottom: .5em; font-size: 1.14rem; }
-.svc-body p { font-size: .88rem; line-height: 1.78; margin-bottom: 1.2em; }
+.svc-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); border-color: var(--primary); }
+
+.svc-media { margin: 14px 14px 0; border-radius: var(--r); overflow: hidden; background: #fff; }
+.svc-media img,
+.svc-media .media-placeholder {
+  display: block; width: 100%; aspect-ratio: 16 / 10;
+  object-fit: cover; border-radius: var(--r);
+}
+/* The drawn stand-in, used per service until a photo is uploaded. */
+.svc-media .media-placeholder { border: 1px solid var(--primary-line); }
+.svc-media .media-placeholder .ico { width: 64px; height: 64px; }
+
+.svc-body {
+  display: flex; flex-direction: column; flex: 1;
+  padding: 22px 24px 24px; text-align: center;
+}
+.svc-body h3 { margin-bottom: .6em; font-size: 1.14rem; }
+.svc-body h3 a { color: var(--secondary); text-decoration: none; }
+.svc-body h3 a:hover { color: var(--primary-ink); }
+/* The copy grows to fill, which keeps every button on the same baseline
+   however long a description happens to be. */
+.svc-body p { font-size: .88rem; line-height: 1.78; margin-bottom: 1.4em; flex: 1; }
+
+.btn-block { width: 100%; padding: 12px 20px; }
 
 /* --- Call bands ---------------------------------------------------- */
 

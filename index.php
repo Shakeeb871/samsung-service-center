@@ -94,13 +94,13 @@ require __DIR__ . '/inc/header.php';
     </div>
 
     <div class="media">
-      <?= photo('/assets/img/about.jpg', 'Samsung appliance technician on a repair call in the UAE', 'tools') ?>
+      <?= photo('/assets/img', 'about', 'Samsung appliance technician on a repair call in the UAE', 'tools') ?>
     </div>
 
   </div>
 </section>
 
-<section class="section section-tint">
+<section class="section">
   <div class="wrap">
     <div class="section-head center">
       <h2>Provide Comprehensive Samsung Appliances Repair Services</h2>
@@ -117,11 +117,13 @@ require __DIR__ . '/inc/header.php';
     <div class="svc-grid">
       <?php foreach ($SERVICES as $slug => $s): ?>
       <article class="svc-card">
-        <div class="svc-figure"><?= icon($s['icon'], 62) ?></div>
+        <div class="svc-media">
+          <?= photo('/assets/img/services', $slug, strip_tags(html_entity_decode($s['title'])), $s['icon']) ?>
+        </div>
         <div class="svc-body">
-          <h3><?= $s['title'] ?></h3>
+          <h3><a href="<?= url('/services/' . $slug . '/') ?>"><?= $s['title'] ?></a></h3>
           <p><?= $s['body'] ?></p>
-          <a class="btn btn-sm" href="<?= url('/services/' . $slug . '/') ?>">View Service</a>
+          <a class="btn btn-block" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 16) ?>Call Us Now!</a>
         </div>
       </article>
       <?php endforeach; ?>

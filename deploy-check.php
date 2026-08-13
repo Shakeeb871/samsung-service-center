@@ -18,21 +18,23 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 $root = __DIR__;
 
 $expect = [
-  'index.php'                                   => 'Homepage',
-  'inc/config.php'                              => 'Config',
-  'inc/icons.php'                               => 'Icons (added in the redesign)',
-  'inc/service-page.php'                        => 'Service page layout',
-  'assets/css/style.css'                        => 'Stylesheet',
-  'assets/js/main.js'                           => 'Script',
-  'services/index.php'                          => 'Services hub',
-  'services/samsung-hood-repair.php'            => 'Hood page (added in the redesign)',
-  'services/samsung-cooker-repair.php'          => 'Cooker page (added in the redesign)',
-  'about.php'                                   => 'About',
-  'contact.php'                                 => 'Contact',
-  'api/contact.php'                             => 'Form handler',
-  '.htaccess'                                   => 'Clean URLs and caching',
-  'robots.txt'                                  => 'Robots',
-  'sitemap.xml'                                 => 'Sitemap',
+  'index.php'                                    => 'Homepage',
+  'inc/config.php'                               => 'Config',
+  'inc/icons.php'                                => 'Icons',
+  'inc/logo.php'                                 => 'Logo',
+  'inc/media.php'                                => 'Image lookup',
+  'inc/service-page.php'                         => 'Service page layout',
+  'assets/css/style.css'                         => 'Stylesheet',
+  'assets/js/main.js'                            => 'Script',
+  'services/index.php'                           => 'Services hub',
+  'services/samsung-hood-repair/index.php'       => 'Hood page',
+  'services/samsung-cooker-repair/index.php'     => 'Cooker page',
+  'about/index.php'                              => 'About',
+  'contact/index.php'                            => 'Contact',
+  'api/contact.php'                              => 'Form handler',
+  '.htaccess'                                    => 'Clean URLs and caching',
+  'robots.txt'                                   => 'Robots',
+  'sitemap.xml'                                  => 'Sitemap',
 ];
 
 $css      = $root . '/assets/css/style.css';
@@ -51,6 +53,18 @@ foreach ($palettes as $marker => $label) {
 }
 
 $stale_index_html = is_file($root . '/index.html');
+
+// Which artwork the server has found. "I uploaded it" and "the site can
+// see it" are different statements, and this is the one that matters.
+require_once __DIR__ . '/inc/media.php';
+$images = [
+  'Hero background'   => ['/assets/img', 'hero'],
+  'Logo'              => ['/assets/img', 'logo'],
+  'About section'     => ['/assets/img', 'about'],
+];
+foreach (array_keys($SERVICES) as $slug) {
+  $images['Service — ' . $slug] = ['/assets/img/services', $slug];
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -96,6 +110,20 @@ $stale_index_html = is_file($root . '/index.html');
   </div>
   <?php endif; ?>
 
+  <h2>Images</h2>
+  <table>
+    <?php foreach ($images as $label => [$dir, $name]): $f = find_image($dir, $name); ?>
+    <tr>
+      <td><?= htmlspecialchars($label) ?><br><span style="font-size:.82rem"><code><?= htmlspecialchars(ltrim($dir,'/') . '/' . $name) ?>.jpg</code></span></td>
+      <td class="<?= $f ? 'ok' : 'no' ?>"><?= $f ? htmlspecialchars(basename($f)) : 'not uploaded' ?></td>
+    </tr>
+    <?php endforeach; ?>
+  </table>
+  <p class="small">
+    Any extension works — jpg, jpeg, png, webp, avif — and the name is not
+    case sensitive, so <code>Hero.JPG</code> is found just as <code>hero.jpg</code> is.
+  </p>
+
   <h2>Files</h2>
   <table>
     <?php foreach ($expect as $rel => $label): $there = file_exists($root . '/' . $rel); ?>
@@ -109,22 +137,26 @@ $stale_index_html = is_file($root . '/index.html');
   <h2>Reading this</h2>
   <p>
     If the stylesheet says <strong>Current</strong> and nothing is missing, the
-    deploy landed and the site itself is fine — an old-looking page then means
-    your browser is holding a cached copy. Open the site in a private window to
-    confirm.
+    site on this server is up to date. A page that still looks old then means
+    your browser is holding a cached copy — open it in a private window, or
+    press Ctrl and Shift and R together.
   </p>
   <p>
-    If the stylesheet says <strong>Older</strong> or <strong>Oldest</strong>, or
-    files are missing, the deploy did not bring the latest commit. In cPanel go
-    to Git&trade; Version Control, press <strong>Update from Remote</strong>
-    first, then <strong>Deploy HEAD Commit</strong>.
+    If the stylesheet says <strong>Older</strong>, or files are missing, the
+    pull did not bring the latest commit. In cPanel open Git&trade; Version
+    Control and press <strong>Update from Remote</strong>. The repository is
+    cloned into the folder this subdomain serves, so that pull is the whole
+    deployment — there is no second step.
   </p>
   <p>
-    If this page itself is not found at
-    <code>/deploy-check.php</code>, the deploy is writing to a different folder
-    than the one this subdomain serves. Compare <code>DEPLOYPATH</code> in
-    <code>.cpanel.yml</code> against the document root shown next to the
-    subdomain in cPanel &rarr; Domains.
+    If a picture shows <strong>not uploaded</strong> above, the server cannot
+    see that file. Upload it into the folder named beside it. The name is not
+    case sensitive and any common image extension works, so the usual causes
+    are the wrong folder, or the upload not having finished.
+  </p>
+  <p>
+    If this page is not found at <code>/deploy-check.php</code> at all, the
+    files are going somewhere other than the folder this subdomain serves.
   </p>
 
 </div>
