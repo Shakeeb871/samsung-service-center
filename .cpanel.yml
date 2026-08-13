@@ -29,6 +29,7 @@ deployment:
     - /bin/cp -R about.php $DEPLOYPATH
     - /bin/cp -R contact.php $DEPLOYPATH
     - /bin/cp -R 404.php $DEPLOYPATH
+    - /bin/cp -R deploy-check.php $DEPLOYPATH
 
     # Directories.
     #

@@ -12,6 +12,35 @@
 // ---------------------------------------------------------------------
 define('IS_STAGING', true);
 
+/**
+ * Cache-busting asset URL.
+ *
+ * .htaccess tells browsers to hold CSS and JS for a long time, which is
+ * right for speed and wrong the moment the file changes: a visitor who
+ * loaded the old stylesheet keeps it until the cache expires, and the new
+ * layout arrives wearing the old design. Appending the file's own
+ * modification time makes every edit a new URL, so the browser refetches
+ * the moment it changes and never before.
+ *
+ * $path is web-root relative, e.g. '/assets/css/style.css'.
+ */
+function asset(string $path): string
+{
+    $file = dirname(__DIR__) . $path;
+    return $path . '?v=' . (is_file($file) ? filemtime($file) : time());
+}
+
+/**
+ * Identifies the deployed build. Printed as an HTML comment on every page
+ * so "did the deploy actually land?" is answerable from View Source
+ * instead of from guesswork.
+ */
+function build_id(): string
+{
+    $css = dirname(__DIR__) . '/assets/css/style.css';
+    return is_file($css) ? date('Y-m-d H:i', filemtime($css)) : 'unknown';
+}
+
 define('SITE_URL', 'https://samsung.aiqonquickcool.com.my');
 
 // --- Business details -------------------------------------------------

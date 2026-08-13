@@ -5,7 +5,12 @@
 # Written for Apache on cPanel, which is what this site runs on.
 # ---------------------------------------------------------------------
 
-DirectoryIndex index.php index.html
+# index.php only. An earlier deploy put an index.html in the web root and
+# the deploy never removes files, so listing index.html here as a fallback
+# risks the stale test page winning the homepage. If index.html is still on
+# the server it can be deleted by hand; this line makes it harmless either
+# way.
+DirectoryIndex index.php
 
 # Directory listings would expose the file layout, and MultiViews guesses at
 # filenames in a way that fights the explicit rewrites below.
@@ -55,13 +60,19 @@ ErrorDocument 404 /404.php
 </IfModule>
 
 # --- Caching ---------------------------------------------------------
-# Long lifetimes for static assets, none for HTML. If a CSS change does not
-# show up for you after a deploy, that is this block doing its job — add a
-# version query to the asset URL rather than shortening the lifetime.
+# Images and fonts keep a long lifetime; their URLs rarely change and a
+# stale one is harmless.
+#
+# CSS and JS are held for a month, not a year. Their URLs already carry a
+# ?v= stamp from inc/config.php that changes whenever the file changes, so
+# a new build is a new URL and gets fetched immediately. The shorter
+# lifetime is the safety net for anything that reaches a browser without
+# that stamp — a year of serving the wrong stylesheet is not a mistake
+# worth being able to make twice.
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType text/css                "access plus 1 year"
-  ExpiresByType application/javascript  "access plus 1 year"
+  ExpiresByType text/css                "access plus 1 month"
+  ExpiresByType application/javascript  "access plus 1 month"
   ExpiresByType image/jpeg              "access plus 1 year"
   ExpiresByType image/png               "access plus 1 year"
   ExpiresByType image/webp              "access plus 1 year"

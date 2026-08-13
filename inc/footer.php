@@ -76,6 +76,6 @@
   <a class="float float-call" href="tel:<?= BIZ_PHONE_LINK ?>" aria-label="Call us"><?= icon('phone', 22) ?></a>
 </div>
 
-<script src="/assets/js/main.js" defer></script>
+<script src="<?= asset('/assets/js/main.js') ?>" defer></script>
 </body>
 </html>
