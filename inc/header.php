@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/icons.php';
 
 /**
- * Each page sets $page_title, $page_desc and $page_path before including
- * this file. $page_path is the canonical path with a leading slash, e.g.
- * '/services/samsung-refrigerator-repair'.
+ * Pages set $page_title, $page_desc and $page_path before including this.
+ * $page_path is the canonical path with a leading slash.
  */
 $page_title = $page_title ?? BIZ_NAME;
 $page_desc  = $page_desc  ?? BIZ_TAGLINE;
@@ -27,16 +27,23 @@ $canonical  = SITE_URL . $page_path;
 <meta property="og:title" content="<?= htmlspecialchars($page_title) ?>">
 <meta property="og:description" content="<?= htmlspecialchars($page_desc) ?>">
 <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
+<meta name="theme-color" content="#1428A0">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css">
-<link rel="icon" href="/assets/img/favicon.png" sizes="any">
 </head>
 <body>
 
 <a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="t-mail" href="mailto:<?= BIZ_EMAIL ?>"><?= icon('mail', 16) ?><?= htmlspecialchars(BIZ_EMAIL) ?></a>
+    <a href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 16) ?><?= htmlspecialchars(BIZ_PHONE) ?></a>
+  </div>
+</div>
 
 <header class="site-head">
   <div class="wrap head-inner">
@@ -55,9 +62,9 @@ $canonical  = SITE_URL . $page_path;
     <nav id="nav" class="nav">
       <a href="/">Home</a>
       <a href="/services/">Services</a>
-      <a href="/about/">About</a>
-      <a href="/contact/">Contact</a>
-      <a class="btn btn-sm" href="tel:<?= BIZ_PHONE_LINK ?>">Call <?= htmlspecialchars(BIZ_PHONE) ?></a>
+      <a href="/about/">About Us</a>
+      <a href="/contact/">Contact Us</a>
+      <a class="btn btn-sm" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 16) ?>Call Now</a>
     </nav>
   </div>
 </header>

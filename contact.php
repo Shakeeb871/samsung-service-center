@@ -1,48 +1,49 @@
 <?php
-$page_title = 'Contact | Samsung Service Center Dubai';
-$page_desc  = 'Book a Samsung appliance repair in Dubai. Send the model number and the fault, and get a diagnosis time and a call-out price back.';
+$page_title = 'Contact Us | Samsung Service Center';
+$page_desc  = 'Book a Samsung appliance repair anywhere in the UAE. Send the model number and the fault, and get a response from our 24/7 call centre.';
 $page_path  = '/contact/';
 require __DIR__ . '/inc/header.php';
 ?>
 
-<div class="wrap crumbs"><a href="/">Home</a> &rsaquo; Contact</div>
+<div class="wrap crumbs"><a href="/">Home</a> &rsaquo; Contact Us</div>
 
 <section class="section">
-  <div class="wrap grid grid-2">
+  <div class="wrap split">
 
     <div>
+      <span class="eyebrow">Get in touch</span>
       <h1>Book a repair</h1>
       <p>
-        The more you can tell us up front, the more useful the first reply is. The model
-        number matters most — it decides which generation of board, compressor or motor
-        is inside, and that is what determines whether the likely part is already in the
-        van.
+        Our call centre is available 24/7 and our friendly team can advise and help you day or
+        night. The more you can tell us up front, the more useful the first reply is — the model
+        number matters most, because it decides which generation of board, compressor or motor is
+        inside and whether the likely part is already in the van.
       </p>
       <p class="small">
-        Where to find it: inside the refrigerator door frame, behind the washing machine
-        door seal, on the back panel of a dryer, or on the side of an AC indoor unit.
+        Where to find it: inside the refrigerator door frame, behind the washing machine door
+        seal, on the back panel of a dryer, or on the side of an AC indoor unit.
       </p>
 
       <ul class="info-list mt">
         <li>
-          <span>Phone</span>
-          <a href="tel:<?= BIZ_PHONE_LINK ?>"><?= htmlspecialchars(BIZ_PHONE) ?></a>
+          <?= icon('phone', 20) ?>
+          <div><span>Phone</span><a href="tel:<?= BIZ_PHONE_LINK ?>"><?= htmlspecialchars(BIZ_PHONE) ?></a></div>
         </li>
         <li>
-          <span>WhatsApp</span>
-          <a href="https://wa.me/<?= BIZ_WHATSAPP ?>" rel="noopener">Message us</a>
+          <?= icon('chat', 20) ?>
+          <div><span>WhatsApp</span><a href="https://wa.me/<?= BIZ_WHATSAPP ?>" rel="noopener">Message us</a></div>
         </li>
         <li>
-          <span>Email</span>
-          <a href="mailto:<?= BIZ_EMAIL ?>"><?= htmlspecialchars(BIZ_EMAIL) ?></a>
+          <?= icon('mail', 20) ?>
+          <div><span>Email</span><a href="mailto:<?= BIZ_EMAIL ?>"><?= htmlspecialchars(BIZ_EMAIL) ?></a></div>
         </li>
         <li>
-          <span>Hours</span>
-          <strong><?= htmlspecialchars(BIZ_HOURS) ?></strong>
+          <?= icon('clock', 20) ?>
+          <div><span>Hours</span><strong><?= htmlspecialchars(BIZ_HOURS) ?></strong></div>
         </li>
         <li>
-          <span>Address</span>
-          <strong><?= htmlspecialchars(BIZ_ADDRESS) ?></strong>
+          <?= icon('pin', 20) ?>
+          <div><span>Coverage</span><strong><?= htmlspecialchars(implode(', ', $EMIRATES)) ?></strong></div>
         </li>
       </ul>
     </div>
@@ -70,7 +71,7 @@ require __DIR__ . '/inc/header.php';
           <select id="appliance" name="appliance" required>
             <option value="">Choose one</option>
             <?php foreach ($SERVICES as $s): ?>
-            <option value="<?= htmlspecialchars($s['short']) ?>"><?= htmlspecialchars($s['short']) ?></option>
+            <option value="<?= htmlspecialchars(html_entity_decode($s['short'], ENT_QUOTES, 'UTF-8')) ?>"><?= $s['short'] ?></option>
             <?php endforeach; ?>
             <option value="Other">Something else</option>
           </select>
@@ -82,8 +83,8 @@ require __DIR__ . '/inc/header.php';
         </div>
 
         <div class="field">
-          <label for="area">Area in Dubai</label>
-          <input type="text" id="area" name="area" maxlength="60" placeholder="e.g. Al Barsha">
+          <label for="area">Your area</label>
+          <input type="text" id="area" name="area" maxlength="60" placeholder="e.g. Al Barsha, Dubai">
         </div>
 
         <div class="field">

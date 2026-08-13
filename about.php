@@ -1,77 +1,61 @@
 <?php
-$page_title = 'About | Samsung Service Center Dubai';
-$page_desc  = 'An independent repair service working only on Samsung home appliances in Dubai. How the work is done, what is quoted, and what is not claimed.';
+$page_title = 'About Us | Samsung Service Center';
+$page_desc  = 'A Samsung appliance repair team covering every emirate in the UAE, with 24/7 customer support, a 1 hour emergency response and a 90 day warranty on repairing.';
 $page_path  = '/about/';
 require __DIR__ . '/inc/header.php';
 ?>
 
-<div class="wrap crumbs"><a href="/">Home</a> &rsaquo; About</div>
+<div class="wrap crumbs"><a href="/">Home</a> &rsaquo; About Us</div>
 
 <section class="section">
-  <div class="wrap" style="max-width:820px">
-    <h1>About this service</h1>
+  <div class="wrap prose">
+    <span class="eyebrow">About us</span>
+    <h1>About our Samsung service center</h1>
 
     <p>
-      This is an independent appliance repair business in Dubai that works on one
-      manufacturer's products: Samsung. Refrigerators, washing machines, air
-      conditioners, dryers, dishwashers, ovens and microwaves.
+      We repair Samsung home appliances across the United Arab Emirates — washing machines,
+      refrigerators, dishwashers, tumble dryers, cookers, hoods and air conditioners. Our call
+      centre runs 24/7, and we aim to reach emergency call-outs within an hour.
     </p>
 
-    <h2>Why the narrow focus</h2>
+    <h2>How we work</h2>
     <p>
-      Appliance repair rewards repetition. Samsung designs its own inverter
-      compressors, its own main control boards and its own fault-code system, and none
-      of it maps neatly onto other manufacturers. A technician who sees those boards
-      every working day recognises a failure pattern that someone meeting it twice a
-      year has to reason out from first principles.
-    </p>
-    <p>
-      The practical effect is on your afternoon rather than on any technical
-      abstraction. Fewer visits end without a repair, because the part that usually
-      fails on your model is already in the van. Fewer bills include a component that
-      turned out not to be the problem.
+      Every job starts with a diagnosis at your home rather than an appliance disappearing into a
+      workshop. Our technicians tell you the right fault, give a proper report, and complete the
+      job on time. Every repair carries an upfront quote and a full 90 day warranty on repairing,
+      so the price is agreed before the work begins and the work is backed after it ends.
     </p>
 
-    <h2>How pricing works</h2>
+    <h2>Where we cover</h2>
     <p>
-      A call-out carries a diagnosis charge, and you are told that figure on the phone
-      before anyone is sent. Once the fault is confirmed at your home, the repair is
-      quoted as a separate figure — part and labour listed separately — and nothing is
-      opened up or replaced until you have agreed to it.
-    </p>
-    <p>
-      Sometimes the honest answer is not to repair. A sealed-system refrigerant leak in
-      an older refrigerator, or a control board on a model where the board costs most of
-      what a replacement appliance costs, is not worth your money. You will be told
-      that plainly, and the diagnosis charge is all you pay.
-    </p>
-
-    <h2>What is not claimed here</h2>
-    <p>
-      This business is not an authorised Samsung service centre, and is not affiliated
-      with, authorised by or endorsed by Samsung Electronics. The brand name appears on
-      this site to describe the appliances the service repairs, which is the only reason
-      it appears.
-    </p>
-    <p>
-      If your appliance is still covered by the manufacturer's warranty, go to Samsung
-      first. An independent repair during the warranty period can end that cover, and no
-      saving on a call-out is worth losing it.
+      We cover every state in the UAE: <?= htmlspecialchars(implode(', ', $EMIRATES)) ?>. Our
+      experts have 10+ years experienced in the UAE and know the main roads very well, which is
+      what makes a one hour response realistic rather than a promise on a page.
     </p>
 
     <h2>Getting in touch</h2>
     <p>
-      The fastest route is a WhatsApp message with the model number and a line about
-      what the appliance is doing. The model number is on a sticker — inside the
-      refrigerator door frame, behind the washing machine door seal, or on the side
-      panel of an AC indoor unit. With that in hand, most faults can be narrowed down
-      before the visit is even booked.
+      The fastest route is a call or a WhatsApp message with the model number and a line about
+      what the appliance is doing. The model number is on a sticker — inside the refrigerator door
+      frame, behind the washing machine door seal, or on the side panel of an AC indoor unit. With
+      that in hand, most faults can be narrowed down before the visit is booked.
     </p>
 
     <p>
-      <a class="btn" href="/contact/">Contact page</a>
-      <a class="btn btn-dark" href="tel:<?= BIZ_PHONE_LINK ?>">Call <?= htmlspecialchars(BIZ_PHONE) ?></a>
+      <a class="btn" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 18) ?>Call <?= htmlspecialchars(BIZ_PHONE) ?></a>
+      <a class="btn btn-dark" href="/contact/">Contact page</a>
     </p>
+  </div>
+</section>
+
+<section class="section section-grey">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>24/7</b><span>Customer service, day or night</span></div>
+      <div class="stat"><b>1 Hour</b><span>Emergency call-out response</span></div>
+      <div class="stat"><b>90 Day</b><span>Warranty on repairing</span></div>
+      <div class="stat"><b>7</b><span>Emirates covered</span></div>
+    </div>
   </div>
 </section>
 

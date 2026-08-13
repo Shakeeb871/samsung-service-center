@@ -1,6 +1,6 @@
 <?php
-$page_title = 'Samsung Appliance Repair Services in Dubai';
-$page_desc  = 'Every Samsung appliance repair covered — refrigerators, washing machines, air conditioners, dryers, dishwashers, ovens and microwaves. Diagnosis at your home, price agreed before work starts.';
+$page_title = 'Samsung Appliance Repair Services in the UAE';
+$page_desc  = 'Every Samsung appliance repair covered — washing machines, refrigerators, dishwashers, tumble dryers, cookers, hoods and air conditioners. 24/7 support and a specialist at your door within 1 hour.';
 $page_path  = '/services/';
 require __DIR__ . '/../inc/header.php';
 ?>
@@ -10,54 +10,39 @@ require __DIR__ . '/../inc/header.php';
 <section class="section">
   <div class="wrap">
     <div class="section-head">
-      <h1>Samsung appliance repairs in Dubai</h1>
+      <span class="eyebrow">What we repair</span>
+      <h1>Samsung appliance repair services</h1>
       <p>
-        Each page below covers one appliance: what usually fails on it, what the
-        technician checks first, and what the repair normally involves. If you already
-        know which appliance is giving trouble, go straight to it.
+        A failing appliance can cause endless hassle when technicians cannot diagnose the issue
+        correctly. Our qualified technicians find the true root cause of the fault across all
+        Samsung devices instead of doing quick guesswork. Each page below covers one appliance:
+        what usually fails on it, what gets checked first, and what the repair involves.
       </p>
     </div>
 
-    <div class="grid grid-3">
+    <div class="svc-grid">
       <?php foreach ($SERVICES as $slug => $s): ?>
-      <div class="card">
-        <h3><?= htmlspecialchars($s['title']) ?></h3>
-        <p><?= htmlspecialchars($s['blurb']) ?></p>
-        <a class="card-link" href="/services/<?= $slug ?>/">Read more</a>
-      </div>
+      <article class="svc-card">
+        <div class="svc-figure"><?= icon($s['icon'], 56) ?></div>
+        <div class="svc-body">
+          <h3><?= $s['title'] ?></h3>
+          <p><?= $s['body'] ?></p>
+          <a class="svc-link" href="/services/<?= $slug ?>/">View Service <?= icon('arrow', 17) ?></a>
+        </div>
+      </article>
       <?php endforeach; ?>
     </div>
   </div>
 </section>
 
-<section class="section section-soft">
-  <div class="wrap grid grid-2">
+<section class="cta-band">
+  <div class="wrap cta-inner">
     <div>
-      <span class="eyebrow">Why one brand</span>
-      <h2>A Samsung-only workload changes the diagnosis</h2>
-      <p>
-        A general appliance technician meets a Samsung inverter compressor occasionally.
-        Someone working on the brand daily has seen the same board fail on the same
-        model range enough times to recognise it from the symptom description on the
-        phone.
-      </p>
-      <p>
-        That shows up in two practical ways. Fewer visits end with a part on order and a
-        second appointment, because the likely part is already in the van. And fewer
-        repairs replace the wrong component, because the fault pattern is familiar
-        rather than being worked out from scratch.
-      </p>
+      <h2>Call Our Experts Now for Fast, Affordable, and Professional Support in the UAE</h2>
+      <p>24/7 customer service, a 1 hour response on emergency call-outs, and a 90 day warranty on repairing.</p>
     </div>
-    <div>
-      <span class="eyebrow">What you get told</span>
-      <h2>The parts of the quote that matter</h2>
-      <ul class="symptoms">
-        <li><strong>What actually failed</strong> — the component, not a restatement of the symptom.</li>
-        <li><strong>What the part costs</strong> and whether it is genuine or a compatible equivalent.</li>
-        <li><strong>What the labour costs</strong>, separately from the part.</li>
-        <li><strong>Whether it is worth doing.</strong> On an older appliance with a sealed-system fault, often it is not.</li>
-        <li><strong>What the guarantee covers</strong> and for how long.</li>
-      </ul>
+    <div class="cta-actions">
+      <a class="btn btn-white" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 18) ?>Call Now</a>
     </div>
   </div>
 </section>

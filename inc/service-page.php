@@ -16,7 +16,7 @@ require __DIR__ . '/header.php';
 ?>
 
 <div class="wrap crumbs">
-  <a href="/">Home</a> &rsaquo; <a href="/services/">Services</a> &rsaquo; <?= htmlspecialchars($svc['short']) ?>
+  <a href="/">Home</a> &rsaquo; <a href="/services/">Services</a> &rsaquo; <?= $svc['short'] ?>
 </div>
 
 <section class="section">
@@ -108,9 +108,9 @@ require __DIR__ . '/header.php';
       <?php foreach ($SERVICES as $slug => $s): ?>
         <?php if ($slug === $svc['slug']) continue; ?>
         <div class="card">
-          <h3><?= htmlspecialchars($s['short']) ?></h3>
-          <p><?= htmlspecialchars($s['blurb']) ?></p>
-          <a class="card-link" href="/services/<?= $slug ?>/">Read more</a>
+          <?= icon($s['icon'], 40) ?>
+          <h3><?= $s['title'] ?></h3>
+          <a class="card-link" href="/services/<?= $slug ?>/">Read more <?= icon('arrow', 16) ?></a>
         </div>
       <?php endforeach; ?>
     </div>
