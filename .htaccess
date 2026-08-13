@@ -74,7 +74,20 @@ Options -Indexes -MultiViews
   Header always unset X-Powered-By
 </IfModule>
 
-# --- Dotfiles --------------------------------------------------------
+# --- Dotfiles and the repository -------------------------------------
+# The git clone lives in this folder, which means .git sits inside the web
+# root. It holds the project's entire history and must not be readable.
+# FilesMatch only covers files, so the directory is blocked by rewrite.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^\.git(/|$) - [F,L]
+</IfModule>
+
 <FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+# .cpanel.yml and this file itself are configuration, not web content.
+<FilesMatch "^(\.cpanel\.yml|\.gitignore|README\.md)$">
   Require all denied
 </FilesMatch>
