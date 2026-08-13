@@ -5,7 +5,7 @@ $page_path  = '/services/';
 require __DIR__ . '/../inc/header.php';
 ?>
 
-<div class="wrap crumbs"><a href="/">Home</a> &rsaquo; Services</div>
+<div class="wrap crumbs"><a href="<?= url('/') ?>">Home</a> &rsaquo; Services</div>
 
 <section class="section">
   <div class="wrap">
@@ -27,7 +27,7 @@ require __DIR__ . '/../inc/header.php';
         <div class="svc-body">
           <h3><?= $s['title'] ?></h3>
           <p><?= $s['body'] ?></p>
-          <a class="btn btn-sm" href="/services/<?= $slug ?>/">View Service</a>
+          <a class="btn btn-sm" href="<?= url('/services/' . $slug . '/') ?>">View Service</a>
         </div>
       </article>
       <?php endforeach; ?>

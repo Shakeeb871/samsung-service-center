@@ -2,10 +2,10 @@
 $page_title = 'Contact Us | Samsung Service Center';
 $page_desc  = 'Book a Samsung appliance repair anywhere in the UAE. Send the model number and the fault, and get a response from our 24/7 call centre.';
 $page_path  = '/contact/';
-require __DIR__ . '/inc/header.php';
+require __DIR__ . '/../inc/header.php';
 ?>
 
-<div class="wrap crumbs"><a href="/">Home</a> &rsaquo; Contact Us</div>
+<div class="wrap crumbs"><a href="<?= url('/') ?>">Home</a> &rsaquo; Contact Us</div>
 
 <section class="section">
   <div class="wrap split">
@@ -49,7 +49,7 @@ require __DIR__ . '/inc/header.php';
     </div>
 
     <div>
-      <form class="form-card" id="enquiry-form" action="/api/contact.php" method="post">
+      <form class="form-card" id="enquiry-form" action="<?= url('/api/contact.php') ?>" method="post">
 
         <div class="field">
           <label for="name">Your name</label>
@@ -107,4 +107,4 @@ require __DIR__ . '/inc/header.php';
   </div>
 </section>
 
-<?php require __DIR__ . '/inc/footer.php'; ?>
+<?php require __DIR__ . '/../inc/footer.php'; ?>

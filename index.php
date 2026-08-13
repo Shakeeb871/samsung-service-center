@@ -52,7 +52,7 @@ require __DIR__ . '/inc/header.php';
     </div>
 
     <div class="enquiry-bar" id="book">
-      <form id="enquiry-form" action="/api/contact.php" method="post">
+      <form id="enquiry-form" action="<?= url('/api/contact.php') ?>" method="post">
         <input type="text" name="name" placeholder="Your Name" required maxlength="80" autocomplete="name" aria-label="Your name">
         <input type="tel" name="phone" placeholder="Phone" required maxlength="30" autocomplete="tel" aria-label="Phone">
         <input type="email" name="email" placeholder="Your Email" maxlength="120" autocomplete="email" aria-label="Email">
@@ -145,7 +145,7 @@ require __DIR__ . '/inc/header.php';
         <div class="svc-body">
           <h3><?= $s['title'] ?></h3>
           <p><?= $s['body'] ?></p>
-          <a class="btn btn-sm" href="/services/<?= $slug ?>/">View Service</a>
+          <a class="btn btn-sm" href="<?= url('/services/' . $slug . '/') ?>">View Service</a>
         </div>
       </article>
       <?php endforeach; ?>

@@ -15,7 +15,7 @@ require __DIR__ . '/inc/header.php';
       everything on this site, or you can call and describe the fault directly.
     </p>
     <p>
-      <a class="btn" href="/services/">All repairs</a>
+      <a class="btn" href="<?= url('/services/') ?>">All repairs</a>
       <a class="btn btn-dark" href="tel:<?= BIZ_PHONE_LINK ?>">Call <?= htmlspecialchars(BIZ_PHONE) ?></a>
     </p>
   </div>

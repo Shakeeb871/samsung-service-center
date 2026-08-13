@@ -27,7 +27,7 @@ define('IS_STAGING', true);
 function asset(string $path): string
 {
     $file = dirname(__DIR__) . $path;
-    return $path . '?v=' . (is_file($file) ? filemtime($file) : time());
+    return url($path) . '?v=' . (is_file($file) ? filemtime($file) : time());
 }
 
 /**
@@ -41,7 +41,36 @@ function build_id(): string
     return is_file($css) ? date('Y-m-d H:i', filemtime($css)) : 'unknown';
 }
 
-define('SITE_URL', 'https://samsung.aiqonquickcool.com.my');
+/**
+ * Where the site lives, worked out at runtime.
+ *
+ * The site does not care which folder it sits in. BASE is the path from
+ * the document root to this site's folder — empty at a domain root,
+ * '/samsung' inside a folder called samsung — and every internal link
+ * goes through url(), so uploading the same files anywhere just works.
+ *
+ * That is deliberate: hardcoded '/assets/...' links break the moment the
+ * site is not at the very top of the web root, and finding out means
+ * looking at a site with no styling and no obvious cause.
+ */
+$__here = str_replace('\\', '/', realpath(dirname(__DIR__)) ?: dirname(__DIR__));
+$__doc  = isset($_SERVER['DOCUMENT_ROOT']) && $_SERVER['DOCUMENT_ROOT'] !== ''
+        ? str_replace('\\', '/', rtrim(realpath($_SERVER['DOCUMENT_ROOT']) ?: $_SERVER['DOCUMENT_ROOT'], '/'))
+        : '';
+define('BASE', ($__doc !== '' && strpos($__here, $__doc) === 0)
+    ? rtrim(substr($__here, strlen($__doc)), '/')
+    : '');
+
+/** Absolute path for an internal link. $path is site-relative: '/contact/'. */
+function url(string $path): string
+{
+    return BASE . $path;
+}
+
+/** Scheme and host as the visitor sees them, used for canonical tags. */
+$__scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+         || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https') ? 'https' : 'http';
+define('SITE_URL', $__scheme . '://' . ($_SERVER['HTTP_HOST'] ?? 'samsung.aiqonquickcool.com.my') . BASE);
 
 // --- Business details -------------------------------------------------
 define('BIZ_NAME',    'Samsung Service Center');

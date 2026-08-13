@@ -16,7 +16,7 @@ require __DIR__ . '/header.php';
 ?>
 
 <div class="wrap crumbs">
-  <a href="/">Home</a> &rsaquo; <a href="/services/">Services</a> &rsaquo; <?= $svc['short'] ?>
+  <a href="<?= url('/') ?>">Home</a> &rsaquo; <a href="<?= url('/services/') ?>">Services</a> &rsaquo; <?= $svc['short'] ?>
 </div>
 
 <section class="section">
@@ -110,7 +110,7 @@ require __DIR__ . '/header.php';
         <div class="card">
           <?= icon($s['icon'], 40) ?>
           <h3><?= $s['title'] ?></h3>
-          <a class="card-link" href="/services/<?= $slug ?>/">Read more <?= icon('arrow', 16) ?></a>
+          <a class="card-link" href="<?= url('/services/' . $slug . '/') ?>">Read more <?= icon('arrow', 16) ?></a>
         </div>
       <?php endforeach; ?>
     </div>

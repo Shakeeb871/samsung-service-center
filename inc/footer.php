@@ -18,10 +18,10 @@
       <div class="foot-col">
         <h3>Quick Links</h3>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/services/">Services</a></li>
-          <li><a href="/about/">About Us</a></li>
-          <li><a href="/contact/">Contact Us</a></li>
+          <li><a href="<?= url('/') ?>">Home</a></li>
+          <li><a href="<?= url('/services/') ?>">Services</a></li>
+          <li><a href="<?= url('/about/') ?>">About Us</a></li>
+          <li><a href="<?= url('/contact/') ?>">Contact Us</a></li>
         </ul>
       </div>
 
@@ -29,7 +29,7 @@
         <h3>Our Services</h3>
         <ul>
           <?php $i = 0; foreach ($SERVICES as $slug => $s): if ($i++ >= 4) break; ?>
-          <li><a href="/services/<?= $slug ?>/"><?= $s['short'] ?></a></li>
+          <li><a href="<?= url('/services/' . $slug . '/') ?>"><?= $s['short'] ?></a></li>
           <?php endforeach; ?>
         </ul>
       </div>
@@ -38,7 +38,7 @@
         <h3>More Services</h3>
         <ul>
           <?php $i = 0; foreach ($SERVICES as $slug => $s): if ($i++ < 4) continue; ?>
-          <li><a href="/services/<?= $slug ?>/"><?= $s['short'] ?></a></li>
+          <li><a href="<?= url('/services/' . $slug . '/') ?>"><?= $s['short'] ?></a></li>
           <?php endforeach; ?>
         </ul>
       </div>

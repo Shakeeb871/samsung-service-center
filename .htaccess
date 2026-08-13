@@ -1,55 +1,41 @@
 # ---------------------------------------------------------------------
-# Samsung Service Center Dubai
+# Samsung Service Center
 #
-# Clean URLs, HTTPS, compression, caching and a few security headers.
-# Written for Apache on cPanel, which is what this site runs on.
+# Nothing here assumes the site is at the top of the web root. Every rule
+# is relative, so this file works whether the site sits at the domain root
+# or inside a folder of any name.
 # ---------------------------------------------------------------------
 
-# index.php only. An earlier deploy put an index.html in the web root and
-# the deploy never removes files, so listing index.html here as a fallback
-# risks the stale test page winning the homepage. If index.html is still on
-# the server it can be deleted by hand; this line makes it harmless either
-# way.
+# Every page is a folder with an index.php inside it, so /contact/ and
+# /services/samsung-ac-repair/ resolve on their own. No rewrite rules are
+# needed to produce clean URLs, which is why there are none.
 DirectoryIndex index.php
 
-# Directory listings would expose the file layout, and MultiViews guesses at
-# filenames in a way that fights the explicit rewrites below.
+# Directory listings would expose the file layout. MultiViews guesses at
+# filenames and interferes with the folder structure above.
 Options -Indexes -MultiViews
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /
 
   # --- HTTPS ---------------------------------------------------------
-  # HTTP_X_FORWARDED_PROTO is checked too, because a proxy in front of the
-  # server terminates TLS and %{HTTPS} reads "off" behind it. Without that
-  # second condition this rule becomes a redirect loop.
+  # The forwarded header is checked too: behind a proxy that terminates
+  # TLS, %{HTTPS} reads "off" and this becomes a redirect loop without it.
   RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-  # --- The include directory is not web content ----------------------
-  # config.php holds the business details and header/footer are fragments.
-  # None of it should be reachable by URL.
+  # --- The include folder is not web content -------------------------
+  # config.php holds the business details; header and footer are partials.
   RewriteRule ^inc/ - [F,L]
 
-  # --- Clean URLs ----------------------------------------------------
-  # /about/ serves about.php, /services/samsung-ac-repair/ serves
-  # services/samsung-ac-repair.php. Real files and real directories are
-  # left alone, so /services/ still resolves to services/index.php.
+  # --- Branded 404 ---------------------------------------------------
+  # A relative target, so it resolves inside whatever folder this file is
+  # in. 404.php sets the 404 status itself.
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{DOCUMENT_ROOT}/$1.php -f
-  RewriteRule ^(.+?)/?$ /$1.php [L]
-
-  # --- One canonical form per page -----------------------------------
-  # A visitor who lands on /about.php is sent to /about/ once, so the two
-  # spellings do not both end up in an index as separate pages.
-  RewriteCond %{THE_REQUEST} \s/+(.*?)\.php[\s?] [NC]
-  RewriteRule ^ /%1/ [R=301,L]
+  RewriteRule ^ 404.php [L]
 </IfModule>
-
-ErrorDocument 404 /404.php
 
 # --- Compression -----------------------------------------------------
 <IfModule mod_deflate.c>
@@ -60,15 +46,12 @@ ErrorDocument 404 /404.php
 </IfModule>
 
 # --- Caching ---------------------------------------------------------
-# Images and fonts keep a long lifetime; their URLs rarely change and a
-# stale one is harmless.
+# Images and fonts keep a long lifetime; their URLs rarely change.
 #
 # CSS and JS are held for a month, not a year. Their URLs already carry a
 # ?v= stamp from inc/config.php that changes whenever the file changes, so
-# a new build is a new URL and gets fetched immediately. The shorter
-# lifetime is the safety net for anything that reaches a browser without
-# that stamp — a year of serving the wrong stylesheet is not a mistake
-# worth being able to make twice.
+# a new build is a new URL and is fetched at once. The shorter lifetime is
+# the safety net for anything that reaches a browser without that stamp.
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType text/css                "access plus 1 month"
@@ -88,14 +71,10 @@ ErrorDocument 404 /404.php
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
-  # Server version and PHP version are not information a visitor needs.
-  Header unset X-Powered-By
   Header always unset X-Powered-By
 </IfModule>
 
 # --- Dotfiles --------------------------------------------------------
-# .htaccess itself, plus anything else beginning with a dot that ends up
-# in the web root by accident.
 <FilesMatch "^\.">
   Require all denied
 </FilesMatch>

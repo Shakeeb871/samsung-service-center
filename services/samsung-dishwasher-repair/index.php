@@ -47,4 +47,4 @@ $svc = [
   ],
 ];
 
-require __DIR__ . '/../inc/service-page.php';
+require __DIR__ . '/../../inc/service-page.php';

@@ -2,10 +2,10 @@
 $page_title = 'About Us | Samsung Service Center';
 $page_desc  = 'A Samsung appliance repair team covering every emirate in the UAE, with 24/7 customer support, a 1 hour emergency response and a 90 day warranty on repairing.';
 $page_path  = '/about/';
-require __DIR__ . '/inc/header.php';
+require __DIR__ . '/../inc/header.php';
 ?>
 
-<div class="wrap crumbs"><a href="/">Home</a> &rsaquo; About Us</div>
+<div class="wrap crumbs"><a href="<?= url('/') ?>">Home</a> &rsaquo; About Us</div>
 
 <section class="section">
   <div class="wrap prose">
@@ -43,7 +43,7 @@ require __DIR__ . '/inc/header.php';
 
     <p>
       <a class="btn" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 18) ?>Call <?= htmlspecialchars(BIZ_PHONE) ?></a>
-      <a class="btn btn-dark" href="/contact/">Contact page</a>
+      <a class="btn btn-dark" href="<?= url('/contact/') ?>">Contact page</a>
     </p>
   </div>
 </section>
@@ -59,4 +59,4 @@ require __DIR__ . '/inc/header.php';
   </div>
 </section>
 
-<?php require __DIR__ . '/inc/footer.php'; ?>
+<?php require __DIR__ . '/../inc/footer.php'; ?>

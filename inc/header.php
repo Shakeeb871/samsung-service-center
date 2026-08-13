@@ -49,7 +49,7 @@ $canonical  = SITE_URL . $page_path;
 
 <header class="site-head">
   <div class="wrap head-inner">
-    <a class="brand" href="/">
+    <a class="brand" href="<?= url('/') ?>">
       <span class="brand-mark">S</span>
       <span class="brand-text">
         <strong><?= htmlspecialchars(BIZ_NAME) ?></strong>
@@ -62,10 +62,10 @@ $canonical  = SITE_URL . $page_path;
     </button>
 
     <nav id="nav" class="nav">
-      <a href="/">Home</a>
-      <a href="/services/">Services</a>
-      <a href="/about/">About Us</a>
-      <a href="/contact/">Contact Us</a>
+      <a href="<?= url('/') ?>">Home</a>
+      <a href="<?= url('/services/') ?>">Services</a>
+      <a href="<?= url('/about/') ?>">About Us</a>
+      <a href="<?= url('/contact/') ?>">Contact Us</a>
       <a class="btn btn-sm" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 16) ?>Call Now</a>
     </nav>
   </div>
