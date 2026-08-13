@@ -39,6 +39,46 @@
     });
   });
 
+  // --- Coverage rail --------------------------------------------------
+  // Every panel is in the markup and visible without this script, so the
+  // section works with JavaScript off. The script's only job is to hide
+  // all but the selected one.
+  var tabs = document.querySelectorAll('.cov-tab');
+  var panels = document.querySelectorAll('.cov-panel');
+
+  if (tabs.length && panels.length) {
+    Array.prototype.forEach.call(panels, function (panel, i) {
+      if (i !== 0) panel.classList.remove('is-on');
+    });
+
+    Array.prototype.forEach.call(tabs, function (tab, i) {
+      tab.addEventListener('click', function () {
+        Array.prototype.forEach.call(tabs, function (t) {
+          t.classList.remove('is-on');
+          t.setAttribute('aria-selected', 'false');
+        });
+        Array.prototype.forEach.call(panels, function (p) {
+          p.classList.remove('is-on');
+        });
+        tab.classList.add('is-on');
+        tab.setAttribute('aria-selected', 'true');
+        if (panels[i]) panels[i].classList.add('is-on');
+      });
+
+      // Left and right arrows move between emirates, which is what a
+      // keyboard user expects of anything built as a tab list.
+      tab.addEventListener('keydown', function (e) {
+        var next = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? i + 1
+                 : e.key === 'ArrowLeft'  || e.key === 'ArrowUp'   ? i - 1 : null;
+        if (next === null) return;
+        e.preventDefault();
+        var target = tabs[(next + tabs.length) % tabs.length];
+        target.focus();
+        target.click();
+      });
+    });
+  }
+
   // --- Contact form ---------------------------------------------------
   var form = document.getElementById('enquiry-form');
   if (!form) return;

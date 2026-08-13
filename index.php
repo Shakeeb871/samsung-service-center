@@ -161,11 +161,33 @@ require __DIR__ . '/inc/header.php';
       </p>
     </div>
 
-    <ul class="emirates">
-      <?php foreach ($EMIRATES as $e): ?>
-      <li><?= icon('pin', 15) ?><?= htmlspecialchars($e) ?></li>
-      <?php endforeach; ?>
-    </ul>
+    <div class="coverage">
+      <ul class="cov-rail" role="tablist" aria-label="Emirates">
+        <?php $n = 0; foreach ($AREAS as $emirate => $list): ?>
+        <li>
+          <button class="cov-tab<?= $n === 0 ? ' is-on' : '' ?>" type="button"
+                  role="tab" id="cov-tab-<?= $n ?>" aria-controls="cov-panel-<?= $n ?>"
+                  aria-selected="<?= $n === 0 ? 'true' : 'false' ?>">
+            <span class="cov-name"><?= htmlspecialchars($emirate) ?></span>
+            <span class="cov-count"><?= count($list) ?></span>
+          </button>
+        </li>
+        <?php $n++; endforeach; ?>
+      </ul>
+
+      <div class="cov-body">
+        <?php $n = 0; foreach ($AREAS as $emirate => $list): ?>
+        <div class="cov-panel<?= $n === 0 ? ' is-on' : '' ?>" id="cov-panel-<?= $n ?>"
+             role="tabpanel" aria-labelledby="cov-tab-<?= $n ?>">
+          <ul class="cov-areas">
+            <?php foreach ($list as $area): ?>
+            <li><?= $area ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+        <?php $n++; endforeach; ?>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -175,28 +197,28 @@ require __DIR__ . '/inc/header.php';
       <h2>How We Works</h2>
     </div>
 
-    <div class="steps">
-      <div class="step">
-        <div class="step-n">1</div>
+    <ol class="flow">
+      <li class="flow-step">
+        <span class="flow-num">01</span>
         <h3>Contact us 24/7</h3>
         <p>Our call centre is available 24/7 and our friendly team can advise and help you day or night.</p>
-      </div>
-      <div class="step">
-        <div class="step-n">2</div>
+      </li>
+      <li class="flow-step">
+        <span class="flow-num">02</span>
         <h3>1 hour</h3>
         <p>We aim to respond to emergency call-outs within an hour, subject to availability.</p>
-      </div>
-      <div class="step">
-        <div class="step-n">3</div>
+      </li>
+      <li class="flow-step">
+        <span class="flow-num">03</span>
         <h3>Issue, sorted</h3>
         <p>Our engineers and property maintenance team will arrive on site to resolve the issues.</p>
-      </div>
-      <div class="step">
-        <div class="step-n">4</div>
+      </li>
+      <li class="flow-step">
+        <span class="flow-num">04</span>
         <h3>Problem, solved</h3>
         <p>We cover every part of property maintenance and leave your home clean and tidy.</p>
-      </div>
-    </div>
+      </li>
+    </ol>
   </div>
 </section>
 

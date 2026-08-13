@@ -105,8 +105,58 @@ define('BIZ_ADDRESS', 'Dubai, United Arab Emirates');
 
 define('BIZ_HOURS', '24/7 customer support');
 
-// Emirates covered, as listed in the coverage section.
-$EMIRATES = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Ras Al Khaimah', 'Umm Al Quwain', 'Fujairah'];
+// Areas covered, by emirate. The coverage section reads this, and
+// $EMIRATES below is derived from it so the two can never drift apart.
+$AREAS = [
+  'Dubai' => [
+    'Deira', 'Bur Dubai', 'Al Barsha', 'Barsha Heights', 'Jumeirah', 'Umm Suqeim',
+    'Dubai Marina', 'Jumeirah Lake Towers', 'Jumeirah Beach Residence', 'Palm Jumeirah',
+    'Business Bay', 'Downtown Dubai', 'DIFC', 'Za&rsquo;abeel', 'Al Quoz', 'Al Safa',
+    'Al Wasl', 'Satwa', 'Karama', 'Oud Metha', 'Al Jaddaf', 'Mirdif', 'Mirdif Hills',
+    'Al Warqa', 'Al Qusais', 'Al Nahda', 'Muhaisnah', 'Al Twar', 'Hor Al Anz',
+    'Al Rigga', 'Port Saeed', 'Al Garhoud', 'Dubai Festival City', 'Ras Al Khor',
+    'Nad Al Sheba', 'Dubai Silicon Oasis', 'International City', 'Discovery Gardens',
+    'Al Furjan', 'Jumeirah Village Circle', 'Jumeirah Village Triangle', 'Dubai Hills Estate',
+    'Arabian Ranches', 'Emirates Hills', 'The Springs', 'The Meadows', 'The Greens',
+    'Motor City', 'Dubai Sports City', 'Dubai Studio City', 'Damac Hills', 'Mudon',
+    'Remraam', 'Town Square', 'Dubailand', 'Jumeirah Islands', 'Madinat Jumeirah Living',
+  ],
+  'Abu Dhabi' => [
+    'Al Danah', 'Al Khalidiyah', 'Al Bateen', 'Al Mushrif', 'Al Nahyan', 'Al Wahda',
+    'Al Muroor', 'Madinat Zayed', 'Corniche', 'Al Maryah Island', 'Al Reem Island',
+    'Saadiyat Island', 'Yas Island', 'Al Raha Beach', 'Al Raha Gardens', 'Khalifa City',
+    'Mohammed Bin Zayed City', 'Shakhbout City', 'Al Shamkha', 'Al Falah', 'Al Reef',
+    'Mussafah', 'Baniyas', 'Al Shahama', 'Al Bahia', 'Between Two Bridges', 'Masdar City',
+  ],
+  'Sharjah' => [
+    'Al Majaz', 'Al Khan', 'Al Taawun', 'Al Qasimia', 'Al Nahda', 'Al Mamzar',
+    'Rolla', 'Al Layyah', 'Al Ramtha', 'Al Yarmook', 'Al Nasserya', 'Al Gharb',
+    'Muwaileh', 'Muwaileh Commercial', 'University City', 'Al Zahia', 'Al Rahmaniya',
+    'Al Suyoh', 'Tilal City', 'Al Riqa', 'Sharjah Industrial Area', 'Al Sajaa',
+    'Khor Fakkan', 'Kalba', 'Dibba Al Hisn',
+  ],
+  'Ajman' => [
+    'Al Nuaimiya', 'Al Rashidiya', 'Al Jurf', 'Ajman Corniche', 'Ajman Downtown',
+    'Al Rawda', 'Al Mowaihat', 'Al Hamidiya', 'Al Zahra', 'Al Bustan', 'Al Rumailah',
+    'Emirates City', 'Al Alia', 'Al Helio', 'Masfout',
+  ],
+  'Ras Al Khaimah' => [
+    'Al Nakheel', 'Al Dhait', 'Al Mairid', 'Al Qusaidat', 'Khuzam', 'Julphar',
+    'Al Hamra Village', 'Mina Al Arab', 'Al Marjan Island', 'Al Jazirah Al Hamra',
+    'Al Rams', 'Digdaga', 'Al Uraibi', 'Khatt', 'Al Ghail',
+  ],
+  'Umm Al Quwain' => [
+    'Al Salamah', 'Al Raas', 'Al Haditha', 'Al Riqqah', 'Al Humrah', 'Al Maidan',
+    'Al Ramlah', 'Al Dar Al Baida', 'UAQ Marina', 'Falaj Al Mualla', 'Old Town',
+  ],
+  'Fujairah' => [
+    'Fujairah City', 'Al Faseel', 'Sakamkam', 'Merashid', 'Al Gurfah', 'Mirbah',
+    'Qidfa', 'Murbah', 'Dibba Al Fujairah', 'Masafi', 'Al Hayl', 'Al Bidyah',
+  ],
+];
+
+// Emirates covered, in the order above.
+$EMIRATES = array_keys($AREAS);
 
 // The seven services. 'icon' maps to a key in inc/icons.php, 'body' is the
 // copy that appears on the service card.
