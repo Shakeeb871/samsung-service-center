@@ -1,0 +1,26 @@
+<svg class="logo-mark" width="64" height="64" viewBox="0 0 120 120" role="img" aria-label="Samsung Service Center UAE">
+  <defs>
+    <g id="gear-lg64">
+      <circle cx="60" cy="60" r="43"/>
+      <rect x="52" y="3" width="16" height="22" rx="5" transform="rotate(0 60 60)"/><rect x="52" y="3" width="16" height="22" rx="5" transform="rotate(45 60 60)"/><rect x="52" y="3" width="16" height="22" rx="5" transform="rotate(90 60 60)"/><rect x="52" y="3" width="16" height="22" rx="5" transform="rotate(135 60 60)"/><rect x="52" y="3" width="16" height="22" rx="5" transform="rotate(180 60 60)"/><rect x="52" y="3" width="16" height="22" rx="5" transform="rotate(225 60 60)"/><rect x="52" y="3" width="16" height="22" rx="5" transform="rotate(270 60 60)"/><rect x="52" y="3" width="16" height="22" rx="5" transform="rotate(315 60 60)"/>
+    </g>
+    <clipPath id="l-lg64"><rect x="0" y="0" width="60" height="120"/></clipPath>
+    <clipPath id="r-lg64"><rect x="60" y="0" width="60" height="120"/></clipPath>
+  </defs>
+
+  <use href="#gear-lg64" fill="#1b4fa8" clip-path="url(#l-lg64)"/>
+  <use href="#gear-lg64" fill="#f4771f" clip-path="url(#r-lg64)"/>
+  <circle cx="60" cy="60" r="29" fill="#fff"/>
+
+  <!-- Wrench, lower-left to upper-right. -->
+  <g transform="rotate(-45 60 60)">
+    <rect x="56.5" y="58" width="7" height="22" rx="3.5" fill="#1b4fa8"/>
+    <path d="M60 40a9.5 9.5 0 0 1 6.7 16.2l-3.3-3.3a4.8 4.8 0 1 0-6.8 0l-3.3 3.3A9.5 9.5 0 0 1 60 40Z" fill="#1b4fa8"/>
+  </g>
+
+  <!-- Screwdriver, upper-left to lower-right. -->
+  <g transform="rotate(45 60 60)">
+    <rect x="57" y="62" width="6" height="18" rx="3" fill="#f4771f"/>
+    <path d="M60 42l4 8v10h-8V50l4-8Z" fill="#f4771f"/>
+  </g>
+</svg>

@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/icons.php';
+require_once __DIR__ . '/logo.php';
 
 /**
  * Pages set $page_title, $page_desc and $page_path before including this.
@@ -32,6 +33,7 @@ $canonical  = SITE_URL . $page_path;
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="<?= asset('/assets/img/favicon.svg') ?>" type="image/svg+xml">
 <link rel="stylesheet" href="<?= asset('/assets/css/style.css') ?>">
 </head>
 <body>
@@ -49,12 +51,8 @@ $canonical  = SITE_URL . $page_path;
 
 <header class="site-head">
   <div class="wrap head-inner">
-    <a class="brand" href="<?= url('/') ?>">
-      <span class="brand-mark">S</span>
-      <span class="brand-text">
-        <strong><?= htmlspecialchars(BIZ_NAME) ?></strong>
-        <small><?= htmlspecialchars(BIZ_TAGLINE) ?></small>
-      </span>
+    <a class="brand" href="<?= url('/') ?>" aria-label="<?= htmlspecialchars(BIZ_NAME) ?> — home">
+      <?= logo() ?>
     </a>
 
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menu">

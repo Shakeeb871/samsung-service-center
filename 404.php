@@ -8,7 +8,6 @@ require __DIR__ . '/inc/header.php';
 
 <section class="section">
   <div class="wrap center" style="max-width:640px">
-    <span class="eyebrow">404</span>
     <h1>That page is not here</h1>
     <p>
       The link is either out of date or slightly wrong. The repair pages below cover

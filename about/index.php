@@ -9,7 +9,6 @@ require __DIR__ . '/../inc/header.php';
 
 <section class="section">
   <div class="wrap prose">
-    <span class="eyebrow">About us</span>
     <h1>About our Samsung service center</h1>
 
     <p>
@@ -45,15 +44,6 @@ require __DIR__ . '/../inc/header.php';
       <a class="btn" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 18) ?>Call <?= htmlspecialchars(BIZ_PHONE) ?></a>
       <a class="btn btn-dark" href="<?= url('/contact/') ?>">Contact page</a>
     </p>
-  </div>
-</section>
-
-<section class="stat-strip" style="padding:0">
-  <div class="wrap stats">
-      <div class="stat"><?= icon('clock', 40) ?><b>24/7</b><span>Customer service, day or night</span></div>
-      <div class="stat"><?= icon('bolt', 40) ?><b>1 Hour</b><span>Emergency call-out response</span></div>
-      <div class="stat"><?= icon('shield', 40) ?><b>90 Day</b><span>Warranty on repairing</span></div>
-      <div class="stat"><?= icon('pin', 40) ?><b>7</b><span>Emirates covered</span></div>
   </div>
 </section>
 

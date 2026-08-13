@@ -11,7 +11,6 @@ require __DIR__ . '/../inc/header.php';
   <div class="wrap split">
 
     <div>
-      <span class="eyebrow">Get in touch</span>
       <h1>Book a repair</h1>
       <p>
         Our call centre is available 24/7 and our friendly team can advise and help you day or

@@ -5,7 +5,7 @@
 
     <div class="foot-grid">
       <div class="foot-col foot-about">
-        <span class="brand-mark">S</span>
+        <?= logo(true) ?>
         <p>
           Samsung appliance repair, servicing and installation across the United Arab
           Emirates, with 24/7 customer support and technicians dispatched to your door.

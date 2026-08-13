@@ -10,7 +10,6 @@ require __DIR__ . '/../inc/header.php';
 <section class="section">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">What we repair</span>
       <h1>Samsung appliance repair services</h1>
       <p>
         A failing appliance can cause endless hassle when technicians cannot diagnose the issue

@@ -72,30 +72,9 @@ require __DIR__ . '/inc/header.php';
   </div>
 </section>
 
-<div class="stat-strip">
-  <div class="wrap stats">
-    <div class="stat"><?= icon('clock', 42) ?><b>24/7</b><span>Customer service, day or night</span></div>
-    <div class="stat"><?= icon('bolt', 42) ?><b>1 Hour</b><span>Emergency call-out response</span></div>
-    <div class="stat"><?= icon('shield', 42) ?><b>90 Day</b><span>Warranty on repairing</span></div>
-    <div class="stat"><?= icon('tools', 42) ?><b>10+</b><span>Years experienced in the UAE</span></div>
-  </div>
-</div>
-
-<div class="appliance-strip">
-  <div class="wrap strip-row">
-    <?php foreach ($SERVICES as $s): ?>
-    <div class="strip-item">
-      <?= icon($s['icon'], 66) ?>
-      <span><?= $s['short'] ?></span>
-    </div>
-    <?php endforeach; ?>
-  </div>
-</div>
-
 <section class="section">
   <div class="wrap">
     <div class="section-head center">
-      <span class="eyebrow">Across the Emirates</span>
       <h2>Best Samsung Service Center In United Arab Emirates</h2>
     </div>
 
@@ -129,7 +108,6 @@ require __DIR__ . '/inc/header.php';
 <section class="section section-tint">
   <div class="wrap">
     <div class="section-head center">
-      <span class="eyebrow">What we repair</span>
       <h2>Provide Comprehensive Samsung Appliances Repair Services</h2>
       <p>
         A failing appliance can cause endless hassle when technicians cannot diagnose the issue
@@ -171,7 +149,6 @@ require __DIR__ . '/inc/header.php';
 <section class="section">
   <div class="wrap">
     <div class="section-head center">
-      <span class="eyebrow">Coverage</span>
       <h2>We Cover Every State In UAE (Dubai, Abu Dhabi, Sharjah)</h2>
       <p>
         We cover every state in UAE no matter where you are located. Whether you need a
@@ -195,7 +172,6 @@ require __DIR__ . '/inc/header.php';
 <section class="section section-grey">
   <div class="wrap">
     <div class="section-head center">
-      <span class="eyebrow">The process</span>
       <h2>How We Works</h2>
     </div>
 
@@ -227,7 +203,6 @@ require __DIR__ . '/inc/header.php';
 <section class="section section-dark">
   <div class="wrap split">
     <div>
-      <span class="eyebrow">Support</span>
       <h2>We Provide Honest 24/7 Samsung Customer Support</h2>
       <p>
         Unresponsive customer care and unhandled complaints make appliance repairs stressful.
@@ -265,7 +240,6 @@ require __DIR__ . '/inc/header.php';
   <div class="wrap reasons-grid">
 
     <div class="reasons-intro">
-      <span class="eyebrow">Why us</span>
       <h2>Reasons To Pick Our Samsung Service Center</h2>
       <p>
         We are proud of our work and always endeavour to find ways to improve our services and,

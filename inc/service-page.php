@@ -36,7 +36,6 @@ require __DIR__ . '/header.php';
 <section class="section section-tint">
   <div class="wrap grid grid-2">
     <div>
-      <span class="eyebrow">Symptoms</span>
       <h2>What people call about</h2>
       <p>
         If one of these matches what your appliance is doing, mention it when you get in
@@ -56,7 +55,6 @@ require __DIR__ . '/header.php';
 <section class="section">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Diagnosis</span>
       <h2>What gets checked, and in what order</h2>
       <p>
         Working through the cheap and likely causes before the expensive ones is what
@@ -87,7 +85,6 @@ require __DIR__ . '/header.php';
 <section class="section">
   <div class="wrap" style="max-width:800px">
     <div class="section-head">
-      <span class="eyebrow">Questions</span>
       <h2>About this repair</h2>
     </div>
     <?php foreach ($svc['faqs'] as $f): ?>
