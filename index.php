@@ -194,7 +194,7 @@ require __DIR__ . '/inc/header.php';
 <section class="section section-grey">
   <div class="wrap">
     <div class="section-head center">
-      <h2>How We Works</h2>
+      <h2>How Our Samsung Service Center Works</h2>
     </div>
 
     <ol class="flow">

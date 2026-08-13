@@ -86,6 +86,17 @@ $__scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
  */
 define('HERO_IMAGE', 'Samsung Authorise service center in uae provide best and most trusted samsung appliances repair services in UAE');
 
+/**
+ * Site icon (favicon). The file name without its extension, exactly as
+ * uploaded into assets/img/.
+ *
+ * Google will only show a favicon in search results if it can crawl it,
+ * so nothing in robots.txt or .htaccess may block /assets/, and the tag
+ * has to be a real <link rel="icon"> in the head of every page — which is
+ * where inc/header.php puts it.
+ */
+define('SITE_ICON', 'Samsung Service Center Site Icon');
+
 define('SITE_URL', $__scheme . '://' . ($_SERVER['HTTP_HOST'] ?? 'samsung.aiqonquickcool.com.my') . BASE);
 
 // --- Business details -------------------------------------------------

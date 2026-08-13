@@ -84,3 +84,35 @@ function hero_bg(): string
     // Quoted, because an unquoted CSS url() breaks on a space.
     return ' style="background-image:url(\'' . asset($found) . '\')"';
 }
+
+/**
+ * The <link> tags for the site icon.
+ *
+ * Google reads rel="icon" and wants the file crawlable and square. The
+ * drawn SVG stays as a second entry: browsers that prefer SVG take the
+ * sharper one, and anything that cannot read SVG falls back to the
+ * uploaded raster.
+ *
+ * apple-touch-icon is the same file — iOS ignores rel="icon" entirely and
+ * will screenshot the page instead if this is missing.
+ */
+function site_icon_tags(): string
+{
+    $out = [];
+
+    $found = find_image('/assets/img', [SITE_ICON, 'site-icon', 'favicon', 'icon']);
+    if ($found !== null) {
+        $type = strtolower(pathinfo($found, PATHINFO_EXTENSION));
+        $mime = ['jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png',
+                 'webp' => 'image/webp', 'avif' => 'image/avif'][$type] ?? '';
+        $src  = asset($found);
+        $out[] = '<link rel="icon" href="' . $src . '"' . ($mime ? ' type="' . $mime . '"' : '') . ' sizes="any">';
+        $out[] = '<link rel="apple-touch-icon" href="' . $src . '">';
+    }
+
+    if (is_file(dirname(__DIR__) . '/assets/img/favicon.svg')) {
+        $out[] = '<link rel="icon" href="' . asset('/assets/img/favicon.svg') . '" type="image/svg+xml">';
+    }
+
+    return implode("\n", $out);
+}

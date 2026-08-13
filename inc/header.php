@@ -34,7 +34,7 @@ $canonical  = SITE_URL . $page_path;
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="<?= asset('/assets/img/favicon.svg') ?>" type="image/svg+xml">
+<?= site_icon_tags() ?>
 <link rel="stylesheet" href="<?= asset('/assets/css/style.css') ?>">
 </head>
 <body>

@@ -435,48 +435,68 @@ ul { margin: 0; }
    once, and reads as a place you look something up rather than a badge
    collection.
 
+   The rail is built as a real control — its own ground, a selected row
+   that sits proud of the others, a moving marker — because a row of
+   plain text links does not look like something you are meant to press.
+
    Every panel is in the HTML and visible before the script runs, so with
    JavaScript off the section degrades to seven labelled lists rather than
    to nothing.
    ------------------------------------------------------------------ */
 
 .coverage {
-  display: grid; grid-template-columns: 230px 1fr;
-  border-top: 1px solid var(--line);
-  margin-top: 8px;
+  display: grid; grid-template-columns: 268px 1fr;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
 }
 
-.cov-rail { list-style: none; padding: 22px 0; margin: 0; border-right: 1px solid var(--line); }
+.cov-rail {
+  list-style: none; padding: 12px; margin: 0;
+  background: var(--tint-grey);
+  border-right: 1px solid var(--line);
+}
 .cov-tab {
   position: relative;
-  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
-  width: 100%; padding: 11px 22px 11px 20px;
-  background: none; border: 0; cursor: pointer;
-  font: inherit; font-size: .95rem; font-weight: 500; color: var(--text);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  width: 100%; padding: 14px 16px 14px 18px;
+  background: none; border: 0; border-radius: var(--r); cursor: pointer;
+  font: inherit; font-size: 1rem; font-weight: 500; color: var(--text);
   text-align: left;
-  transition: color .16s, background .16s;
+  transition: color .16s, background .16s, box-shadow .16s;
 }
-/* The marker slides rather than blinks, which is what makes the rail feel
-   like one control instead of seven links. */
+/* The marker grows rather than blinks, which is what makes the rail read
+   as one control instead of seven separate links. */
 .cov-tab::before {
   content: ""; position: absolute; left: 0; top: 50%;
-  width: 3px; height: 0; border-radius: 0 2px 2px 0;
+  width: 3px; height: 0; border-radius: 0 3px 3px 0;
   background: var(--primary);
   transform: translateY(-50%);
-  transition: height .2s ease;
+  transition: height .22s ease;
 }
-.cov-tab:hover { color: var(--secondary); }
-.cov-tab.is-on { color: var(--secondary); font-weight: 600; }
-.cov-tab.is-on::before { height: 70%; }
-.cov-count { font-size: .74rem; font-weight: 500; color: var(--muted); font-variant-numeric: tabular-nums; }
-.cov-tab.is-on .cov-count { color: var(--primary-ink); }
+.cov-tab:hover { background: rgba(255,255,255,.7); color: var(--secondary); }
+.cov-tab.is-on {
+  background: #fff; color: var(--secondary); font-weight: 600;
+  box-shadow: var(--shadow-xs);
+}
+.cov-tab.is-on::before { height: 58%; }
 
-.cov-body { padding: 26px 0 26px 34px; min-height: 260px; }
+.cov-count {
+  font-size: .74rem; font-weight: 600; font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  background: #fff; border: 1px solid var(--line);
+  border-radius: 999px; padding: 3px 9px; line-height: 1.5;
+  transition: color .16s, background .16s, border-color .16s;
+}
+.cov-tab.is-on .cov-count {
+  color: #fff; background: var(--primary-ink); border-color: var(--primary-ink);
+}
+
+.cov-body { padding: 26px 30px; min-height: 300px; }
 .cov-panel { display: none; }
 .cov-panel.is-on { display: block; }
-/* Before the script runs every panel is shown; the script hides all but
-   one. Without it the section still lists everything. */
-.no-js .cov-panel { display: block; }
 
 .cov-areas {
   list-style: none; padding: 0; margin: 0;
@@ -484,13 +504,14 @@ ul { margin: 0; }
 }
 .cov-areas li {
   break-inside: avoid;
-  padding: 5px 0 5px 16px; position: relative;
-  font-size: .87rem; line-height: 1.6;
+  padding: 6px 0 6px 17px; position: relative;
+  font-size: .88rem; line-height: 1.6;
 }
 .cov-areas li::before {
-  content: ""; position: absolute; left: 0; top: .82em;
+  content: ""; position: absolute; left: 0; top: .88em;
   width: 5px; height: 5px; border-radius: 50%;
   background: var(--primary-line);
+  transition: background .16s;
 }
 .cov-areas li:hover::before { background: var(--primary); }
 
@@ -709,8 +730,9 @@ ul { margin: 0; }
   .svc-grid { grid-template-columns: 1fr; }
   .flow { grid-template-columns: repeat(2, 1fr); gap: 34px 26px; }
   .flow-step:nth-child(2)::before { right: 0; }
-  .coverage { grid-template-columns: 190px 1fr; }
+  .coverage { grid-template-columns: 210px 1fr; }
   .cov-areas { columns: 2; }
+  .cov-body { padding: 22px 24px; }
   .strip-row { grid-template-columns: repeat(4, 1fr); gap: 22px; }
   .reasons-grid { grid-template-columns: 1fr; gap: 36px; }
   .reasons-intro { position: static; }
@@ -751,6 +773,25 @@ ul { margin: 0; }
   .topbar-inner { justify-content: center; }
 }
 
+/* --- Touch targets --------------------------------------------------
+   Below the tablet break, anything tappable gets enough height to hit
+   with a thumb. A 15px text link is fine with a cursor and a coin toss
+   with a finger, and this site's whole job is getting someone to press
+   a phone number.
+   ------------------------------------------------------------------ */
+@media (max-width: 820px) {
+  .topbar a { padding: 9px 4px; }
+  .topbar-inner { min-height: 44px; }
+  .site-foot li { margin-bottom: 2px; }
+  .site-foot li a { display: inline-block; padding: 9px 0; }
+  .foot-contact a { display: inline-block; padding: 6px 0; }
+  .crumbs { padding-top: 10px; }
+  .crumbs a { display: inline-block; padding: 7px 2px; }
+  .card-link, .info-list a { display: inline-flex; padding: 8px 0; }
+  .svc-body h3 a { display: inline-block; padding: 9px 0; }
+  .cta-phone, .phone-big { padding: 6px 0; }
+}
+
 @media (max-width: 600px) {
   .flow { grid-template-columns: 1fr; gap: 26px; }
   .flow-step { padding-top: 0; padding-left: 34px; }
@@ -760,14 +801,29 @@ ul { margin: 0; }
   .flow-step::after { top: 4px; }
   .flow-num { top: -6px; right: 0; font-size: 2.6rem; }
 
+  /* The rail becomes a scrolling row of chips. -webkit-overflow-scrolling
+     and scroll-snap make it behave like a native control under a thumb
+     rather than a list that happens to slide. */
   .coverage { grid-template-columns: 1fr; }
-  .cov-rail { display: flex; overflow-x: auto; padding: 12px 0; border-right: 0; border-bottom: 1px solid var(--line); }
-  .cov-rail li { flex: none; }
-  .cov-tab { padding: 8px 16px; white-space: nowrap; }
-  .cov-tab::before { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 0; transform: none; }
-  .cov-tab.is-on::before { height: 3px; }
-  .cov-body { padding: 20px 0; }
-  .cov-areas { columns: 1; }
+  .cov-rail {
+    display: flex; gap: 8px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    padding: 12px; border-right: 0; border-bottom: 1px solid var(--line);
+    scrollbar-width: none;
+  }
+  .cov-rail::-webkit-scrollbar { display: none; }
+  .cov-rail li { flex: none; scroll-snap-align: start; }
+  .cov-tab {
+    padding: 10px 14px; white-space: nowrap; font-size: .9rem;
+    border: 1px solid var(--line); background: #fff;
+  }
+  .cov-tab::before { display: none; }
+  .cov-tab.is-on { background: var(--primary-ink); color: #fff; border-color: var(--primary-ink); }
+  .cov-tab.is-on .cov-count { background: rgba(255,255,255,.2); border-color: transparent; color: #fff; }
+  .cov-body { padding: 20px 18px 22px; min-height: 0; }
+  .cov-areas { columns: 2; column-gap: 18px; }
+  .cov-areas li { font-size: .84rem; }
 
   .logo-mark { width: 40px; height: 40px; }
   .logo-brand { font-size: 1.08rem; }
