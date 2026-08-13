@@ -73,12 +73,12 @@ require __DIR__ . '/inc/header.php';
 </section>
 
 <section class="section">
-  <div class="wrap">
-    <div class="section-head center">
-      <h2>Best Samsung Service Center In United Arab Emirates</h2>
-    </div>
+  <div class="wrap split media-split">
 
-    <div class="lead">
+    <div>
+      <div class="section-head">
+        <h2>Best Samsung Service Center In United Arab Emirates</h2>
+      </div>
       <p>
         Are you tired of repair services taking your appliance away for a &ldquo;simple
         clean&rdquo; or basic check, only to deliver it back dented, damaged, or not working
@@ -99,7 +99,13 @@ require __DIR__ . '/inc/header.php';
         report, and complete the job on time to make your Samsung devices fully functional
         again.
       </p>
-      <p><a class="btn btn-dark" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 15) ?>Speak to a specialist</a></p>
+      <p class="mt">
+        <a class="btn" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 15) ?>Speak to a specialist</a>
+      </p>
+    </div>
+
+    <div class="media">
+      <?= photo('/assets/img/about.jpg', 'Samsung appliance technician on a repair call in the UAE', 'tools') ?>
     </div>
 
   </div>

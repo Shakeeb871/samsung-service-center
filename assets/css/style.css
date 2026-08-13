@@ -13,7 +13,7 @@
      #232333  secondary     headings, dark sections, footer
        at 97% lightness     --tint-grey  section fill
 
-     #747487  body text        #ffffff  page background
+     #56566b  body text        #ffffff  page background
 
    Sections alternate between white, a 4% blue tint, a 3% neutral tint
    and full dark. That rotation is what separates them — a long page of
@@ -49,8 +49,8 @@
   --secondary-soft: #32324a;
   --secondary-deep: #1a1a26;
 
-  --text:   #747487;
-  --muted:  #9494a6;
+  --text:   #56566b;   /* darkened from #747487 — 7.4:1 on white */
+  --muted:  #7c7c90;   /* labels and captions, darkened to match */
   --line:   #e7e7ee;
   --bg:     #ffffff;
 
@@ -421,6 +421,31 @@ ul { margin: 0; }
 
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
 
+/* Text left, picture right. The media column is centred against the copy
+   rather than pinned to the top, so a short image does not leave the
+   right side looking abandoned. */
+.media-split { grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
+.split .section-head { margin-bottom: 26px; }
+
+.media { position: relative; }
+.media-img {
+  display: block; width: 100%; height: auto;
+  border-radius: var(--r);
+  box-shadow: var(--shadow-md);
+}
+
+/* Stands in until assets/img/about.jpg is uploaded. Built to look like a
+   deliberate panel, not a missing file. */
+.media-placeholder {
+  display: grid; place-items: center;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(150deg, var(--tint-1) 0%, var(--tint-2) 100%);
+  border: 1px solid var(--primary-line);
+  border-radius: var(--r);
+  color: var(--primary);
+}
+.media-placeholder .ico { width: 96px; height: 96px; opacity: .55; }
+
 .grid { display: grid; gap: 22px; }
 .grid-2 { grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); }
 .grid-3 { grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
@@ -529,7 +554,7 @@ ul { margin: 0; }
 
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; gap: 32px; }
-  .split { grid-template-columns: 1fr; gap: 32px; }
+  .split, .media-split { grid-template-columns: 1fr; gap: 32px; }
   .foot-grid { grid-template-columns: 1fr 1fr; }
 }
 

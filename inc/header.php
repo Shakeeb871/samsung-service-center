@@ -2,6 +2,7 @@
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/icons.php';
 require_once __DIR__ . '/logo.php';
+require_once __DIR__ . '/media.php';
 
 /**
  * Pages set $page_title, $page_desc and $page_path before including this.
