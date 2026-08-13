@@ -33,7 +33,7 @@ require __DIR__ . '/header.php';
   </div>
 </section>
 
-<section class="section section-soft">
+<section class="section section-tint">
   <div class="wrap grid grid-2">
     <div>
       <span class="eyebrow">Symptoms</span>
@@ -75,7 +75,7 @@ require __DIR__ . '/header.php';
   </div>
 </section>
 
-<section class="section section-soft">
+<section class="section section-grey">
   <div class="wrap" style="max-width:820px">
     <h2><?= htmlspecialchars($svc['notes_h2']) ?></h2>
     <?php foreach ($svc['notes'] as $p): ?>
@@ -99,7 +99,7 @@ require __DIR__ . '/header.php';
   </div>
 </section>
 
-<section class="section section-soft">
+<section class="section section-tint">
   <div class="wrap">
     <div class="section-head">
       <h2>Other Samsung repairs</h2>

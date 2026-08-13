@@ -72,6 +72,15 @@ require __DIR__ . '/inc/header.php';
   </div>
 </section>
 
+<div class="stat-strip">
+  <div class="wrap stats">
+    <div class="stat"><?= icon('clock', 42) ?><b>24/7</b><span>Customer service, day or night</span></div>
+    <div class="stat"><?= icon('bolt', 42) ?><b>1 Hour</b><span>Emergency call-out response</span></div>
+    <div class="stat"><?= icon('shield', 42) ?><b>90 Day</b><span>Warranty on repairing</span></div>
+    <div class="stat"><?= icon('tools', 42) ?><b>10+</b><span>Years experienced in the UAE</span></div>
+  </div>
+</div>
+
 <div class="appliance-strip">
   <div class="wrap strip-row">
     <?php foreach ($SERVICES as $s): ?>
@@ -114,16 +123,10 @@ require __DIR__ . '/inc/header.php';
       <p><a class="btn btn-dark" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 15) ?>Speak to a specialist</a></p>
     </div>
 
-    <div class="stats">
-      <div class="stat"><?= icon('clock', 40) ?><b>24/7</b><span>Customer service, day or night</span></div>
-      <div class="stat"><?= icon('bolt', 40) ?><b>1 Hour</b><span>Emergency call-out response</span></div>
-      <div class="stat"><?= icon('shield', 40) ?><b>90 Day</b><span>Warranty on repairing</span></div>
-      <div class="stat"><?= icon('tools', 40) ?><b>10+</b><span>Years experienced in the UAE</span></div>
-    </div>
   </div>
 </section>
 
-<section class="section section-grey">
+<section class="section section-tint">
   <div class="wrap">
     <div class="section-head center">
       <span class="eyebrow">What we repair</span>
@@ -155,12 +158,12 @@ require __DIR__ . '/inc/header.php';
 
 <section class="cta-band">
   <div class="wrap cta-inner">
-    <div>
-      <h2>Call Our Experts Now for Fast, Affordable, and Professional Support in the UAE</h2>
-      <p>Expert repairs for home and commercial Samsung appliances, every day of the week.</p>
-    </div>
+    <h2>Call Our Experts Now for Fast, Affordable, and Professional Support in the UAE</h2>
+    <p>Expert repairs for home and commercial Samsung appliances, every day of the week.</p>
+    <a class="cta-phone" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 30) ?><?= htmlspecialchars(BIZ_PHONE) ?></a>
     <div class="cta-actions">
       <a class="btn btn-white" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 15) ?>Call Now</a>
+      <a class="btn btn-outline" href="https://wa.me/<?= BIZ_WHATSAPP ?>" rel="noopener">WhatsApp</a>
     </div>
   </div>
 </section>
@@ -221,7 +224,7 @@ require __DIR__ . '/inc/header.php';
   </div>
 </section>
 
-<section class="section">
+<section class="section section-dark">
   <div class="wrap split">
     <div>
       <span class="eyebrow">Support</span>
@@ -258,7 +261,7 @@ require __DIR__ . '/inc/header.php';
   </div>
 </section>
 
-<section class="section section-grey">
+<section class="section section-tint">
   <div class="wrap reasons-grid">
 
     <div class="reasons-intro">
@@ -375,12 +378,11 @@ require __DIR__ . '/inc/header.php';
 
 <section class="cta-band">
   <div class="wrap cta-inner">
-    <div>
-      <h2>Book a Samsung specialist now</h2>
-      <p>24/7 customer service, a 1 hour response on emergency call-outs, and a 90 day warranty on repairing.</p>
-    </div>
+    <h2>Book a Samsung specialist now</h2>
+    <p>24/7 customer service, a 1 hour response on emergency call-outs, and a 90 day warranty on repairing.</p>
+    <a class="cta-phone" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 30) ?><?= htmlspecialchars(BIZ_PHONE) ?></a>
     <div class="cta-actions">
-      <a class="btn btn-white" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 15) ?><?= htmlspecialchars(BIZ_PHONE) ?></a>
+      <a class="btn btn-white" href="<?= url('/contact/') ?>">Book a repair</a>
       <a class="btn btn-outline" href="https://wa.me/<?= BIZ_WHATSAPP ?>" rel="noopener">WhatsApp</a>
     </div>
   </div>

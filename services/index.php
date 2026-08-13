@@ -37,12 +37,12 @@ require __DIR__ . '/../inc/header.php';
 
 <section class="cta-band">
   <div class="wrap cta-inner">
-    <div>
-      <h2>Call Our Experts Now for Fast, Affordable, and Professional Support in the UAE</h2>
-      <p>24/7 customer service, a 1 hour response on emergency call-outs, and a 90 day warranty on repairing.</p>
-    </div>
+    <h2>Call Our Experts Now for Fast, Affordable, and Professional Support in the UAE</h2>
+    <p>24/7 customer service, a 1 hour response on emergency call-outs, and a 90 day warranty on repairing.</p>
+    <a class="cta-phone" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 30) ?><?= htmlspecialchars(BIZ_PHONE) ?></a>
     <div class="cta-actions">
-      <a class="btn btn-white" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 18) ?>Call Now</a>
+      <a class="btn btn-white" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 15) ?>Call Now</a>
+      <a class="btn btn-outline" href="https://wa.me/<?= BIZ_WHATSAPP ?>" rel="noopener">WhatsApp</a>
     </div>
   </div>
 </section>
