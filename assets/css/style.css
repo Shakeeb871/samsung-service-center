@@ -90,7 +90,10 @@ ul { margin: 0; }
 .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 22px; }
 .center { text-align: center; }
 .small { font-size: .87rem; }
-.ico { flex: none; }
+/* One drawing weight across the site. 1.6 is the width every icon set
+   ships at and it reads as generic; 1.5 on larger glyphs and 2.4 on the
+   small ticks gives them a deliberate hierarchy instead. */
+.ico { flex: none; stroke-width: 1.5; }
 .mt { margin-top: 1.5em; }
 
 .skip { position: absolute; left: -9999px; background: var(--primary-ink); color: #fff; padding: 10px 16px; z-index: 200; }
@@ -236,8 +239,9 @@ ul { margin: 0; }
 .hero-checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
 .hero-checks li { display: flex; gap: 12px; align-items: flex-start; font-size: .91rem; color: #e2e2ea; line-height: 1.6; }
 .hero-checks .ico {
-  width: 22px; height: 22px; padding: 4px; margin-top: 3px;
-  border-radius: var(--r); background: var(--primary); color: #fff;
+  width: 17px; height: 17px; margin-top: 4px;
+  color: var(--primary);
+  stroke-width: 2.4;
 }
 
 /* --- Enquiry bar --------------------------------------------------- */
@@ -543,7 +547,7 @@ ul { margin: 0; }
 .reason-list { list-style: none; padding: 0; margin: 0; counter-reset: reason; }
 .reason-list li {
   position: relative;
-  display: grid; grid-template-columns: 46px 1fr; gap: 18px;
+  display: grid; grid-template-columns: 26px 1fr; gap: 20px;
   padding: 24px 22px; margin-bottom: 12px;
   background: #fff; border: 1px solid var(--line); border-radius: var(--r);
   box-shadow: var(--shadow-xs);
@@ -551,10 +555,14 @@ ul { margin: 0; }
 }
 .reason-list li:hover { box-shadow: var(--shadow-md); border-color: var(--primary-line); transform: translateX(4px); }
 .reason-list li:last-child { margin-bottom: 0; }
+/* No tile, no gradient, no glow. The icon sits on its own against a
+   hairline that separates it from the text — the rule does the work a
+   coloured box was doing, without shouting. */
 .reason-list .ico {
-  width: 46px; height: 46px; padding: 11px; border-radius: var(--r);
-  background: linear-gradient(145deg, var(--primary) 0%, var(--primary-ink) 100%);
-  color: #fff; box-shadow: 0 5px 14px rgba(45,140,255,.28);
+  width: 26px; height: 26px;
+  color: var(--primary-ink);
+  stroke-width: 1.5;
+  margin-top: 3px;
 }
 /* 01 to 07, sitting in the corner of each card. Numbering a list of
    reasons tells the reader how much is left, which a plain list does not. */
@@ -620,8 +628,6 @@ ul { margin: 0; }
 .symptoms { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 .symptoms li { background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--primary); border-radius: 0 var(--r) var(--r) 0; padding: 14px 18px; font-size: .89rem; }
 
-.area-tags { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; list-style: none; }
-.area-tags li { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 8px 16px; font-size: .85rem; }
 
 /* --- Forms --------------------------------------------------------- */
 
@@ -644,9 +650,9 @@ ul { margin: 0; }
 .form-status.is-err { color: #c02626; }
 
 .info-list { list-style: none; padding: 0; margin: 0; }
-.info-list li { display: flex; gap: 13px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.info-list li { display: flex; gap: 16px; padding: 15px 0; border-bottom: 1px solid var(--line); }
 .info-list li:last-child { border-bottom: 0; }
-.info-list .ico { width: 36px; height: 36px; padding: 8px; border-radius: var(--r); background: var(--primary-tint); color: var(--primary-ink); }
+.info-list .ico { width: 22px; height: 22px; color: var(--primary-ink); stroke-width: 1.5; margin-top: 4px; }
 .info-list span { display: block; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
 .info-list strong, .info-list a { color: var(--secondary); font-size: .94rem; text-decoration: none; font-weight: 500; }
 .info-list a:hover { color: var(--primary-ink); }
@@ -680,7 +686,7 @@ ul { margin: 0; }
 
 .foot-contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 42px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,.1); }
 .foot-contact li { display: flex; gap: 13px; align-items: center; margin: 0; list-style: none; }
-.foot-contact .ico { width: 36px; height: 36px; padding: 9px; border-radius: var(--r); background: var(--primary); color: #fff; }
+.foot-contact .ico { width: 22px; height: 22px; color: var(--primary); stroke-width: 1.5; }
 .foot-contact span { display: block; font-size: .73rem; text-transform: uppercase; letter-spacing: .08em; color: #8f8fa2; }
 .foot-contact strong, .foot-contact a { color: #fff; font-weight: 500; font-size: .9rem; }
 
@@ -769,8 +775,7 @@ ul { margin: 0; }
   .logo-img { height: 40px; }
   .enquiry-bar form { grid-template-columns: 1fr; }
   .svc-card { grid-template-columns: 1fr; gap: 16px; }
-  .steps { grid-template-columns: 1fr; }
-  .strip-row { grid-template-columns: repeat(3, 1fr); }
+    .strip-row { grid-template-columns: repeat(3, 1fr); }
   .foot-grid { grid-template-columns: 1fr; gap: 24px; }
   .hero-actions .btn, .cta-actions .btn { flex: 1 1 100%; }
 }
