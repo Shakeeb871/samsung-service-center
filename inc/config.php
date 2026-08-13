@@ -27,7 +27,11 @@ define('IS_STAGING', true);
 function asset(string $path): string
 {
     $file = dirname(__DIR__) . $path;
-    return url($path) . '?v=' . (is_file($file) ? filemtime($file) : time());
+    // Each segment is encoded separately so the slashes stay slashes. A
+    // file name with a space in it produces a broken URL otherwise, and
+    // uploaded artwork very often has spaces in it.
+    $enc = implode('/', array_map('rawurlencode', explode('/', ltrim($path, '/'))));
+    return url('/' . $enc) . '?v=' . (is_file($file) ? filemtime($file) : time());
 }
 
 /**
@@ -70,6 +74,18 @@ function url(string $path): string
 /** Scheme and host as the visitor sees them, used for canonical tags. */
 $__scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
          || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https') ? 'https' : 'http';
+/**
+ * Hero background image.
+ *
+ * The file name without its extension, exactly as uploaded into
+ * assets/img/. Spaces and capitals are fine and the extension does not
+ * matter — jpg, webp, png all work.
+ *
+ * Uploaded artwork often arrives with a long descriptive name for search,
+ * and renaming it loses that. Naming it here is the cheaper trade.
+ */
+define('HERO_IMAGE', 'Samsung Authorise service center in uae provide best and most trusted samsung appliances repair services in UAE');
+
 define('SITE_URL', $__scheme . '://' . ($_SERVER['HTTP_HOST'] ?? 'samsung.aiqonquickcool.com.my') . BASE);
 
 // --- Business details -------------------------------------------------

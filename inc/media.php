@@ -13,8 +13,11 @@
  * usual extensions, in any case, is found.
  */
 
-/** Absolute path of the first file matching $name.<ext>, or null. */
-function find_image(string $dir, string $name): ?string
+/**
+ * Site-relative path of the first file in $dir whose name matches any of
+ * $names, with any usual image extension. $names may be a single string.
+ */
+function find_image(string $dir, $names): ?string
 {
     $abs = dirname(__DIR__) . $dir;
     if (!is_dir($abs)) {
@@ -22,7 +25,7 @@ function find_image(string $dir, string $name): ?string
     }
 
     $exts = ['webp', 'jpg', 'jpeg', 'png', 'avif'];
-    $want = strtolower($name);
+    $want = array_map('strtolower', (array) $names);
 
     foreach (scandir($abs) ?: [] as $entry) {
         if ($entry === '.' || $entry === '..') {
@@ -34,7 +37,7 @@ function find_image(string $dir, string $name): ?string
         }
         $stem = strtolower(substr($entry, 0, $dot));
         $ext  = strtolower(substr($entry, $dot + 1));
-        if ($stem === $want && in_array($ext, $exts, true)) {
+        if (in_array($stem, $want, true) && in_array($ext, $exts, true)) {
             return $dir . '/' . $entry;
         }
     }
@@ -72,6 +75,12 @@ function photo(string $dir, string $name, string $alt, string $icon = 'tools'): 
  */
 function hero_bg(): string
 {
-    $found = find_image('/assets/img', 'hero');
-    return $found === null ? '' : ' style="background-image:url(' . asset($found) . ')"';
+    // The name from config first, then plain 'hero' — so either the file
+    // as uploaded or a file renamed to hero.jpg will be picked up.
+    $found = find_image('/assets/img', [HERO_IMAGE, 'hero']);
+    if ($found === null) {
+        return '';
+    }
+    // Quoted, because an unquoted CSS url() breaks on a space.
+    return ' style="background-image:url(\'' . asset($found) . '\')"';
 }

@@ -36,7 +36,7 @@ require __DIR__ . '/../inc/header.php';
   </div>
 </section>
 
-<section class="cta-band">
+<section class="cta-band cta-plain">
   <div class="wrap cta-inner">
     <h2>Call Our Experts Now for Fast, Affordable, and Professional Support in the UAE</h2>
     <p>24/7 customer service, a 1 hour response on emergency call-outs, and a 90 day warranty on repairing.</p>

@@ -345,32 +345,69 @@ ul { margin: 0; }
 
 .btn-block { width: 100%; padding: 11px 18px; }
 
-/* --- Call bands ---------------------------------------------------- */
+/* --- Call bands ----------------------------------------------------
+   The main one runs the copy on a dark panel with a photograph filling
+   the right edge, and the phone number set larger than anything else in
+   it. On a page whose whole purpose is a phone call, the number is the
+   message.
 
-/* The two loudest moments on the page. Centred, on the deep primary,
-   with the phone number set larger than the heading above it — on a page
-   whose whole purpose is a phone call, the number is the message. */
-.cta-band {
-  position: relative; overflow: hidden;
-  background: linear-gradient(115deg, var(--primary-deep) 0%, var(--primary-deeper) 100%);
-  color: #b9cbe8; padding: 66px 0; text-align: center;
+   The closing band before the footer stays centred on the deep primary,
+   so the page does not show the same picture layout twice.
+   ------------------------------------------------------------------ */
+
+.cta-band { background: var(--secondary); color: #b8b8c8; overflow: hidden; }
+
+.cta-band-inner { display: grid; grid-template-columns: 1.75fr 1fr; align-items: stretch; }
+
+.cta-copy { display: flex; align-items: center; padding: 66px 0; }
+/* Lines the copy up with the site container's left edge even though this
+   column is not the container — the band itself runs edge to edge. */
+.cta-copy-inner {
+  width: 100%;
+  padding-left: max(22px, calc((100vw - var(--wrap)) / 2 + 22px));
+  padding-right: 56px;
 }
-.cta-band::before {
+.cta-band h2 { color: #fff; margin-bottom: .45em; font-size: clamp(1.5rem, 2.9vw, 2.15rem); max-width: 20ch; }
+.cta-band p { margin: 0 0 4px; font-size: .92rem; max-width: 56ch; }
+
+.cta-phone {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: clamp(1.7rem, 3.2vw, 2.3rem); font-weight: 700; letter-spacing: -.02em;
+  color: var(--primary); text-decoration: none;
+  margin: 18px 0 22px;
+}
+.cta-phone:hover { color: #6fb0ff; }
+
+.cta-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* The photograph fills its column to the band's full height. */
+.cta-photo { position: relative; min-height: 340px; }
+.cta-photo img,
+.cta-photo .media-placeholder {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border: 0; border-radius: 0;
+}
+.cta-photo .media-placeholder { background: linear-gradient(150deg, #2f2f42 0%, #262636 100%); }
+
+/* --- Closing band, centred ----------------------------------------- */
+
+.cta-plain {
+  position: relative;
+  background: linear-gradient(115deg, var(--primary-deep) 0%, var(--primary-deeper) 100%);
+  color: #b9cbe8; padding: 64px 0; text-align: center;
+}
+.cta-plain::before {
   content: ""; position: absolute; inset: 0;
   background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
   background-size: 20px 20px;
 }
-.cta-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.cta-band h2 { color: #fff; margin-bottom: .3em; font-size: clamp(1.35rem, 2.5vw, 1.95rem); max-width: 34ch; }
-.cta-band p { margin: 0 0 6px; font-size: .9rem; max-width: 60ch; }
-.cta-phone {
-  display: inline-flex; align-items: center; gap: 12px;
-  font-size: clamp(1.7rem, 3.4vw, 2.4rem); font-weight: 700; letter-spacing: -.02em;
-  color: #fff; text-decoration: none; margin: 6px 0 16px;
-}
-.cta-phone .ico { width: 30px; height: 30px; padding: 6px; border-radius: var(--r); background: rgba(255,255,255,.16); }
-.cta-phone:hover { color: #cfe2ff; }
-.cta-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.cta-plain .cta-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+.cta-plain h2 { max-width: 34ch; }
+.cta-plain .cta-phone { color: #fff; }
+.cta-plain .cta-phone:hover { color: #cfe2ff; }
+.cta-plain .cta-actions { justify-content: center; }
 
 /* --- Coverage ------------------------------------------------------ */
 
@@ -595,8 +632,15 @@ ul { margin: 0; }
 }
 
 @media (max-width: 900px) {
-  /* On a narrow screen the photo has no room to show beside the copy, so
-     the overlay closes up and the picture becomes texture behind it. */
+  /* The photo stacks under the copy rather than being squeezed into a
+     column too narrow to show a person in. */
+  .cta-band-inner { grid-template-columns: 1fr; }
+  .cta-copy { padding: 52px 0 46px; }
+  .cta-copy-inner { padding-left: 22px; padding-right: 22px; }
+  .cta-photo { min-height: 260px; }
+
+  /* On a narrow screen the hero photo has no room to show beside the copy,
+     so the overlay closes up and the picture becomes texture behind it. */
   .hero[style*="background-image"] { background-position: 62% center; }
   .hero[style*="background-image"]::before {
     background: linear-gradient(180deg, rgba(26,26,38,.94) 0%, rgba(26,26,38,.88) 60%, rgba(26,26,38,.92) 100%);
