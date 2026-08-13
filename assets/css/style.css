@@ -262,16 +262,31 @@ ul { margin: 0; }
 
 /* --- Sections ------------------------------------------------------ */
 
-.section { padding: 92px 0; background: #fff; }
+.section { padding: 64px 0; background: #fff; }
 
 /* The rotation. Each fill is one of the two theme colours at a very high
    lightness, so the page gains structure without gaining a palette. */
 .section-tint  { background: var(--tint-1); }
 .section-grey  { background: var(--tint-grey); }
-.section-tint  { background: var(--tint-1); }
 .section-dark  { background: var(--secondary); color: #b8b8c8; }
 .section-dark h1, .section-dark h2, .section-dark h3 { color: #fff; }
-.section-dark /* The accent under each heading. With the eyebrow gone this is the only
+
+/* Cards on the dark ground. Without these they keep their white fill and
+   a white heading lands on white — which is exactly what happened when
+   the selector below lost its tail in an earlier edit. */
+.section-dark .card,
+.section-dark .callout {
+  background: #2c2c3f;
+  border-color: #3c3c52;
+  border-top-color: var(--primary);
+  box-shadow: none;
+}
+.section-dark .callout p,
+.section-dark .card p { color: #c4c4d2; }
+.section-dark strong { color: #fff; }
+.section-dark .phone-big { color: #6fb0ff; }
+
+/* The accent under each heading. With the eyebrow gone this is the only
    thing marking where a section starts, so it sits above the heading as
    well as below — a rule the eye meets before the words. */
 .section-head h1::after,
@@ -359,7 +374,7 @@ ul { margin: 0; }
 
 .cta-band-inner { display: grid; grid-template-columns: 1.75fr 1fr; align-items: stretch; }
 
-.cta-copy { display: flex; align-items: center; padding: 66px 0; }
+.cta-copy { display: flex; align-items: center; padding: 54px 0; }
 /* Lines the copy up with the site container's left edge even though this
    column is not the container — the band itself runs edge to edge. */
 .cta-copy-inner {
@@ -396,7 +411,7 @@ ul { margin: 0; }
 .cta-plain {
   position: relative;
   background: linear-gradient(115deg, var(--primary-deep) 0%, var(--primary-deeper) 100%);
-  color: #b9cbe8; padding: 64px 0; text-align: center;
+  color: #b9cbe8; padding: 52px 0; text-align: center;
 }
 .cta-plain::before {
   content: ""; position: absolute; inset: 0;
@@ -591,7 +606,7 @@ ul { margin: 0; }
 
 /* --- Footer -------------------------------------------------------- */
 
-.site-foot { background: var(--secondary); color: #a0a0b2; padding: 58px 0 22px; font-size: .87rem; }
+.site-foot { background: var(--secondary); color: #a0a0b2; padding: 50px 0 22px; font-size: .87rem; }
 .foot-grid { display: grid; gap: 32px; grid-template-columns: 1.6fr 1fr 1.1fr 1.1fr; }
 .site-foot h3 { color: #fff; font-size: .9rem; margin-bottom: 1.1em; font-weight: 600; }
 .site-foot ul { list-style: none; padding: 0; }
@@ -660,7 +675,7 @@ ul { margin: 0; }
   .nav.is-open { display: flex; }
   .nav a { padding: 12px 0; border-bottom: 1px solid var(--line); }
   .nav a.btn { margin-top: 12px; border-bottom: 0; }
-  .section { padding: 54px 0; }
+  .section { padding: 46px 0; }
   .hero { padding-top: 42px; }
   .topbar .t-mail { display: none; }
   .topbar-inner { justify-content: center; }

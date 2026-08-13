@@ -138,10 +138,6 @@ require __DIR__ . '/inc/header.php';
         <h2>Call Our Experts Now for Fast, Affordable, and Professional Support in the UAE</h2>
         <p>Expert repairs for home and commercial Samsung appliances, every day of the week.</p>
         <a class="cta-phone" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 26) ?><?= htmlspecialchars(BIZ_PHONE) ?></a>
-        <div class="cta-actions">
-          <a class="btn" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 15) ?>Call Us Now!</a>
-          <a class="btn btn-outline" href="https://wa.me/<?= BIZ_WHATSAPP ?>" rel="noopener">WhatsApp</a>
-        </div>
       </div>
     </div>
     <div class="cta-photo">
