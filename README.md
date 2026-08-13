@@ -73,22 +73,31 @@ At launch, three things change together:
 
 ## Deploying
 
-`.cpanel.yml` copies site files into the subdomain document root. The repo is
-cloned to `~/repositories/samsung-service-center`, outside the web root.
+The repository is cloned directly into the folder the subdomain serves:
 
-**Check `DEPLOYPATH` in `.cpanel.yml` before the first deploy.** It is set to
-`$HOME/public_html/samsung/`, which is the common cPanel default but not a
-certainty. A wrong path still reports a successful deploy — the files just
-land somewhere nothing is serving.
+```
+/home/carpente/samsung.aiqonquickcool.com.my
+```
 
-To deploy: push to `main`, then in cPanel go to Git™ Version Control →
-**Manage** → **Pull or Deploy** → **Update from Remote**, then
-**Deploy HEAD Commit**.
+So a pull *is* the deployment — there is no copy step and no `.cpanel.yml`.
+Pushing to `main` and then pressing **Update from Remote** in cPanel &rarr;
+Git&trade; Version Control puts the change live. **Deploy HEAD Commit** is
+not needed and does nothing.
 
-Deleting a file from the repo does not delete it from the server. The deploy
-copies over; it never removes. That is deliberate — an `rm -rf` driven by a
-variable is one typo away from clearing a directory belonging to another site
-on the same account.
+Because the clone sits in the web root, `.htaccess` blocks `/.git/`,
+`.gitignore` and `README.md` from being served. Do not remove those rules —
+`/.git/config` is readable without them, and the whole history behind it.
+
+If a pull ever refuses with *"local changes would be overwritten"*, it means
+files in that folder were edited or uploaded outside git. Discard them and
+take the remote as the truth:
+
+```
+cd /home/carpente/samsung.aiqonquickcool.com.my
+git fetch origin main
+git reset --hard origin/main
+git clean -fd
+```
 
 ## Mail
 
