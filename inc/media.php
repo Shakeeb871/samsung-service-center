@@ -117,3 +117,26 @@ function site_icon_tags(): string
 
     return implode("\n", $out);
 }
+
+/**
+ * A service's photograph.
+ *
+ * Looks under the name recorded in $SERVICES first, then the slug, in
+ * both assets/img/ and assets/img/services/. Uploads land in whichever
+ * folder is convenient on the day, and the page should not care.
+ */
+function service_photo(string $slug, array $svc): string
+{
+    $names = array_values(array_filter([$svc['image'] ?? null, $slug]));
+    $alt   = strip_tags(html_entity_decode($svc['title'], ENT_QUOTES, 'UTF-8'));
+
+    foreach (['/assets/img/services', '/assets/img'] as $dir) {
+        $found = find_image($dir, $names);
+        if ($found !== null) {
+            return '<img class="media-img" src="' . asset($found) . '" alt="'
+                 . htmlspecialchars($alt) . '" loading="lazy" decoding="async">';
+        }
+    }
+
+    return '<div class="media-placeholder" role="img" aria-label="' . htmlspecialchars($alt) . '"></div>';
+}

@@ -118,7 +118,7 @@ require __DIR__ . '/inc/header.php';
       <?php foreach ($SERVICES as $slug => $s): ?>
       <article class="svc-card">
         <div class="svc-media">
-          <?= photo('/assets/img/services', $slug, strip_tags(html_entity_decode($s['title'])), '') ?>
+          <?= service_photo($slug, $s) ?>
         </div>
         <div class="svc-body">
           <h3><a href="<?= url('/services/' . $slug . '/') ?>"><?= $s['title'] ?></a></h3>
@@ -141,7 +141,7 @@ require __DIR__ . '/inc/header.php';
       </div>
     </div>
     <div class="cta-photo">
-      <?= photo('/assets/img', 'cta', 'Samsung appliance technician on a call-out', '') ?>
+      <?= photo('/assets/img', [CTA_IMAGE, 'cta'], 'Call our Samsung appliance repair experts in the UAE', '') ?>
     </div>
   </div>
 </section>

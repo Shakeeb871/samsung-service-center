@@ -62,10 +62,10 @@ $images = [
   'Site icon'         => ['/assets/img', [SITE_ICON, 'site-icon', 'favicon']],
   'About section'     => ['/assets/img', [ABOUT_IMAGE, 'about']],
   'Logo'              => ['/assets/img', ['logo']],
-  'Call band'         => ['/assets/img', ['cta']],
+  'Call band'         => ['/assets/img', [CTA_IMAGE, 'cta']],
 ];
-foreach (array_keys($SERVICES) as $slug) {
-  $images['Service — ' . $slug] = ['/assets/img/services', $slug];
+foreach ($SERVICES as $slug => $svc) {
+  $images['Service — ' . $slug] = ['/assets/img', [$svc['image'] ?? '', $slug]];
 }
 ?>
 <!doctype html>
