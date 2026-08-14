@@ -29,6 +29,16 @@ $canonical  = SITE_URL . $page_path;
 <meta property="og:title" content="<?= htmlspecialchars($page_title) ?>">
 <meta property="og:description" content="<?= htmlspecialchars($page_desc) ?>">
 <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
+<meta property="og:site_name" content="<?= htmlspecialchars(BIZ_NAME) ?>">
+<meta property="og:locale" content="en_AE">
+<?php if ($og = social_image()): ?>
+<meta property="og:image" content="<?= htmlspecialchars($og) ?>">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="<?= htmlspecialchars(BIZ_NAME) ?>">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="<?= htmlspecialchars($og) ?>">
+<?php endif; ?>
 <meta name="theme-color" content="#2d8cff">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -33,8 +33,11 @@ $expect = [
   'contact/index.php'                            => 'Contact',
   'api/contact.php'                              => 'Form handler',
   '.htaccess'                                    => 'Clean URLs and caching',
-  'robots.txt'                                   => 'Robots',
-  'sitemap.xml'                                  => 'Sitemap',
+  'robots.php'                                   => 'Robots (served at /robots.txt)',
+  'sitemap.php'                                  => 'Sitemap (served at /sitemap.xml)',
+  'assets/img/favicon-96.png'                    => 'Favicon 96px',
+  'assets/img/favicon-192.png'                   => 'Favicon 192px',
+  'assets/img/apple-touch-icon.png'              => 'Apple touch icon',
 ];
 
 $css      = $root . '/assets/css/style.css';

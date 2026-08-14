@@ -17,14 +17,14 @@
  * Site-relative path of the first file in $dir whose name matches any of
  * $names, with any usual image extension. $names may be a single string.
  */
-function find_image(string $dir, $names): ?string
+function find_image(string $dir, $names, ?array $exts = null): ?string
 {
     $abs = dirname(__DIR__) . $dir;
     if (!is_dir($abs)) {
         return null;
     }
 
-    $exts = ['webp', 'jpg', 'jpeg', 'png', 'avif'];
+    $exts = $exts ?? ['webp', 'jpg', 'jpeg', 'png', 'avif'];
     $want = array_map('strtolower', (array) $names);
 
     foreach (scandir($abs) ?: [] as $entry) {
@@ -89,33 +89,81 @@ function hero_bg(): string
 /**
  * The <link> tags for the site icon.
  *
- * Google reads rel="icon" and wants the file crawlable and square. The
- * drawn SVG stays as a second entry: browsers that prefer SVG take the
- * sharper one, and anything that cannot read SVG falls back to the
- * uploaded raster.
+ * Three rules decide what goes here, and each of them was a real problem
+ * before:
  *
- * apple-touch-icon is the same file — iOS ignores rel="icon" entirely and
- * will screenshot the page instead if this is missing.
+ * 1. ONE rel="icon". Two of them pointing at different artwork is an
+ *    invitation for Google to pick the wrong one — and it was picking
+ *    between the uploaded logo and a gear this file used to draw.
+ *
+ * 2. PNG, not WebP. Google documents ICO, PNG, GIF, JPEG and SVG for
+ *    favicons; WebP is not among them, and Safari and Firefox do not
+ *    render WebP favicons either. The uploaded WebP was converted once
+ *    into favicon-96.png and favicon-192.png, both multiples of 48 as
+ *    Google asks, and those are what ship.
+ *
+ * 3. apple-touch-icon at 180px. iOS ignores rel="icon" completely and
+ *    screenshots the page instead when this is missing.
+ *
+ * Nothing here is generated per request — the PNGs are committed files.
  */
 function site_icon_tags(): string
 {
     $out = [];
 
-    $found = find_image('/assets/img', [SITE_ICON, 'site-icon', 'favicon', 'icon']);
-    if ($found !== null) {
-        $type = strtolower(pathinfo($found, PATHINFO_EXTENSION));
-        $mime = ['jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png',
-                 'webp' => 'image/webp', 'avif' => 'image/avif'][$type] ?? '';
-        $src  = asset($found);
-        $out[] = '<link rel="icon" href="' . $src . '"' . ($mime ? ' type="' . $mime . '"' : '') . ' sizes="any">';
-        $out[] = '<link rel="apple-touch-icon" href="' . $src . '">';
+    // Converted PNGs first. Whichever exists is authoritative.
+    $png96  = find_image('/assets/img', 'favicon-96');
+    $png192 = find_image('/assets/img', 'favicon-192');
+    $apple  = find_image('/assets/img', 'apple-touch-icon');
+
+    if ($png96 !== null) {
+        $out[] = '<link rel="icon" type="image/png" sizes="96x96" href="' . asset($png96) . '">';
+    }
+    if ($png192 !== null) {
+        $out[] = '<link rel="icon" type="image/png" sizes="192x192" href="' . asset($png192) . '">';
     }
 
-    if (is_file(dirname(__DIR__) . '/assets/img/favicon.svg')) {
-        $out[] = '<link rel="icon" href="' . asset('/assets/img/favicon.svg') . '" type="image/svg+xml">';
+    // Only if no PNG was produced does the original upload stand in, and
+    // only then does the drawn SVG appear — never alongside the real one.
+    if ($png96 === null && $png192 === null) {
+        $found = find_image('/assets/img', [SITE_ICON, 'site-icon', 'favicon', 'icon']);
+        if ($found !== null) {
+            $ext  = strtolower(pathinfo($found, PATHINFO_EXTENSION));
+            $mime = ['jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png',
+                     'webp' => 'image/webp', 'avif' => 'image/avif'][$ext] ?? '';
+            $out[] = '<link rel="icon"' . ($mime ? ' type="' . $mime . '"' : '') . ' sizes="any" href="' . asset($found) . '">';
+        } elseif (is_file(dirname(__DIR__) . '/assets/img/favicon.svg')) {
+            $out[] = '<link rel="icon" type="image/svg+xml" href="' . asset('/assets/img/favicon.svg') . '">';
+        }
+    }
+
+    if ($apple !== null) {
+        $out[] = '<link rel="apple-touch-icon" sizes="180x180" href="' . asset($apple) . '">';
     }
 
     return implode("\n", $out);
+}
+
+/**
+ * The sharing image, absolute, for og:image and Twitter cards.
+ *
+ * Both want a full URL — a relative path is silently ignored, which is
+ * why a page can look fine and still share as a blank rectangle.
+ */
+function social_image(): ?string
+{
+    $names = [ABOUT_IMAGE, HERO_IMAGE, 'about', 'hero'];
+
+    // JPEG and PNG first. WhatsApp, Facebook and several link previewers
+    // still do not render a WebP og:image, and a share that comes up
+    // blank is worse than one with a slightly larger file behind it.
+    // og-image.jpg is made once at 1200x630, the ratio every link
+    // previewer crops to, and in a format all of them render.
+    $found = find_image('/assets/img', 'og-image', ['jpg', 'jpeg', 'png'])
+          ?? find_image('/assets/img', $names, ['jpg', 'jpeg', 'png'])
+          ?? find_image('/assets/img', $names);
+
+    return $found === null ? null : SITE_URL . asset($found);
 }
 
 /**
