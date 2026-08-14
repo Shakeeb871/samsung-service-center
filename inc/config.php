@@ -75,27 +75,17 @@ function url(string $path): string
 $__scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
          || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https') ? 'https' : 'http';
 /**
- * Hero background image.
+ * Uploaded artwork, by the name each file carries in assets/img/.
  *
- * The file name without its extension, exactly as uploaded into
- * assets/img/. Spaces and capitals are fine and the extension does not
- * matter — jpg, webp, png all work.
- *
- * Uploaded artwork often arrives with a long descriptive name for search,
- * and renaming it loses that. Naming it here is the cheaper trade.
+ * Descriptive file names are worth keeping — they are read by image
+ * search — so the site is told the name rather than the file being
+ * renamed to suit the code. Extension and capitalisation do not matter,
+ * and each falls back to a short generic name if that is what gets
+ * uploaded instead.
  */
-define('HERO_IMAGE', 'Samsung Authorise service center in uae provide best and most trusted samsung appliances repair services in UAE');
-
-/**
- * Site icon (favicon). The file name without its extension, exactly as
- * uploaded into assets/img/.
- *
- * Google will only show a favicon in search results if it can crawl it,
- * so nothing in robots.txt or .htaccess may block /assets/, and the tag
- * has to be a real <link rel="icon"> in the head of every page — which is
- * where inc/header.php puts it.
- */
-define('SITE_ICON', 'Samsung Service Center Site Icon');
+define('HERO_IMAGE',  'Samsung Authorise service center in uae provide best and most trusted samsung appliances repair services in UAE');
+define('ABOUT_IMAGE', 'Best Samsung Service Center In United Arab Emirates');
+define('SITE_ICON',   'Samsung Service Center Site Icon');
 
 define('SITE_URL', $__scheme . '://' . ($_SERVER['HTTP_HOST'] ?? 'samsung.aiqonquickcool.com.my') . BASE);
 

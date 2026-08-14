@@ -94,7 +94,7 @@ require __DIR__ . '/inc/header.php';
     </div>
 
     <div class="media">
-      <?= photo('/assets/img', 'about', 'Samsung appliance technician on a repair call in the UAE', 'tools') ?>
+      <?= photo('/assets/img', [ABOUT_IMAGE, 'about'], 'Best Samsung service center in the United Arab Emirates — technician on a repair call', 'tools') ?>
     </div>
 
   </div>

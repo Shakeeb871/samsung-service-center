@@ -58,9 +58,11 @@ $stale_index_html = is_file($root . '/index.html');
 // see it" are different statements, and this is the one that matters.
 require_once __DIR__ . '/inc/media.php';
 $images = [
-  'Hero background'   => ['/assets/img', 'hero'],
-  'Logo'              => ['/assets/img', 'logo'],
-  'About section'     => ['/assets/img', 'about'],
+  'Hero background'   => ['/assets/img', [HERO_IMAGE, 'hero']],
+  'Site icon'         => ['/assets/img', [SITE_ICON, 'site-icon', 'favicon']],
+  'About section'     => ['/assets/img', [ABOUT_IMAGE, 'about']],
+  'Logo'              => ['/assets/img', ['logo']],
+  'Call band'         => ['/assets/img', ['cta']],
 ];
 foreach (array_keys($SERVICES) as $slug) {
   $images['Service — ' . $slug] = ['/assets/img/services', $slug];
@@ -114,7 +116,7 @@ foreach (array_keys($SERVICES) as $slug) {
   <table>
     <?php foreach ($images as $label => [$dir, $name]): $f = find_image($dir, $name); ?>
     <tr>
-      <td><?= htmlspecialchars($label) ?><br><span style="font-size:.82rem"><code><?= htmlspecialchars(ltrim($dir,'/') . '/' . $name) ?>.jpg</code></span></td>
+      <td><?= htmlspecialchars($label) ?><br><span style="font-size:.82rem"><code><?= htmlspecialchars(ltrim($dir,'/') . '/' . ((array) $name)[0]) ?></code></span></td>
       <td class="<?= $f ? 'ok' : 'no' ?>"><?= $f ? htmlspecialchars(basename($f)) : 'not uploaded' ?></td>
     </tr>
     <?php endforeach; ?>

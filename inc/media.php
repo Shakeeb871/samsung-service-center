@@ -45,12 +45,13 @@ function find_image(string $dir, $names): ?string
 }
 
 /**
- * @param string $dir   site-relative folder, e.g. '/assets/img'
+ * @param string       $dir    site-relative folder, e.g. '/assets/img'
+ * @param string|array $name   file stem, or several to try in order
  * @param string $name  file stem without extension, e.g. 'about'
  * @param string $alt   description for screen readers and for search
  * @param string $icon  key from inc/icons.php, drawn if no file is found
  */
-function photo(string $dir, string $name, string $alt, string $icon = 'tools'): string
+function photo(string $dir, $name, string $alt, string $icon = 'tools'): string
 {
     $found = find_image($dir, $name);
     if ($found !== null) {
