@@ -1193,9 +1193,11 @@ ul { margin: 0; }
 
 /* --- Model range as one bar ----------------------------------------- */
 
+/* The column count comes from the page — the AC page names five models,
+   the rest name six, and a fixed six would leave that page a blank cell. */
 .spec-bar {
   list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: repeat(6, 1fr);
+  display: grid; grid-template-columns: repeat(var(--cols, 6), 1fr);
   background: #fff; border: 1px solid var(--line); border-radius: var(--r);
   overflow: hidden;
 }
@@ -1482,7 +1484,8 @@ ul { margin: 0; }
 
   .spec-bar { grid-template-columns: repeat(2, 1fr); }
   .spec-bar li { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 20px 10px; }
-  .spec-bar li:nth-child(2n) { border-right: 0; }
+  .spec-bar li:nth-child(2n),
+  .spec-bar li:last-child { border-right: 0; }
   .spec-bar li:nth-last-child(-n+2) { border-bottom: 0; }
 
   .code-index a { min-width: 52px; padding: 10px 12px; }

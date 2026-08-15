@@ -110,7 +110,7 @@ page_hero(
       <p class="two-col"><?= $LP['types_body'] ?></p>
     </div>
 
-    <ul class="spec-bar">
+    <ul class="spec-bar" style="--cols:<?= count($LP['models']) ?>">
       <?php foreach ($LP['models'] as $m): ?>
       <li><span><?= htmlspecialchars($m) ?></span></li>
       <?php endforeach; ?>

@@ -30,12 +30,13 @@ contact.php          Contact form       -> /contact/
 404.php              Error page
 services/
   index.php          Services hub       -> /services/
-  samsung-*.php      Six service pages  -> /services/<slug>/
+  samsung-*/         Seven service pages -> /services/<slug>/
 inc/
   config.php         Business details, staging switch, service list
   header.php         <head>, nav, canonical, noindex
   footer.php         CTA band, footer, WhatsApp button
-  service-page.php   Shared layout for the six service pages
+  landing-page.php   Shared layout for the seven service pages
+  page-hero.php      The banner every inner page opens with
 api/contact.php      Form handler, answers JSON
 assets/css/style.css
 assets/js/main.js    Mobile nav, FAQ accordion, form submit
@@ -47,12 +48,14 @@ fragments, none of which should be reachable by URL.
 
 ## Editing content
 
-Service page copy lives in the page file itself as a `$svc` array — intro,
-symptoms, diagnosis steps, notes and FAQs. `inc/service-page.php` only holds
-the structure, so a layout change is one file rather than six.
+Service page copy lives in the page file itself as an `$LP` array — the
+intro, the service centre block, the model range, the faults with the fix for
+each, the process, the inspection list, support, coverage and the closing
+block. `inc/landing-page.php` holds the structure, so a layout change is one
+file rather than seven, and a new page is copy rather than markup.
 
-Adding a service means creating `services/<slug>.php` and adding an entry to
-`$SERVICES` in `inc/config.php`. The nav, footer, home grid, services hub and
+Adding a service means creating `services/<slug>/index.php` with its `$LP`
+array and adding an entry to `$SERVICES` in `inc/config.php`. The nav, footer, home grid, services hub and
 the related-services block all read that array, so nothing else needs editing.
 
 ## Staging
