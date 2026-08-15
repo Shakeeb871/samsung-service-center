@@ -1,50 +1,348 @@
 <?php
-$page_title = 'Samsung Washing Machine Repair Dubai | Not Draining, Not Spinning';
-$page_desc  = 'Samsung washing machine repair across Dubai. Will not drain, will not spin, error codes, leaking water or a drum that does not turn — diagnosed at your home and quoted before work starts.';
+/**
+ * Samsung Washing Machine Repair UAE — a landing page in its own right.
+ *
+ * The other six services still run through inc/service-page.php, which
+ * expects symptoms, checks, notes and FAQs. This page's copy is a
+ * different shape: eleven faults, each with its error code, what causes
+ * it and how it is fixed. Forcing that into the shared template would
+ * have meant cutting it about, so it has its own layout.
+ *
+ * The eleven faults are native <details> elements rather than a scripted
+ * accordion. They open without JavaScript, they are keyboard operable for
+ * free, and browsers can find text inside a closed one. Someone arriving
+ * with a 5C on the display wants that one entry, not all eleven.
+ */
+
+$page_title = 'Samsung Washing Machine Repair UAE | Certified On-Site Service';
+$page_desc  = 'Certified Samsung washing machine repair across the UAE. Same-day on-site service, genuine Samsung spare parts, upfront pricing and a 90-day warranty on every job.';
 $page_path  = '/services/samsung-washing-machine-repair/';
 
-$svc = [
-  'slug'  => 'samsung-washing-machine-repair',
-  'short' => 'Washing Machine',
-  'h1'    => 'Samsung washing machine repair in Dubai',
+require __DIR__ . '/../../inc/header.php';
 
-  'intro' => [
-    'A washing machine that stops mid-cycle leaves you with a drum full of water and a door that will not open, which is why these calls tend to be urgent. The good news is that the most common causes are also the cheapest ones, and a fair number of them you can check yourself in ten minutes.',
-    'Samsung front loaders and top loaders both display error codes when they stop, and those codes are genuinely useful. Write down what appears on the panel before switching the machine off — it points the diagnosis at a specific circuit instead of a general area.',
+/* The eleven faults as supplied: heading, the code shown on the machine,
+   what is happening and why, then the fix. */
+$FAULTS = [
+  [
+    'title' => 'Water Drainage Failure',
+    'code'  => '5C or 5E Error',
+    'problem' => 'Your washing machine stops mid-cycle and leaves clothes soaking in a drum full of dirty water. This drainage failure usually happens when lint, coins, or small fabric pieces completely block the debris filter or the main drain hose. In older machines, the magnetic drain pump motor simply burns out over time and loses the electrical power needed to push heavy water out of the drum.',
+    'solution' => 'Our technicians clear all internal blockages from the drainage path and test the pump&rsquo;s electrical continuity. If the drain pump motor has failed entirely, we replace it directly with a genuine Samsung pump to restore smooth and fast water drainage instantly.',
   ],
-
-  'symptoms' => [
-    ['Cycle stops with water still in the drum.', 'Almost always drainage: the pump filter, the pump itself, or a hose that has kinked or blocked.'],
-    ['Drum fills but never spins.', 'Could be a motor or board fault, but an unbalanced load or a worn drum bearing produces the same result more often.'],
-    ['Loud grinding or rumbling on spin.', 'Drum bearings on the way out, or something hard that has worked its way past the seal into the outer tub.'],
-    ['Water on the floor after every wash.', 'Door seal, detergent drawer, or a split hose. Where the puddle appears narrows it quickly.'],
-    ['Machine will not fill, or fills very slowly.', 'The inlet valve or its filter screen. On Dubai water supply those screens scale up faster than the manual assumes.'],
-    ['Door stays locked after the cycle finishes.', 'The door interlock, or a machine that thinks there is still water inside because the pressure system is blocked.'],
+  [
+    'title' => 'Water Supply and Filling Issues',
+    'code'  => '4C or 4E Error',
+    'problem' => 'The machine turns on, but no water enters the drum, which triggers a 4C error code on your display. This occurs when the small mesh filters inside the water inlet valves get clogged with hard water scale and sand. A damaged electronic water inlet valve can also fail to open mechanically, stopping the water flow completely even if your home water pressure remains perfect.',
+    'solution' => 'We clean the inlet mesh filters thoroughly and test the electrical voltage reaching the water valves. If the valve mechanism is jammed or electrically dead, we install a new authorized inlet valve so your machine fills quickly and correctly on every wash cycle.',
   ],
-
-  'checks' => [
-    ['Error code and cycle behaviour', 'The code on the panel is read first, then the machine is run to see where in the cycle it actually stops. A machine that fails at the same point every time is telling you which stage of the circuit to look at.'],
-    ['Drain path, end to end', 'Pump filter, pump impeller, drain hose and standpipe. This is where most "will not spin" faults actually live, because the machine refuses to spin while it still senses water.'],
-    ['Water inlet and pressure system', 'Inlet valve, filter screens and the pressure sensor and its tube. A blocked pressure tube makes the machine misread its own water level, which produces symptoms all over the map.'],
-    ['Motor and drive', 'Motor windings, drive belt where fitted, and the board output that feeds them. On direct-drive models the rotor and hall sensor are checked instead.'],
-    ['Bearings and drum', 'Drum play is checked by hand. A bearing that has started to go gives a distinctive rumble under load, and catching it early is the difference between a bearing job and a new outer tub.'],
-    ['Seals and hose runs', 'For leaks, the machine is run and watched rather than guessed at. Water travels along the base before it appears, so the visible puddle is rarely under the actual source.'],
+  [
+    'title' => 'Door Lock Malfunctions',
+    'code'  => 'DE or dC Error',
+    'problem' => 'You finish a wash cycle but the door refuses to unlock, trapping your wet clothes inside. Conversely, the door might not click shut properly to allow the machine to start. This frustrating problem happens when the electronic door latch mechanism breaks physically or when the main control board fails to send the correct electrical unlocking signal to the latch assembly.',
+    'solution' => 'We safely manually unlock your door to rescue your clothes without breaking the plastic handle. Then, we replace the faulty door interlock switch and check the wiring connections to ensure the door secures and opens exactly when it should.',
   ],
-
-  'notes_h2' => 'The two things worth checking before you call',
-  'notes' => [
-    'The drain pump filter is behind a small hatch at the bottom front of most front loaders. It is designed to be opened by the owner, and it collects coins, hairclips, buttons and lint until the pump can no longer move water. A blocked filter is the single most common cause of a machine that stops with water inside, and clearing it costs nothing. Put a shallow tray and a towel down first, because whatever is still in the drum comes out through that opening.',
-    'The second is the drain hose. Check that it has not been pushed too far down the standpipe, that it is not kinked behind the machine, and that the standpipe itself is not blocked. A hose pushed too deep siphons water out during the wash and the machine keeps refilling to compensate.',
-    'If the filter is clean and the hose is clear and the machine still will not drain, the pump itself or the board that drives it is the next thing, and that is a job for someone with a meter. Scale is a factor here too — hard water leaves deposits on heating elements and inside the pressure system, and both show up as faults that look electrical until you open them.',
+  [
+    'title' => 'Excessive Drum Noise and Heavy Vibrations',
+    'code'  => '',
+    'problem' => 'Your washing machine sounds like a jet engine taking off during the spin cycle and shakes violently across your laundry floor. This severe vibration stems from worn-out shock absorbers, broken suspension springs, or completely collapsed drum bearings. Continuous overloading tears these internal suspension parts apart, causing the heavy metal drum to hit the outer casing.',
+    'solution' => 'We strip down the machine to inspect the internal suspension system. We replace the damaged shock absorbers or fit new high-quality drum bearings on the spot, completely eliminating the loud banging noises and keeping your machine perfectly stable.',
   ],
-
-  'faqs' => [
-    ['The machine shows an error code. Does that tell you the fault?', 'It tells us which circuit reported a problem, not which component failed. A drainage code, for example, means the machine did not empty within its expected time — that could be the filter, the pump, the hose or the sensor that measures the level. It narrows six possibilities to three, which is worth having.'],
-    ['Is a bearing replacement worth doing?', 'On a mid to high-end machine that is otherwise sound, usually yes. On an entry-level machine several years old, the labour involved often approaches the cost of replacing the machine, and you will be given both figures to compare rather than just the repair quote.'],
-    ['My clothes come out soaking wet.', 'The machine is not reaching spin speed. Start with load balance — a single heavy item like a bath mat will defeat any machine — then look at the drain, because a machine holding water will not spin at all. If both are fine it is the motor, the board or the bearings.'],
-    ['Can you repair top loaders as well as front loaders?', 'Yes. The mechanics differ — top loaders have a different drive and suspension arrangement — but the diagnostic approach is the same and parts for both are available.'],
-    ['Do I need to move the machine out before you arrive?', 'Only if it is built in or wedged into a tight space. Clear access to the front and enough room to pull the machine forward is enough for most repairs.'],
+  [
+    'title' => 'Spin Cycle Failure',
+    'code'  => 'UE or Ub Error',
+    'problem' => 'The machine washes and drains perfectly, but refuses to spin fast, leaving your laundry dripping wet. The UE error indicates an unbalanced load, which the machine detects to prevent self-damage. However, if your load is perfectly balanced, the actual root cause is often a stretched drive belt, worn-out motor carbon brushes, or a failing motor capacitor that cannot generate enough spinning torque.',
+    'solution' => 'We recalibrate the internal load sensors and inspect the motor drive system physically. We fit a new tight drive belt or replace the worn motor brushes, giving your machine the exact power it needs to spin your clothes completely dry.',
+  ],
+  [
+    'title' => 'Water Leaking From the Front or Bottom',
+    'code'  => 'LE Error',
+    'problem' => 'You find dangerous puddles of water spreading across your floor during a wash. Front leaks almost always happen because sharp objects like keys or zippers tear the flexible rubber door seal gasket. Bottom leaks usually come from loose internal detergent hoses, a cracked plastic water tub, or a degraded rubber seal inside the main water pump.',
+    'solution' => 'We trace the exact source of the leak using dry testing methods. We fit a brand new, factory-grade rubber door seal and secure all internal hose clips tightly, ensuring your laundry room floor stays completely dry.',
+  ],
+  [
+    'title' => 'Machine Completely Dead',
+    'code'  => 'No Power',
+    'problem' => 'You press the power button, but the digital display stays blank and the machine makes absolutely no sound. This sudden power loss happens due to a blown internal noise filter, a damaged main power cable, or a short-circuited main PCB motherboard. Power surges in your home electrical system easily fry these sensitive electronic control boards.',
+    'solution' => 'We use digital multimeters to trace the electrical current from your wall plug directly to the main board. We replace blown internal fuses, fix wiring faults, or install a new programmed Samsung motherboard to bring your dead machine back to life.',
+  ],
+  [
+    'title' => 'Drum Not Turning At All',
+    'code'  => '3E Error',
+    'problem' => 'The machine fills with water, but the drum stays completely still and you hear a faint clicking noise from the bottom. The 3E error points directly to a serious motor defect. A snapped drive belt stops the rotation immediately, but more complex causes include a failed motor hall sensor or a burnt inverter control board that cannot communicate with the direct-drive motor.',
+    'solution' => 'We run a direct diagnostic scan on the motor components to find the break in communication. We replace snapped belts, fit new hall sensors, or repair the inverter communication lines, restoring smooth and continuous drum rotation.',
+  ],
+  [
+    'title' => 'Water Heating Failure',
+    'code'  => 'HE or HC Error',
+    'problem' => 'Your clothes come out stained, and the front glass door stays completely cold during a hot wash cycle. The HE error means the water heating element has failed. Hard water causes thick calcium scale to build up around the heater, causing it to overheat and burn out from the inside. A faulty NTC thermistor temperature sensor can also stop the heater from turning on.',
+    'solution' => 'We test the heating element and the temperature sensor for proper electrical resistance. We remove the heavily scaled heater and install a brand new heating element, ensuring your machine reaches the exact temperatures needed to remove tough stains.',
+  ],
+  [
+    'title' => 'Bad Odors and Mold on Clothes',
+    'code'  => '',
+    'problem' => 'Your freshly washed clothes smell like damp mildew, and you notice dark black spots inside the machine drum. This hygiene problem occurs because low-temperature washes leave undissolved detergent residue and fabric softener behind. This sticky sludge builds up behind the drum and inside the rubber door seal, creating a perfect breeding ground for foul-smelling black mold.',
+    'solution' => 'We perform a deep mechanical cleaning of the internal tub, detergent dispenser, and drainage path. We replace heavily molded door seals and run a high-temperature chemical service wash to eliminate all bacteria, leaving your machine smelling fresh.',
+  ],
+  [
+    'title' => 'Detergent Not Dispensing Properly',
+    'code'  => '',
+    'problem' => 'At the end of the wash cycle, you open the drawer and find a solid lump of wet washing powder left behind. This happens when the small water jets above the dispenser drawer get blocked by hard water limescale. A clogged siphon tube in the fabric softener compartment also stops the cleaning liquids from flowing down into the drum.',
+    'solution' => 'We safely remove and dismantle the entire upper dispenser housing. We clear the blocked water jets, clean the siphon tubes, and ensure strong water pressure flushes all your detergent directly into the wash load where it belongs.',
   ],
 ];
 
-require __DIR__ . '/../../inc/service-page.php';
+page_hero(
+  'Samsung Washing Machine Repair UAE',
+  'Certified, on-site Samsung washing machine repair across the Emirates.',
+  ['Home' => '/', 'Services' => '/services/', 'Washing Machine' => null]
+);
+?>
+
+<section class="section">
+  <div class="wrap lead">
+    <p>
+      Welcome to the official destination for premium Samsung washing machine repair across
+      the UAE. We provide certified, on-site repair services to keep your laundry routine
+      running at peak performance. Our dedicated specialists deliver fast, same-day solutions
+      using genuine Samsung spare parts and advanced diagnostic tools. Whether you need a quick
+      part replacement or a complete system service, we bring true expertise straight to your
+      doorstep with guaranteed results.
+    </p>
+    <p class="lead-actions">
+      <a class="btn" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 15) ?>Call <?= htmlspecialchars(BIZ_PHONE) ?></a>
+      <a class="btn btn-dark" href="https://wa.me/<?= BIZ_WHATSAPP ?>" rel="noopener">WhatsApp the model number</a>
+    </p>
+  </div>
+</section>
+
+<section class="section section-tint">
+  <div class="wrap split media-split">
+    <div>
+      <div class="section-head">
+        <h2>Professional Samsung Washing Machine Service Center In United Arab Emirates</h2>
+      </div>
+      <p>
+        Finding a trustworthy team to handle your expensive home appliances requires confidence
+        and clear communication. We operate the most reliable Samsung washing machine service
+        center in the region, focusing strictly on transparency and high-quality workmanship.
+        Our certified technicians understand the exact engineering behind Samsung technology.
+        We prioritize your schedule, provide upfront clear pricing, and ensure every repair
+        meets official factory standards. You receive a complete service record and a solid
+        90-day warranty on every job we complete.
+      </p>
+    </div>
+    <div class="media">
+      <?= service_photo('samsung-washing-machine-repair', $SERVICES['samsung-washing-machine-repair']) ?>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap lead">
+    <div class="section-head center">
+      <h2>Our Specialits Repair All Types Of Samsung Washing Machine</h2>
+    </div>
+    <p>
+      Samsung produces a wide variety of laundry appliances, and our technical team knows the
+      internal mechanics of every single model perfectly. We repair front-load washing machines,
+      top-load washers, and advanced washer-dryer combos. Whether you own an EcoBubble model, a
+      QuickDrive unit, or a classic AddWash machine, our engineers carry the exact tools and
+      knowledge required. We adapt our repair methods to the specific design and features of
+      your exact appliance to ensure a flawless repair.
+    </p>
+  </div>
+</section>
+
+<section class="section section-grey">
+  <div class="wrap">
+    <div class="section-head center">
+      <h2>We Deal With All Samsung Washing Machine Problems</h2>
+      <p>
+        A washing machine can stop unexpectedly during a spin cycle, fail to drain water
+        completely, or lock the door tight with your wet clothes trapped inside. Ignoring these
+        early warning signs or simply resetting the machine often leads to permanent motherboard
+        damage. Calling an uncertified mechanic makes the situation much worse, as they often
+        replace the wrong parts through guesswork. Our expert technicians eliminate this stress
+        completely. We use advanced digital error scanners to pinpoint the exact root cause
+        behind any Samsung washing machine problem.
+      </p>
+      <p>
+        Here is a detailed breakdown of the exact problems we fix and how we resolve them
+        directly at your home.
+      </p>
+    </div>
+
+    <div class="fault-list">
+      <?php foreach ($FAULTS as $i => $f): ?>
+      <details class="fault"<?= $i === 0 ? ' open' : '' ?>>
+        <summary>
+          <span class="fault-n"><?= str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) ?></span>
+          <span class="fault-head">
+            <span class="fault-title"><?= $f['title'] ?></span>
+            <?php if ($f['code'] !== ''): ?>
+            <span class="fault-code"><?= $f['code'] ?></span>
+            <?php endif; ?>
+          </span>
+          <span class="fault-mark" aria-hidden="true"></span>
+        </summary>
+        <div class="fault-body">
+          <p><?= $f['problem'] ?></p>
+          <div class="fault-fix">
+            <span class="fault-fix-label">The Solution</span>
+            <p><?= $f['solution'] ?></p>
+          </div>
+        </div>
+      </details>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="cta-band-inner">
+    <div class="cta-copy">
+      <div class="cta-copy-inner">
+        <h2>Washing machine down? A specialist can be with you within the hour.</h2>
+        <p>Certified technicians, genuine Samsung parts, and a 90-day warranty on every repair.</p>
+        <a class="cta-phone" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 26) ?><?= htmlspecialchars(BIZ_PHONE) ?></a>
+      </div>
+    </div>
+    <div class="cta-photo">
+      <?= photo('/assets/img', [CTA_IMAGE, 'cta'], 'Call our Samsung washing machine repair experts in the UAE', '') ?>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head center">
+      <h2>Our Complete Working Process</h2>
+    </div>
+
+    <ol class="flow">
+      <li class="flow-step">
+        <span class="flow-num">01</span>
+        <h3>Contact Us 24/7</h3>
+        <p>Our friendly customer support team is available day or night to record your appliance issue and arrange immediate help.</p>
+      </li>
+      <li class="flow-step">
+        <span class="flow-num">02</span>
+        <h3>1 Hour Response</h3>
+        <p>We aim to respond to emergency call-outs within an hour, dispatching a skilled specialist straight to your location.</p>
+      </li>
+      <li class="flow-step">
+        <span class="flow-num">03</span>
+        <h3>Diagnosis &amp; Approval</h3>
+        <p>Our technician examines the machine on site, explains the exact fault clearly, and provides an upfront price before starting any work.</p>
+      </li>
+      <li class="flow-step">
+        <span class="flow-num">04</span>
+        <h3>Problem Solved</h3>
+        <p>We complete the approved repair, run a final test cycle to prove the machine works, and leave your laundry room completely clean and tidy.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section-tint">
+  <div class="wrap lead">
+    <div class="section-head center">
+      <h2>Our Complete Inspection Services Includes In Samsung Washing Machine</h2>
+    </div>
+    <p>
+      We do not just replace a single broken part and leave your home. Our comprehensive
+      inspection covers every critical component of your machine to prevent future breakdowns.
+      We thoroughly check the water inlet valves for blockages and test the drain pump for
+      proper water flow. Our specialists inspect the main PCB control board for electrical
+      faults and assess the motor and drive belt for wear and tear. We also carefully examine
+      the rubber door seal, shock absorbers, and drum bearings to ensure smooth, quiet, and
+      leak-free operation.
+    </p>
+  </div>
+</section>
+
+<section class="section section-dark">
+  <div class="wrap lead">
+    <div class="section-head center">
+      <h2>Official Samsung Washing Machine Customer Support</h2>
+    </div>
+    <p>
+      A successful repair depends heavily on honest and accessible communication. Our dedicated
+      customer support desk operates around the clock to provide instant assistance for any
+      service inquiry or technical complaint. If you have a question about your recent repair or
+      need emergency troubleshooting, you never have to wait for hours or chase different staff
+      members. We maintain clear service records and take full accountability for our work,
+      ensuring you always have a direct line to reliable and professional help.
+    </p>
+    <p>
+      <a class="cta-phone" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 26) ?><?= htmlspecialchars(BIZ_PHONE) ?></a>
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head center">
+      <h2>We Cover Every Area In UAE</h2>
+      <p>
+        A broken washing machine does not wait for a convenient time, no matter where you live.
+        Our dedicated repair team covers every major state, including Dubai, Abu Dhabi, Sharjah,
+        Ajman, Ras Al Khaimah, Umm Al Quwain, and Fujairah. Our technicians have over a decade
+        of local driving experience and know the fastest routes across the Emirates. This allows
+        us to reach your doorstep swiftly and deliver emergency repair services exactly when you
+        need them.
+      </p>
+    </div>
+
+    <ul class="emirates">
+      <?php foreach ($EMIRATES as $e): ?>
+      <li><?= icon('pin', 15) ?><?= htmlspecialchars($e) ?></li>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+</section>
+
+<section class="section section-grey">
+  <div class="wrap lead">
+    <div class="section-head center">
+      <h2>Why Our Samsung Washing Machine Repair Team Matters In The UAE</h2>
+    </div>
+    <p>
+      We are proud of our high standards and always endeavour to find ways to improve our
+      relationship with our customers. Finding a reliable technician in the UAE can be a
+      frustrating challenge, but our licensed Samsung team saves you from those constant
+      headaches.
+    </p>
+    <p>
+      We guarantee punctual arrivals to protect your daily schedule and provide completely
+      transparent pricing with zero hidden fees. By combining genuine spare parts, professional
+      communication, and deep technical expertise, we serve as the perfect appliance repair
+      partner for your home. We treat your property with complete respect and deliver quick,
+      trustworthy solutions that last.
+    </p>
+    <p class="lead-actions">
+      <a class="btn" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 15) ?>Call <?= htmlspecialchars(BIZ_PHONE) ?></a>
+      <a class="btn btn-dark" href="<?= url('/contact/') ?>">Book a repair</a>
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head center">
+      <h2>Other Samsung repairs</h2>
+    </div>
+    <div class="grid grid-3">
+      <?php foreach ($SERVICES as $slug => $s): ?>
+        <?php if ($slug === 'samsung-washing-machine-repair') continue; ?>
+        <div class="card">
+          <?= icon($s['icon'], 40) ?>
+          <h3><?= $s['title'] ?></h3>
+          <a class="card-link" href="<?= url('/services/' . $slug . '/') ?>">Read more <?= icon('arrow', 16) ?></a>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+<?php require __DIR__ . '/../../inc/footer.php'; ?>

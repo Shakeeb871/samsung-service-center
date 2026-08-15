@@ -953,3 +953,99 @@ ul { margin: 0; }
   html { scroll-behavior: auto; }
   * { transition: none !important; }
 }
+
+/* --- Fault list ------------------------------------------------------
+   Eleven faults, each with the code the machine shows. Native <details>,
+   so they open with no JavaScript, take keyboard focus for free, and can
+   be found by the browser's own find-in-page. Someone reading a 5C off a
+   display wants that one entry, not all eleven at once.
+   ------------------------------------------------------------------ */
+
+.fault-list { display: grid; gap: 12px; max-width: 900px; margin: 0 auto; }
+
+.fault {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+}
+.fault[open] { border-color: var(--primary-line); box-shadow: var(--shadow-sm); }
+
+.fault summary {
+  display: grid; grid-template-columns: auto 1fr auto;
+  align-items: center; gap: 16px;
+  padding: 18px 22px;
+  cursor: pointer;
+  list-style: none;
+}
+/* Safari draws its own triangle unless both of these are set. */
+.fault summary::-webkit-details-marker { display: none; }
+.fault summary::marker { content: ""; }
+
+.fault-n {
+  font-size: 1.05rem; font-weight: 700; line-height: 1;
+  color: var(--primary); opacity: .45;
+  font-variant-numeric: tabular-nums;
+}
+.fault[open] .fault-n { opacity: 1; }
+
+.fault-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+.fault-title { font-weight: 600; color: var(--secondary); font-size: 1rem; line-height: 1.4; }
+/* The code is the thing a reader is matching against their display, so
+   it is set apart rather than buried in the sentence. */
+.fault-code {
+  font-size: .72rem; font-weight: 600; letter-spacing: .04em;
+  color: var(--primary-ink);
+  background: var(--primary-tint);
+  border: 1px solid var(--primary-line);
+  border-radius: 999px; padding: 3px 10px;
+  white-space: nowrap;
+}
+
+/* Drawn, not typed, so no character is read aloud or selectable. */
+.fault-mark {
+  position: relative; width: 16px; height: 16px; flex: none;
+}
+.fault-mark::before,
+.fault-mark::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  background: var(--primary-ink);
+  transform: translate(-50%, -50%);
+  transition: transform .18s, opacity .18s;
+}
+.fault-mark::before { width: 14px; height: 2px; border-radius: 1px; }
+.fault-mark::after  { width: 2px; height: 14px; border-radius: 1px; }
+.fault[open] .fault-mark::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+
+.fault-body { padding: 0 22px 22px; }
+.fault-body > p { font-size: .92rem; margin-bottom: 1.1em; }
+
+.fault-fix {
+  background: var(--tint-1);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 16px 20px;
+}
+.fault-fix-label {
+  display: block; font-size: .72rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--primary-ink); margin-bottom: 6px;
+}
+.fault-fix p { margin: 0; font-size: .92rem; }
+
+/* A centred prose block wants its buttons centred with it. */
+.lead-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 1.6em; }
+.lead .section-head { margin-bottom: 30px; }
+
+/* On the dark section the prose and the number have to invert. */
+.section-dark .lead p { color: #c4c4d2; }
+.section-dark .cta-phone { color: #6fb0ff; }
+
+@media (max-width: 600px) {
+  .fault summary { padding: 15px 16px; gap: 12px; }
+  .fault-body { padding: 0 16px 18px; }
+  .fault-title { font-size: .94rem; }
+  .fault-fix { padding: 14px 16px; }
+  .lead-actions .btn { flex: 1 1 100%; }
+}
