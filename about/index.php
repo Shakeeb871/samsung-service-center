@@ -5,11 +5,14 @@ $page_path  = '/about/';
 require __DIR__ . '/../inc/header.php';
 ?>
 
-<div class="wrap crumbs"><a href="<?= url('/') ?>">Home</a> &rsaquo; About Us</div>
+<?php page_hero(
+  'About our Samsung service center',
+  'An independent team repairing Samsung home appliances across every emirate.',
+  ['Home' => '/', 'About Us' => '/about/']
+); ?>
 
 <section class="section">
   <div class="wrap prose">
-    <h1>About our Samsung service center</h1>
 
     <p>
       We repair Samsung home appliances across the United Arab Emirates — washing machines,

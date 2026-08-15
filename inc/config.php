@@ -86,6 +86,7 @@ $__scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
 define('HERO_IMAGE',  'Samsung Authorise service center in uae provide best and most trusted samsung appliances repair services in UAE');
 define('ABOUT_IMAGE', 'Best Samsung Service Center In United Arab Emirates');
 define('SITE_ICON',   'Samsung Service Center Site Icon');
+define('PAGE_HERO_IMAGE', 'Samsung Authorise Service Centre In UAE - Official Repair Centre');
 define('CTA_IMAGE',   'Call Our Experts Now for Fast, Affordable, and Professional Support in the UAE');
 
 define('SITE_URL', $__scheme . '://' . ($_SERVER['HTTP_HOST'] ?? 'samsung.aiqonquickcool.com.my') . BASE);

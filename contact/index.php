@@ -5,13 +5,16 @@ $page_path  = '/contact/';
 require __DIR__ . '/../inc/header.php';
 ?>
 
-<div class="wrap crumbs"><a href="<?= url('/') ?>">Home</a> &rsaquo; Contact Us</div>
+<?php page_hero(
+  'Book a repair',
+  'Our call centre is available 24/7 &mdash; send the model number and the fault.',
+  ['Home' => '/', 'Contact Us' => '/contact/']
+); ?>
 
 <section class="section">
   <div class="wrap split">
 
     <div>
-      <h1>Book a repair</h1>
       <p>
         Our call centre is available 24/7 and our friendly team can advise and help you day or
         night. The more you can tell us up front, the more useful the first reply is — the model

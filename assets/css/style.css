@@ -669,11 +669,64 @@ ul { margin: 0; }
 .faq-a { padding-bottom: 18px; font-size: .89rem; }
 .faq-item.is-collapsed .faq-a { display: none; }
 
-/* --- Breadcrumbs --------------------------------------------------- */
+/* --- Page banner ---------------------------------------------------
+   Every page except the homepage opens the same way: heading, one line,
+   breadcrumbs, over the shared photograph. Same shape everywhere, so the
+   site does not feel like several sites stitched together.
+   ------------------------------------------------------------------ */
 
-.crumbs { font-size: .82rem; padding: 16px 0 0; color: var(--muted); }
-.crumbs a { color: var(--muted); text-decoration: none; }
-.crumbs a:hover { color: var(--primary-ink); }
+.page-hero {
+  position: relative;
+  background: var(--secondary-deep) center/cover no-repeat;
+  padding: 68px 0 60px;
+  text-align: center;
+  color: #c2cee4;
+}
+/* Dark enough under the words to keep them at full contrast, thinner at
+   the edges so the photograph is still a photograph. */
+.page-hero::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(26,26,38,.88) 0%, rgba(26,26,38,.80) 55%, rgba(20,63,143,.82) 100%);
+}
+.page-hero::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.page-hero .wrap { position: relative; z-index: 1; }
+
+.page-hero h1 { color: #fff; margin-bottom: .35em; }
+.page-hero h1::after {
+  content: ""; display: block;
+  width: 56px; height: 3px; border-radius: 2px;
+  background: var(--primary);
+  margin: 20px auto 0;
+}
+.page-lead {
+  font-size: 1rem; max-width: 62ch; margin: 0 auto;
+  color: #d3dbe8;
+}
+
+/* --- Breadcrumbs ---------------------------------------------------- */
+
+.crumbs { margin-top: 22px; font-size: .84rem; }
+.crumbs ol {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0;
+}
+.crumbs li { display: inline-flex; align-items: center; }
+/* The separator is drawn rather than typed, so it is not read aloud as
+   a word and cannot be selected with the text. */
+.crumbs li + li::before {
+  content: ""; display: inline-block;
+  width: 5px; height: 5px; margin: 0 12px;
+  border-top: 1.5px solid rgba(255,255,255,.45);
+  border-right: 1.5px solid rgba(255,255,255,.45);
+  transform: rotate(45deg);
+}
+.crumbs a { color: #b7c4d8; text-decoration: none; padding: 4px 0; }
+.crumbs a:hover { color: #fff; }
+.crumbs span { color: #fff; font-weight: 500; }
 
 /* --- Footer -------------------------------------------------------- */
 
@@ -762,6 +815,9 @@ ul { margin: 0; }
    a phone number.
    ------------------------------------------------------------------ */
 @media (max-width: 820px) {
+  .page-hero { padding: 48px 0 44px; }
+  .page-lead { font-size: .94rem; }
+  .crumbs a { padding: 8px 0; }
   .topbar a { padding: 9px 4px; }
   .topbar-inner { min-height: 44px; }
   .site-foot li { margin-bottom: 2px; }

@@ -5,12 +5,15 @@ $page_path  = '/services/';
 require __DIR__ . '/../inc/header.php';
 ?>
 
-<div class="wrap crumbs"><a href="<?= url('/') ?>">Home</a> &rsaquo; Services</div>
+<?php page_hero(
+  'Samsung appliance repair services',
+  'Seven appliances, one manufacturer, repaired at your home across the UAE.',
+  ['Home' => '/', 'Services' => '/services/']
+); ?>
 
 <section class="section">
   <div class="wrap">
-    <div class="section-head">
-      <h1>Samsung appliance repair services</h1>
+    <div class="section-head center">
       <p>
         A failing appliance can cause endless hassle when technicians cannot diagnose the issue
         correctly. Our qualified technicians find the true root cause of the fault across all

@@ -15,15 +15,35 @@ require_once __DIR__ . '/config.php';
 require __DIR__ . '/header.php';
 ?>
 
-<div class="wrap crumbs">
-  <a href="<?= url('/') ?>">Home</a> &rsaquo; <a href="<?= url('/services/') ?>">Services</a> &rsaquo; <?= $svc['short'] ?>
-</div>
+<?php
+/* The banner takes the first sentence of this service's own intro — it
+   should say what the page is, not restate the whole opening.
+ *
+ * What is left of that paragraph goes back at the top of the body. An
+ * earlier version sliced the whole first element away and silently lost
+ * every sentence after the first. */
+$intro = $svc['intro'];
+$first = array_shift($intro);
+
+$dot  = strpos($first, '. ');
+$lead = $dot === false ? $first : substr($first, 0, $dot + 1);
+$rest = $dot === false ? ''     : ltrim(substr($first, $dot + 1));
+
+if ($rest !== '') {
+    array_unshift($intro, $rest);
+}
+
+page_hero($svc['h1'], $lead, [
+    'Home'        => '/',
+    'Services'    => '/services/',
+    $svc['short'] => null,
+]);
+?>
 
 <section class="section">
   <div class="wrap" style="max-width:860px">
-    <h1><?= htmlspecialchars($svc['h1']) ?></h1>
-    <?php foreach ($svc['intro'] as $p): ?>
-    <p><?= $p ?></p>
+    <?php foreach ($intro as $para): ?>
+    <p><?= $para ?></p>
     <?php endforeach; ?>
 
     <p>

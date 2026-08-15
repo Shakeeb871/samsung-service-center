@@ -6,12 +6,17 @@ $page_path  = '/404';
 require __DIR__ . '/inc/header.php';
 ?>
 
+<?php page_hero(
+  'That page is not here',
+  'The link is either out of date or slightly wrong.',
+  ['Home' => '/', '404' => null]
+); ?>
+
 <section class="section">
   <div class="wrap center" style="max-width:640px">
-    <h1>That page is not here</h1>
     <p>
-      The link is either out of date or slightly wrong. The repair pages below cover
-      everything on this site, or you can call and describe the fault directly.
+      The repair pages below cover everything on this site, or you can call and
+      describe the fault directly.
     </p>
     <p>
       <a class="btn" href="<?= url('/services/') ?>">All repairs</a>
