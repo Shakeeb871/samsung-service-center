@@ -151,9 +151,30 @@ $MODELS = ['Front-Load', 'Top-Load', 'Washer-Dryer Combo', 'EcoBubble', 'QuickDr
 page_hero(
   'Samsung Washing Machine Repair UAE',
   'Certified, on-site Samsung washing machine repair across the Emirates.',
-  ['Home' => '/', 'Services' => '/services/', 'Washing Machine' => null]
+  ['Home' => '/', 'Services' => '/services/', 'Washing Machine' => null],
+  'has-lift'
 );
 ?>
+
+<?php /* Lifted up into the banner. The four things the copy promises are
+         the first thing on the page, before any scrolling, and the overlap
+         ties the banner to the page instead of stacking one flat block on
+         another. */ ?>
+<div class="lift">
+  <div class="wrap">
+    <ul class="lift-row">
+      <?php foreach ($ASSURANCE as $a): ?>
+      <li>
+        <?= icon($a[0], 24) ?>
+        <div>
+          <strong><?= htmlspecialchars($a[1]) ?></strong>
+          <span><?= htmlspecialchars($a[2]) ?></span>
+        </div>
+      </li>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+</div>
 
 <section class="section wm-open-sec">
   <div class="wrap wm-open">
@@ -166,36 +187,27 @@ page_hero(
         part replacement or a complete system service, we bring true expertise straight to your
         doorstep with guaranteed results.
       </p>
-      <p class="wm-actions">
-        <a class="btn" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 15) ?>Call <?= htmlspecialchars(BIZ_PHONE) ?></a>
-        <a class="btn btn-dark" href="https://wa.me/<?= BIZ_WHATSAPP ?>" rel="noopener">WhatsApp the model number</a>
-      </p>
     </div>
 
-    <?php /* Not a grid of tiles — one panel with ruled rows, so it reads
-             as a specification rather than as four badges. */ ?>
-    <aside class="assure" aria-label="What every repair includes">
-      <ul>
-        <?php foreach ($ASSURANCE as $a): ?>
-        <li>
-          <?= icon($a[0], 22) ?>
-          <div>
-            <strong><?= htmlspecialchars($a[1]) ?></strong>
-            <span><?= htmlspecialchars($a[2]) ?></span>
-          </div>
-        </li>
-        <?php endforeach; ?>
-      </ul>
-      <a class="assure-call" href="tel:<?= BIZ_PHONE_LINK ?>">
-        <span>Speak to a technician</span>
-        <strong><?= icon('phone', 18) ?><?= htmlspecialchars(BIZ_PHONE) ?></strong>
-      </a>
+    <?php /* Dark, on a white ground, early in the page. The one element
+             the whole page exists to be pressed should not look like the
+             panels around it. */ ?>
+    <aside class="call-card">
+      <span class="call-card-top"><?= icon('clock', 16) ?>Lines open 24 hours</span>
+      <a class="call-card-num" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 22) ?><?= htmlspecialchars(BIZ_PHONE) ?></a>
+      <div class="call-card-actions">
+        <a class="btn btn-white" href="https://wa.me/<?= BIZ_WHATSAPP ?>" rel="noopener">WhatsApp the model number</a>
+        <a class="btn btn-outline" href="<?= url('/contact/') ?>">Book a repair</a>
+      </div>
     </aside>
   </div>
 </section>
 
-<section class="section section-tint">
+<section class="section section-tint framed-sec">
   <div class="wrap split media-split">
+    <div class="media frame frame-left">
+      <?= service_photo('samsung-washing-machine-repair', $SERVICES['samsung-washing-machine-repair']) ?>
+    </div>
     <div>
       <div class="section-head">
         <h2>Professional Samsung Washing Machine Service Center In United Arab Emirates</h2>
@@ -210,29 +222,31 @@ page_hero(
         90-day warranty on every job we complete.
       </p>
     </div>
-    <div class="media">
-      <?= service_photo('samsung-washing-machine-repair', $SERVICES['samsung-washing-machine-repair']) ?>
-    </div>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <div class="section-head center">
-      <h2>Our Specialits Repair All Types Of Samsung Washing Machine</h2>
+    <div class="head-split">
+      <div class="section-head">
+        <h2>Our Specialits Repair All Types Of Samsung Washing Machine</h2>
+      </div>
+      <?php /* Set in two columns. One paragraph across 1150px runs to
+               140 characters a line, which is where the eye starts losing
+               its place on the way back to the left edge. */ ?>
+      <p class="two-col">
+        Samsung produces a wide variety of laundry appliances, and our technical team knows the
+        internal mechanics of every single model perfectly. We repair front-load washing machines,
+        top-load washers, and advanced washer-dryer combos. Whether you own an EcoBubble model, a
+        QuickDrive unit, or a classic AddWash machine, our engineers carry the exact tools and
+        knowledge required. We adapt our repair methods to the specific design and features of
+        your exact appliance to ensure a flawless repair.
+      </p>
     </div>
-    <p class="wm-narrow">
-      Samsung produces a wide variety of laundry appliances, and our technical team knows the
-      internal mechanics of every single model perfectly. We repair front-load washing machines,
-      top-load washers, and advanced washer-dryer combos. Whether you own an EcoBubble model, a
-      QuickDrive unit, or a classic AddWash machine, our engineers carry the exact tools and
-      knowledge required. We adapt our repair methods to the specific design and features of
-      your exact appliance to ensure a flawless repair.
-    </p>
 
-    <ul class="model-strip">
+    <ul class="spec-bar">
       <?php foreach ($MODELS as $m): ?>
-      <li><?= icon('washer', 20) ?><?= htmlspecialchars($m) ?></li>
+      <li><span><?= htmlspecialchars($m) ?></span></li>
       <?php endforeach; ?>
     </ul>
   </div>
@@ -240,12 +254,11 @@ page_hero(
 
 <section class="section section-grey">
   <div class="wrap">
-    <div class="fault-intro">
-      <div class="section-head fi-head">
+    <div class="head-split">
+      <div class="section-head">
         <h2>We Deal With All Samsung Washing Machine Problems</h2>
       </div>
-
-      <div class="fi-copy">
+      <div>
         <p>
           A washing machine can stop unexpectedly during a spin cycle, fail to drain water
           completely, or lock the door tight with your wet clothes trapped inside. Ignoring these
@@ -260,47 +273,53 @@ page_hero(
           directly at your home.
         </p>
       </div>
+    </div>
 
-      <?php /* An index, not decoration. Someone standing at the machine
+    <div class="fault-wrap">
+      <?php /* Stays on screen beside the eleven rows rather than scrolling
+               away at the top of them. Someone standing at the machine
                reading a code off the display presses it and lands on that
                one entry, already open. Without JavaScript the link still
                jumps to the row. */ ?>
-      <aside class="code-index" aria-label="Find your error code">
-        <h3>Your machine is showing</h3>
-        <ul>
-          <?php foreach ($FAULTS as $f): ?>
-          <li><a href="#fault-<?= $f['id'] ?>"><?= htmlspecialchars($f['chip']) ?></a></li>
-          <?php endforeach; ?>
-        </ul>
-        <p>Press a code to jump straight to that fault and its fix.</p>
-      </aside>
-    </div>
-
-    <div class="fault-list">
-      <?php foreach ($FAULTS as $i => $f): ?>
-      <details class="fault" id="fault-<?= $f['id'] ?>"<?= $i === 0 ? ' open' : '' ?>>
-        <summary>
-          <span class="fault-n"><?= str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) ?></span>
-          <span class="fault-head">
-            <span class="fault-title"><?= $f['title'] ?></span>
-            <?php if ($f['code'] !== ''): ?>
-            <span class="fault-code"><?= $f['code'] ?></span>
-            <?php endif; ?>
-          </span>
-          <span class="fault-mark" aria-hidden="true"></span>
-        </summary>
-        <div class="fault-body">
-          <div class="fault-problem">
-            <span class="fault-label">The Problem</span>
-            <p><?= $f['problem'] ?></p>
-          </div>
-          <div class="fault-fix">
-            <span class="fault-label fault-fix-label">The Solution</span>
-            <p><?= $f['solution'] ?></p>
-          </div>
+      <aside class="fault-side">
+        <div class="code-index" aria-label="Find your error code">
+          <h3>Your machine is showing</h3>
+          <ul>
+            <?php foreach ($FAULTS as $f): ?>
+            <li><a href="#fault-<?= $f['id'] ?>"><?= htmlspecialchars($f['chip']) ?></a></li>
+            <?php endforeach; ?>
+          </ul>
+          <p>Press a code to jump straight to that fault and its fix.</p>
+          <a class="code-call" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 16) ?>Not sure? Call us</a>
         </div>
-      </details>
-      <?php endforeach; ?>
+      </aside>
+
+      <div class="fault-list">
+        <?php foreach ($FAULTS as $i => $f): ?>
+        <details class="fault" id="fault-<?= $f['id'] ?>"<?= $i === 0 ? ' open' : '' ?>>
+          <summary>
+            <span class="fault-n"><?= str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) ?></span>
+            <span class="fault-head">
+              <span class="fault-title"><?= $f['title'] ?></span>
+              <?php if ($f['code'] !== ''): ?>
+              <span class="fault-code"><?= $f['code'] ?></span>
+              <?php endif; ?>
+            </span>
+            <span class="fault-mark" aria-hidden="true"></span>
+          </summary>
+          <div class="fault-body">
+            <div class="fault-problem">
+              <span class="fault-label">The Problem</span>
+              <p><?= $f['problem'] ?></p>
+            </div>
+            <div class="fault-fix">
+              <span class="fault-label fault-fix-label">The Solution</span>
+              <p><?= $f['solution'] ?></p>
+            </div>
+          </div>
+        </details>
+        <?php endforeach; ?>
+      </div>
     </div>
   </div>
 </section>
@@ -326,26 +345,42 @@ page_hero(
       <h2>Our Complete Working Process</h2>
     </div>
 
-    <ol class="flow">
-      <li class="flow-step">
-        <span class="flow-num">01</span>
-        <h3>Contact Us 24/7</h3>
-        <p>Our friendly customer support team is available day or night to record your appliance issue and arrange immediate help.</p>
+    <?php /* A line down the middle with the four steps alternating either
+             side of it. Four boxes in a row is the shape every template
+             uses; this reads as a sequence you follow rather than four
+             things that happen to be next to each other. */ ?>
+    <ol class="track">
+      <li class="track-step">
+        <span class="track-dot" aria-hidden="true"></span>
+        <div class="track-card">
+          <span class="track-n">01</span>
+          <h3>Contact Us 24/7</h3>
+          <p>Our friendly customer support team is available day or night to record your appliance issue and arrange immediate help.</p>
+        </div>
       </li>
-      <li class="flow-step">
-        <span class="flow-num">02</span>
-        <h3>1 Hour Response</h3>
-        <p>We aim to respond to emergency call-outs within an hour, dispatching a skilled specialist straight to your location.</p>
+      <li class="track-step">
+        <span class="track-dot" aria-hidden="true"></span>
+        <div class="track-card">
+          <span class="track-n">02</span>
+          <h3>1 Hour Response</h3>
+          <p>We aim to respond to emergency call-outs within an hour, dispatching a skilled specialist straight to your location.</p>
+        </div>
       </li>
-      <li class="flow-step">
-        <span class="flow-num">03</span>
-        <h3>Diagnosis &amp; Approval</h3>
-        <p>Our technician examines the machine on site, explains the exact fault clearly, and provides an upfront price before starting any work.</p>
+      <li class="track-step">
+        <span class="track-dot" aria-hidden="true"></span>
+        <div class="track-card">
+          <span class="track-n">03</span>
+          <h3>Diagnosis &amp; Approval</h3>
+          <p>Our technician examines the machine on site, explains the exact fault clearly, and provides an upfront price before starting any work.</p>
+        </div>
       </li>
-      <li class="flow-step">
-        <span class="flow-num">04</span>
-        <h3>Problem Solved</h3>
-        <p>We complete the approved repair, run a final test cycle to prove the machine works, and leave your laundry room completely clean and tidy.</p>
+      <li class="track-step">
+        <span class="track-dot" aria-hidden="true"></span>
+        <div class="track-card">
+          <span class="track-n">04</span>
+          <h3>Problem Solved</h3>
+          <p>We complete the approved repair, run a final test cycle to prove the machine works, and leave your laundry room completely clean and tidy.</p>
+        </div>
       </li>
     </ol>
   </div>
@@ -353,7 +388,7 @@ page_hero(
 
 <section class="section section-tint">
   <div class="wrap split inspect-split">
-    <div>
+    <div class="inspect-copy">
       <div class="section-head">
         <h2>Our Complete Inspection Services Includes In Samsung Washing Machine</h2>
       </div>
@@ -368,13 +403,13 @@ page_hero(
       </p>
     </div>
 
-    <?php /* The same seven components as a list you can run your eye down
-             while the technician works through them. */ ?>
-    <ul class="check-list">
+    <?php /* The same seven components, numbered, as a list you can run
+             your eye down while the technician works through them. */ ?>
+    <ol class="check-list">
       <?php foreach ($INSPECTION as $item): ?>
-      <li><?= icon('check', 18) ?><?= htmlspecialchars($item) ?></li>
+      <li><?= htmlspecialchars($item) ?></li>
       <?php endforeach; ?>
-    </ul>
+    </ol>
   </div>
 </section>
 
@@ -407,17 +442,19 @@ page_hero(
 
 <section class="section">
   <div class="wrap">
-    <div class="section-head center">
-      <h2>We Cover Every Area In UAE</h2>
+    <div class="head-split">
+      <div class="section-head">
+        <h2>We Cover Every Area In UAE</h2>
+      </div>
+      <p>
+        A broken washing machine does not wait for a convenient time, no matter where you live.
+        Our dedicated repair team covers every major state, including Dubai, Abu Dhabi, Sharjah,
+        Ajman, Ras Al Khaimah, Umm Al Quwain, and Fujairah. Our technicians have over a decade
+        of local driving experience and know the fastest routes across the Emirates. This allows
+        us to reach your doorstep swiftly and deliver emergency repair services exactly when you
+        need them.
+      </p>
     </div>
-    <p class="wm-narrow">
-      A broken washing machine does not wait for a convenient time, no matter where you live.
-      Our dedicated repair team covers every major state, including Dubai, Abu Dhabi, Sharjah,
-      Ajman, Ras Al Khaimah, Umm Al Quwain, and Fujairah. Our technicians have over a decade
-      of local driving experience and know the fastest routes across the Emirates. This allows
-      us to reach your doorstep swiftly and deliver emergency repair services exactly when you
-      need them.
-    </p>
 
     <ul class="area-grid">
       <?php foreach ($EMIRATES as $e): ?>
@@ -431,9 +468,9 @@ page_hero(
   </div>
 </section>
 
-<section class="section section-grey">
+<section class="section section-grey framed-sec">
   <div class="wrap split media-split media-split-flip">
-    <div class="media">
+    <div class="media frame frame-right">
       <?= photo('/assets/img', [ABOUT_IMAGE, 'about'], 'Our Samsung washing machine repair team in the UAE') ?>
     </div>
     <div>

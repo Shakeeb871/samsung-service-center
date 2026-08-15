@@ -17,13 +17,17 @@
  * @param string $lead   one line, no more — it is a banner, not a section
  * @param array  $crumbs [label => path]; the last entry is the current
  *                       page and is rendered as text, not a link
+ * @param string $extra  extra class on the banner. 'has-lift' adds room at
+ *                       the foot for a panel that overlaps up into it, so
+ *                       the card never lands on the breadcrumbs.
  */
-function page_hero(string $h1, string $lead = '', array $crumbs = []): void
+function page_hero(string $h1, string $lead = '', array $crumbs = [], string $extra = ''): void
 {
     $bg = find_image('/assets/img', [PAGE_HERO_IMAGE, 'page-hero', HERO_IMAGE, 'hero']);
     $style = $bg === null ? '' : ' style="background-image:url(\'' . asset($bg) . '\')"';
+    $cls   = 'page-hero' . ($extra === '' ? '' : ' ' . $extra);
     ?>
-<section class="page-hero"<?= $style ?>>
+<section class="<?= htmlspecialchars($cls) ?>"<?= $style ?>>
   <div class="wrap">
     <h1><?= $h1 ?></h1>
     <?php if ($lead !== ''): ?>

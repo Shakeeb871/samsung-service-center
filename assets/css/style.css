@@ -961,7 +961,7 @@ ul { margin: 0; }
    display wants that one entry, not all eleven at once.
    ------------------------------------------------------------------ */
 
-.fault-list { display: grid; gap: 12px; max-width: 900px; margin: 0 auto; }
+.fault-list { display: grid; gap: 12px; }
 
 .fault {
   background: #fff;
@@ -1068,148 +1068,251 @@ ul { margin: 0; }
   .lead-actions .btn { flex: 1 1 100%; }
 }
 
+
 /* ------------------------------------------------------------------
    Washing machine landing page
    ------------------------------------------------------------------
-   The page is nine long blocks of copy. Left as centred paragraphs it
-   reads as a document, and a document is something a visitor scrolls
-   past. Every block here is paired with something the eye can rest on
-   instead — a panel of assurances, an index of error codes, a checklist,
-   a photograph. No new colour and no new radius: the same blue at the
-   same four lightnesses, and 7px throughout.
+   Nine long blocks of copy. Stacked as full-width sections with a
+   centred heading over a centred paragraph, every one of them reads the
+   same and the page has no shape — which is exactly what it looked like.
+
+   What gives it shape here is layout, not decoration: a panel that lifts
+   up into the banner, headings set beside their copy rather than above
+   it, photographs carried on an offset block, an index that stays on
+   screen beside eleven faults, and a process that runs down a line
+   instead of sitting in four boxes.
+
+   No new colour and no new radius. Same blue at the same lightnesses,
+   7px throughout.
    ------------------------------------------------------------------ */
 
-/* --- Opening ------------------------------------------------------- */
+/* --- Panel lifted into the banner ----------------------------------- */
 
-.wm-open { display: grid; grid-template-columns: 1.22fr .78fr; gap: 54px; align-items: stretch; }
-/* The buttons drop to the foot of the column so they finish level with
-   the panel beside them, rather than leaving a hole under the copy. */
-.wm-open-copy { display: flex; flex-direction: column; }
-/* The first paragraph is the page's promise, so it is set a size above
-   body copy rather than the same as everything below it. */
-.wm-first { font-size: 1.02rem; line-height: 1.85; }
+/* Room at the foot of the banner so the panel overlaps the picture and
+   not the breadcrumbs. */
+.page-hero.has-lift { padding-bottom: 104px; }
+
+.lift { position: relative; z-index: 6; margin-top: -62px; }
+.lift-row {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.lift-row li {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 24px 24px;
+  border-right: 1px solid var(--line);
+}
+.lift-row li:last-child { border-right: 0; }
+.lift-row .ico { color: var(--primary-ink); stroke-width: 1.5; margin-top: 2px; }
+.lift-row strong { display: block; color: var(--secondary); font-size: .9rem; font-weight: 600; line-height: 1.45; }
+.lift-row span { display: block; font-size: .8rem; line-height: 1.6; }
+
+/* --- Opening -------------------------------------------------------- */
+
+.wm-open-sec { padding-top: 54px; }
+.wm-open { display: grid; grid-template-columns: 1.3fr .7fr; gap: 56px; align-items: center; }
+/* The page's promise, set a size above the body copy under it. */
+.wm-first { font-size: 1.06rem; line-height: 1.85; margin: 0; }
 .wm-first::first-letter { color: var(--secondary); font-weight: 600; }
 .wm-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 1.6em 0 0; }
-.wm-open-copy .wm-actions { margin-top: auto; padding-top: 1.6em; }
 
-.assure {
-  background: var(--tint-1);
-  border: 1px solid var(--primary-line);
+/* Dark, on a white ground. The one thing the page exists to be pressed
+   should not look like the panels around it. */
+.call-card {
+  background: var(--secondary);
   border-radius: var(--r);
-  padding: 8px 22px 22px;
+  border-top: 3px solid var(--primary);
+  padding: 26px 28px 28px;
+  box-shadow: var(--shadow-md);
 }
-.assure ul { list-style: none; padding: 0; margin: 0; }
-.assure li {
-  display: flex; gap: 15px; align-items: flex-start;
-  padding: 17px 0; border-bottom: 1px solid var(--primary-line);
-}
-.assure li:last-child { border-bottom: 0; }
-.assure .ico { color: var(--primary-ink); stroke-width: 1.5; margin-top: 2px; }
-.assure strong { display: block; color: var(--secondary); font-size: .92rem; font-weight: 600; line-height: 1.5; }
-.assure span { display: block; font-size: .82rem; line-height: 1.6; color: var(--text); }
-
-.assure-call {
-  display: block; text-decoration: none;
-  margin-top: 4px; padding: 15px 18px;
-  background: #fff; border: 1px solid var(--primary-line); border-radius: var(--r);
-}
-.assure-call span {
-  display: block; font-size: .72rem; font-weight: 600;
-  letter-spacing: .09em; text-transform: uppercase; color: var(--muted);
-  margin-bottom: 4px;
-}
-.assure-call strong {
+.call-card-top {
   display: inline-flex; align-items: center; gap: 9px;
-  font-size: 1.16rem; font-weight: 700; color: var(--primary-ink); letter-spacing: -.01em;
+  font-size: .74rem; font-weight: 500; letter-spacing: .09em; text-transform: uppercase;
+  color: #b8b8c8;
 }
-.assure-call:hover strong { color: var(--primary-dark); }
-
-/* --- Narrow prose --------------------------------------------------
-   Centred, but held to a comfortable measure. Full-width paragraphs on a
-   1200px container run past 120 characters a line, which is where the
-   eye starts losing its place returning to the left edge. */
-.wm-narrow { max-width: 76ch; margin: 0 auto; text-align: center; font-size: .96rem; }
-
-/* --- Model range ---------------------------------------------------- */
-
-.model-strip {
-  list-style: none; padding: 0; margin: 34px 0 0;
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+.call-card-top .ico { color: var(--primary); }
+.call-card-num {
+  display: flex; align-items: center; gap: 11px;
+  margin: 12px 0 20px;
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem); font-weight: 700; letter-spacing: -.02em;
+  color: var(--primary); text-decoration: none;
 }
-.model-strip li {
-  display: inline-flex; align-items: center; gap: 9px;
-  padding: 11px 18px;
-  background: #fff; border: 1px solid var(--line); border-radius: var(--r);
-  font-size: .87rem; font-weight: 500; color: var(--secondary);
-  transition: border-color .18s, background .18s;
-}
-.model-strip li:hover { border-color: var(--primary-line); background: var(--tint-1); }
-.model-strip .ico { color: var(--primary-ink); stroke-width: 1.4; }
+.call-card-num:hover { color: #6fb0ff; }
+.call-card-actions { display: grid; gap: 9px; }
 
-/* --- Fault section head and code index ------------------------------ */
+/* --- Heading beside its copy ----------------------------------------
+   The centred-heading-over-centred-paragraph shape is what made every
+   section look like the one before it. Here the heading holds the left
+   third and the copy runs beside it. */
 
-/* Named areas, because the order changes with the width: beside the copy
-   on a desktop, but between the heading and the copy on a phone — where
-   six paragraphs above it would bury the one thing a person holding a
-   broken machine is looking for. */
-.fault-intro {
-  display: grid;
-  grid-template-columns: 1.35fr .65fr;
-  grid-template-areas: "head index" "copy index";
-  gap: 0 50px;
+.head-split {
+  display: grid; grid-template-columns: .82fr 1.18fr; gap: 26px 58px;
   align-items: start; margin-bottom: 42px;
 }
-.fi-head  { grid-area: head; margin-bottom: 22px; }
-.fi-copy  { grid-area: copy; }
-.fi-copy p:last-child { margin-bottom: 0; }
-.code-index { grid-area: index; }
+.head-split .section-head { margin: 0; position: sticky; top: 100px; }
+.head-split p:last-child { margin-bottom: 0; }
+
+/* Two columns of text, for the one paragraph with no panel beside it. */
+.two-col { columns: 2; column-gap: 46px; }
+.two-col { margin: 0; }
+
+/* --- Photograph on an offset block ---------------------------------- */
+
+.framed-sec { overflow: hidden; }
+.frame { position: relative; }
+.frame::before {
+  content: ""; position: absolute; z-index: 0;
+  top: 20px; bottom: -20px;
+  width: 100%;
+  background: var(--tint-2);
+  border-radius: var(--r);
+}
+.frame-left::before  { left: -20px; }
+.frame-right::before { right: -20px; }
+.frame .media-img, .frame .media-placeholder { position: relative; z-index: 1; }
+
+/* --- Model range as one bar ----------------------------------------- */
+
+.spec-bar {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  background: #fff; border: 1px solid var(--line); border-radius: var(--r);
+  overflow: hidden;
+}
+.spec-bar li {
+  display: grid; justify-items: center; gap: 14px;
+  padding: 24px 12px;
+  border-right: 1px solid var(--line);
+  transition: background .18s;
+}
+.spec-bar li:last-child { border-right: 0; }
+.spec-bar li:hover { background: var(--tint-1); }
+/* The same short rule that marks a heading, rather than six copies of one
+   icon — a glyph repeated across a row says nothing and reads as filler. */
+.spec-bar li::before {
+  content: ""; width: 24px; height: 3px; border-radius: var(--r);
+  background: var(--primary);
+}
+.spec-bar span {
+  font-size: .88rem; font-weight: 600; color: var(--secondary);
+  text-align: center; line-height: 1.4;
+}
+
+/* --- Faults: index beside the list ---------------------------------- */
+
+.fault-wrap { display: grid; grid-template-columns: 264px 1fr; gap: 34px; align-items: start; }
+/* Stays with the reader through all eleven rows rather than scrolling
+   off the top of them. */
+.fault-side { position: sticky; top: 96px; }
 
 .code-index {
   background: #fff; border: 1px solid var(--line); border-radius: var(--r);
-  padding: 22px 22px 18px;
+  padding: 20px 20px 18px;
   box-shadow: var(--shadow-xs);
 }
 .code-index h3 {
-  font-size: .74rem; font-weight: 600; letter-spacing: .11em;
-  text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
+  font-size: .72rem; font-weight: 600; letter-spacing: .11em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 13px;
 }
-.code-index ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.code-index ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 7px; }
 .code-index a {
   display: inline-flex; align-items: center; justify-content: center;
-  min-width: 46px; padding: 8px 12px;
-  font-size: .82rem; font-weight: 600; letter-spacing: .02em;
+  min-width: 44px; padding: 8px 11px;
+  font-size: .81rem; font-weight: 600; letter-spacing: .02em;
   color: var(--primary-ink); text-decoration: none;
   background: var(--primary-tint);
   border: 1px solid var(--primary-line); border-radius: var(--r);
   transition: background .16s, color .16s, border-color .16s;
 }
 .code-index a:hover { background: var(--primary-ink); border-color: var(--primary-ink); color: #fff; }
-.code-index p { font-size: .8rem; line-height: 1.65; margin: 14px 0 0; color: var(--muted); }
+.code-index p { font-size: .79rem; line-height: 1.6; margin: 13px 0 0; color: var(--muted); }
 
-/* The sticky header would otherwise sit on top of the row just jumped to. */
+.code-call {
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  margin-top: 14px; padding: 11px 12px;
+  background: var(--secondary); color: #fff;
+  border-radius: var(--r);
+  font-size: .82rem; font-weight: 500; text-decoration: none;
+  transition: background .16s;
+}
+.code-call:hover { background: var(--secondary-soft); color: #fff; }
+.code-call .ico { color: var(--primary); }
+
+/* Beside the index it fills its own column — no centred measure. */
+.fault-list { display: grid; gap: 12px; max-width: none; margin: 0; }
+/* The sticky header would otherwise sit on top of the row jumped to. */
 .fault { scroll-margin-top: 96px; }
-.fault-list { max-width: none; }
-/* Momentary highlight so it is obvious which of eleven rows was opened. */
 .fault:target { border-color: var(--primary); box-shadow: var(--shadow-sm); }
 
-/* --- Inspection checklist ------------------------------------------- */
+/* --- Process on a line ----------------------------------------------
+   Four steps alternating either side of one rule. Four boxes in a row is
+   the shape every template uses; this reads as a sequence. */
 
-.inspect-split { grid-template-columns: 1.05fr .95fr; gap: 50px; align-items: center; }
+.track { list-style: none; margin: 0; padding: 0; position: relative; }
+.track::before {
+  content: ""; position: absolute; left: 50%; top: 8px; bottom: 8px;
+  width: 2px; margin-left: -1px;
+  background: var(--primary-line);
+}
+.track-step { position: relative; display: grid; grid-template-columns: 1fr 1fr; }
+.track-step + .track-step { margin-top: 26px; }
+.track-step:nth-child(odd)  .track-card { grid-column: 1; margin-right: 46px; }
+.track-step:nth-child(even) .track-card { grid-column: 2; margin-left: 46px; }
+
+.track-dot {
+  position: absolute; left: 50%; top: 30px;
+  width: 15px; height: 15px; margin-left: -7px;
+  border-radius: 50%; background: var(--primary);
+  box-shadow: 0 0 0 5px #fff, 0 0 0 6px var(--primary-line);
+}
+
+.track-card {
+  position: relative;
+  background: #fff; border: 1px solid var(--line); border-radius: var(--r);
+  padding: 26px 26px 22px;
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow .2s, border-color .2s;
+}
+.track-card:hover { box-shadow: var(--shadow-md); border-color: var(--primary-line); }
+.track-n {
+  position: absolute; right: 20px; top: 14px;
+  font-size: 2.6rem; font-weight: 700; line-height: 1;
+  color: var(--primary); opacity: .14; letter-spacing: -.04em;
+}
+.track-card h3 { margin-bottom: .4em; padding-right: 56px; }
+.track-card p { font-size: .88rem; line-height: 1.75; margin: 0; }
+
+/* --- Inspection checklist -------------------------------------------- */
+
+.inspect-split { grid-template-columns: 1fr 1fr; gap: 52px; align-items: center; }
+.inspect-copy .section-head { margin-bottom: 24px; }
+.inspect-copy p:last-child { margin-bottom: 0; }
 
 .check-list {
-  list-style: none; padding: 22px 24px; margin: 0;
+  list-style: none; counter-reset: chk;
+  padding: 10px 26px; margin: 0;
   background: #fff; border: 1px solid var(--primary-line); border-radius: var(--r);
   box-shadow: var(--shadow-xs);
 }
 .check-list li {
-  display: flex; gap: 14px; align-items: flex-start;
-  padding: 13px 0; border-bottom: 1px dashed var(--primary-line);
+  counter-increment: chk;
+  display: grid; grid-template-columns: 30px 1fr; gap: 14px; align-items: baseline;
+  padding: 15px 0; border-bottom: 1px solid var(--tint-2);
   font-size: .89rem; line-height: 1.6; color: var(--secondary);
 }
 .check-list li:last-child { border-bottom: 0; }
-.check-list .ico { color: var(--primary); stroke-width: 2.4; margin-top: 4px; }
+.check-list li::before {
+  content: "0" counter(chk);
+  font-size: .78rem; font-weight: 700; color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
 
-/* --- Support panel on the dark band --------------------------------- */
+/* --- Support panel on the dark band ---------------------------------- */
 
 .support-split { grid-template-columns: 1.2fr .8fr; gap: 50px; align-items: center; }
 
@@ -1228,12 +1331,12 @@ ul { margin: 0; }
 .support-card .cta-phone { margin: 12px 0 20px; font-size: clamp(1.5rem, 2.6vw, 1.95rem); }
 .support-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
-/* --- Coverage tiles -------------------------------------------------- */
+/* --- Coverage tiles --------------------------------------------------- */
 
 /* Flex rather than grid, so the two emirates left over on the last row
    centre themselves instead of hanging off the left edge. */
 .area-grid {
-  list-style: none; padding: 0; margin: 36px 0 0;
+  list-style: none; padding: 0; margin: 0;
   display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;
 }
 .area-grid li {
@@ -1249,39 +1352,78 @@ ul { margin: 0; }
 .area-grid strong { font-size: .95rem; font-weight: 600; color: var(--secondary); line-height: 1.3; }
 .area-grid span { font-size: .78rem; color: var(--muted); line-height: 1.4; }
 
-/* --- Picture on the left, for the closing block ---------------------- */
+/* --- Picture on the left, for the closing block ----------------------- */
 
 .media-split-flip { grid-template-columns: .95fr 1.05fr; }
 
-/* --- Compact service card, for the cross-links ----------------------- */
+/* --- Compact service card, for the cross-links ------------------------ */
 
 .svc-card-sm .svc-body { padding: 16px 20px 20px; }
 .svc-card-sm .svc-body h3 { margin-bottom: .5em; font-size: 1rem; }
 
+/* --- Responsive ------------------------------------------------------- */
+
 @media (max-width: 1080px) {
+  .lift-row { grid-template-columns: repeat(2, 1fr); }
+  .lift-row li:nth-child(2n) { border-right: 0; }
+  .lift-row li:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+
   .wm-open { grid-template-columns: 1fr; gap: 34px; }
-  .fault-intro {
-    grid-template-columns: 1fr;
-    grid-template-areas: "head" "index" "copy";
-    gap: 26px;
-  }
-  .fi-head { margin-bottom: 0; }
-  .inspect-split, .support-split { grid-template-columns: 1fr; gap: 32px; }
+  .head-split { grid-template-columns: 1fr; gap: 20px; margin-bottom: 32px; }
+  .head-split .section-head { position: static; }
+  .two-col { columns: 1; }
+
+  .spec-bar { grid-template-columns: repeat(3, 1fr); }
+  .spec-bar li:nth-child(3n) { border-right: 0; }
+  .spec-bar li:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
+
+  /* The index goes above the list and stops being sticky — a panel that
+     follows you down a phone screen is in the way, not in reach. */
+  .fault-wrap { grid-template-columns: 1fr; gap: 24px; }
+  .fault-side { position: static; }
+
+  .inspect-split { grid-template-columns: 1fr; gap: 32px; }
 }
 
 @media (max-width: 900px) {
+  .support-split { grid-template-columns: 1fr; gap: 32px; }
   /* Stacked, the picture belongs under the words it illustrates. */
   .media-split-flip { grid-template-columns: 1fr; }
   .media-split-flip .media { order: 2; }
+  .frame::before { display: none; }
+
+  /* The line moves to the left edge and every step sits to the right of
+     it — alternating sides needs width that a phone does not have. */
+  .track::before { left: 7px; margin-left: 0; }
+  .track-step { grid-template-columns: 1fr; }
+  .track-step:nth-child(odd) .track-card,
+  .track-step:nth-child(even) .track-card { grid-column: 1; margin: 0 0 0 40px; }
+  .track-dot { left: 7px; margin-left: -6px; top: 26px; }
 }
 
 @media (max-width: 600px) {
-  .wm-first { font-size: .96rem; }
+  .page-hero.has-lift { padding-bottom: 74px; }
+  .lift { margin-top: -46px; }
+  .lift-row { grid-template-columns: 1fr; }
+  .lift-row li { border-right: 0; border-bottom: 1px solid var(--line); padding: 18px 20px; }
+  .lift-row li:last-child { border-bottom: 0; }
+
+  .wm-open-sec { padding-top: 40px; }
+  .wm-first { font-size: .98rem; }
   .wm-actions .btn { flex: 1 1 100%; }
-  .assure { padding: 6px 18px 18px; }
-  .assure-call strong { font-size: 1.08rem; }
+  .call-card { padding: 22px 20px 24px; }
+
+  .spec-bar { grid-template-columns: repeat(2, 1fr); }
+  .spec-bar li { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 20px 10px; }
+  .spec-bar li:nth-child(2n) { border-right: 0; }
+  .spec-bar li:nth-last-child(-n+2) { border-bottom: 0; }
+
   .code-index a { min-width: 52px; padding: 10px 12px; }
-  .model-strip li { padding: 10px 14px; font-size: .83rem; }
+  .check-list { padding: 6px 18px; }
+  .track-card { padding: 22px 20px 18px; }
+  .track-n { font-size: 2.1rem; right: 16px; }
+  .track-card h3 { padding-right: 44px; }
+
   .area-grid li { flex: 1 1 100%; max-width: none; }
   .support-actions .btn { flex: 1 1 100%; }
 }
