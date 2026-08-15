@@ -118,6 +118,36 @@
     });
   }
 
+  // --- Error code index -----------------------------------------------
+  // The chips are ordinary anchors, so with the script off they still jump
+  // to the right fault and it can be opened by hand. This only saves that
+  // second tap by opening it on the way.
+  function openFault(hash) {
+    if (!hash || hash.charAt(0) !== '#') return null;
+    var target;
+    try { target = document.querySelector(hash); } catch (err) { return null; }
+    if (!target || target.tagName !== 'DETAILS') return null;
+    target.open = true;
+    return target;
+  }
+
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest ? e.target.closest('.code-index a') : null;
+    if (!link) return;
+    var target = openFault(link.getAttribute('href'));
+    if (!target) return;
+    // Scrolled here rather than left to the browser, because the row is
+    // opened in the same frame and the native jump lands on its old height.
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (history.replaceState) history.replaceState(null, '', link.getAttribute('href'));
+    var summary = target.querySelector('summary');
+    if (summary) summary.focus({ preventScroll: true });
+  });
+
+  // Someone arriving on a shared link to one fault should find it open.
+  if (window.location.hash) openFault(window.location.hash);
+
   // --- Contact form ---------------------------------------------------
   var form = document.getElementById('enquiry-form');
   if (!form) return;
