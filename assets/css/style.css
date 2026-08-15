@@ -998,7 +998,9 @@ ul { margin: 0; }
 }
 .fault[open] .fault-n { opacity: 1; }
 
-.fault-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+/* min-width:0 or the badge's nowrap sets the column's floor and pushes
+   the +/- off the right edge on a narrow phone. */
+.fault-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; min-width: 0; }
 .fault-title { font-weight: 600; color: var(--secondary); font-size: 1rem; line-height: 1.4; }
 /* The code is the thing a reader is matching against their display, so
    it is set apart rather than buried in the sentence. */
@@ -1072,6 +1074,9 @@ ul { margin: 0; }
   .fault-mark { margin-top: 5px; }
   .fault-body { padding: 18px 16px 18px; }
   .fault-title { font-size: .94rem; }
+  /* A long badge — "Condenser & Heat Pump Models" — wraps here rather
+     than holding the row open wider than the screen. */
+  .fault-code { white-space: normal; }
   .fault-fix { padding: 14px 16px; }
   .lead-actions .btn { flex: 1 1 100%; }
 }
