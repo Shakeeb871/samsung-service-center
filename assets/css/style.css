@@ -166,8 +166,59 @@ ul { margin: 0; }
 
 .nav { display: flex; align-items: center; gap: 26px; }
 .nav a { color: var(--secondary); text-decoration: none; font-weight: 500; font-size: .88rem; }
-.nav a:hover { color: var(--primary-ink); }
 .nav a.btn { color: #fff; }
+
+/* No colour change and no border on hover, anywhere in the menu. The
+   focus ring stays — that is for keyboard users and is not a hover
+   state; without it a menu cannot be operated without a mouse. */
+
+/* --- Services dropdown ---------------------------------------------- */
+
+.nav-item { position: relative; display: inline-flex; align-items: center; gap: 4px; }
+
+.sub-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; padding: 0;
+  background: none; border: 0; cursor: pointer;
+  color: var(--secondary);
+}
+.sub-toggle svg { transition: transform .18s; }
+.has-sub.is-open > .sub-toggle svg { transform: rotate(180deg); }
+
+.sub {
+  position: absolute; top: 100%; left: -14px;
+  min-width: 268px; z-index: 120;
+  list-style: none; margin: 0; padding: 8px 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-md);
+  opacity: 0; visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity .16s, transform .16s, visibility .16s;
+}
+/* Opens on hover for a mouse and on focus for a keyboard. focus-within
+   is what lets someone tab through the seven links without the panel
+   closing under them. */
+.nav-item.has-sub:hover > .sub,
+.nav-item.has-sub:focus-within > .sub,
+.nav-item.has-sub.is-open > .sub {
+  opacity: 1; visibility: visible; transform: translateY(0);
+}
+/* A gap between the trigger and the panel would close the menu as the
+   pointer crosses it. This bridges it without being visible. */
+.nav-item.has-sub::after {
+  content: ""; position: absolute; top: 100%; left: 0; right: 0; height: 12px;
+}
+
+.sub li { margin: 0; }
+.sub a {
+  display: block; padding: 9px 18px;
+  font-size: .85rem; font-weight: 400; line-height: 1.5;
+  color: var(--secondary); text-decoration: none;
+}
+.sub-all { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 4px; }
+.sub-all a { font-weight: 500; }
 
 .nav-toggle { display: none; width: 42px; height: 38px; background: none; border: 1px solid var(--line); border-radius: var(--r); cursor: pointer; padding: 10px 9px; }
 .nav-toggle span { display: block; height: 2px; background: var(--secondary); border-radius: var(--r); }
@@ -800,8 +851,32 @@ ul { margin: 0; }
     padding: 8px 22px 18px; display: none;
   }
   .nav.is-open { display: flex; }
-  .nav a { padding: 12px 0; border-bottom: 1px solid var(--line); }
-  .nav a.btn { margin-top: 12px; border-bottom: 0; }
+  .nav > a { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .nav a.btn { margin-top: 12px; border-bottom: 0; text-align: center; }
+
+  /* On a phone the panel is not a panel — it opens in the flow, pushing
+     the rest of the menu down, because a floating dropdown on a narrow
+     screen either runs off the edge or covers what is under it. */
+  .nav-item.has-sub { display: block; width: 100%; position: static; }
+  .nav-item.has-sub > a {
+    display: inline-block; padding: 12px 0;
+    width: calc(100% - 44px);
+  }
+  .nav-item.has-sub { border-bottom: 1px solid var(--line); }
+  .sub-toggle { position: absolute; right: 22px; width: 44px; height: 44px; }
+  .nav-item.has-sub > a + .sub-toggle { margin-top: 0; }
+
+  .sub {
+    position: static; min-width: 0; width: 100%;
+    border: 0; border-radius: 0; box-shadow: none; padding: 0 0 8px 14px;
+    display: none;
+    opacity: 1; visibility: visible; transform: none;
+  }
+  .nav-item.has-sub:hover > .sub,
+  .nav-item.has-sub:focus-within > .sub { display: none; }
+  .nav-item.has-sub.is-open > .sub { display: block; }
+  .sub a { padding: 10px 0; }
+  .sub-all { border-top: 0; margin-top: 0; }
   .section { padding: 46px 0; }
   .hero { padding-top: 42px; }
   .topbar .t-mail { display: none; }

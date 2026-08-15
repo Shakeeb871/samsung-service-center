@@ -71,9 +71,29 @@ $canonical  = SITE_URL . $page_path;
       <span></span><span></span><span></span>
     </button>
 
-    <nav id="nav" class="nav">
+    <nav id="nav" class="nav" aria-label="Main">
       <a href="<?= url('/') ?>">Home</a>
-      <a href="<?= url('/services/') ?>">Services</a>
+
+      <div class="nav-item has-sub">
+        <a href="<?= url('/services/') ?>">Services</a>
+        <?php /* Separate control, so the parent link still goes to the hub
+                 rather than being swallowed by the menu it opens. */ ?>
+        <button class="sub-toggle" type="button" aria-expanded="false" aria-controls="services-menu"
+                aria-label="Show services">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+
+        <ul class="sub" id="services-menu">
+          <?php foreach ($SERVICES as $slug => $s): ?>
+          <li><a href="<?= url('/services/' . $slug . '/') ?>"><?= $s['title'] ?></a></li>
+          <?php endforeach; ?>
+          <li class="sub-all"><a href="<?= url('/services/') ?>">All services</a></li>
+        </ul>
+      </div>
+
       <a href="<?= url('/about/') ?>">About Us</a>
       <a href="<?= url('/contact/') ?>">Contact Us</a>
       <a class="btn btn-sm" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 16) ?>Call Now</a>

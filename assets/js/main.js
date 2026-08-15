@@ -24,6 +24,45 @@
     });
   }
 
+  // --- Services dropdown ----------------------------------------------
+  // On desktop CSS handles it with :hover and :focus-within. This is for
+  // touch, where neither exists, and for the keyboard.
+  var subToggles = document.querySelectorAll('.sub-toggle');
+
+  Array.prototype.forEach.call(subToggles, function (btn) {
+    var item = btn.closest('.has-sub');
+    if (!item) return;
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var open = item.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  });
+
+  // A click anywhere else closes an open menu. Without this a touch user
+  // has no way to dismiss it except by opening another one.
+  document.addEventListener('click', function (e) {
+    Array.prototype.forEach.call(document.querySelectorAll('.has-sub.is-open'), function (item) {
+      if (!item.contains(e.target)) {
+        item.classList.remove('is-open');
+        var b = item.querySelector('.sub-toggle');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // Escape closes it and returns focus to the control that opened it,
+  // which is what a keyboard user expects of any menu.
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    Array.prototype.forEach.call(document.querySelectorAll('.has-sub.is-open'), function (item) {
+      item.classList.remove('is-open');
+      var b = item.querySelector('.sub-toggle');
+      if (b) { b.setAttribute('aria-expanded', 'false'); b.focus(); }
+    });
+  });
+
   // --- FAQ accordion --------------------------------------------------
   // The answers are in the HTML and visible without JS; this only collapses
   // them once the script runs, so a failed script leaves content readable.
