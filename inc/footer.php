@@ -10,9 +10,6 @@
           Samsung appliance repair, servicing and installation across the United Arab
           Emirates, with 24/7 customer support and technicians dispatched to your door.
         </p>
-        <p>
-          <a class="btn btn-sm" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 16) ?>Call Now</a>
-        </p>
       </div>
 
       <div class="foot-col">

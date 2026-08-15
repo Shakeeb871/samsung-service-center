@@ -684,8 +684,8 @@ ul { margin: 0; }
 .site-foot li { margin-bottom: 9px; }
 .site-foot a { color: #a0a0b2; text-decoration: none; }
 .site-foot a:hover { color: #fff; }
-.foot-about .logo-lockup, .foot-about .logo-img { margin-bottom: 18px; }
-.foot-about p { line-height: 1.8; }
+.foot-about .logo-lockup, .foot-about .logo-img { margin-bottom: 16px; }
+.foot-about p { line-height: 1.8; margin-bottom: 0; }
 
 .foot-contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 42px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,.1); }
 .foot-contact li { display: flex; gap: 13px; align-items: center; margin: 0; list-style: none; }
