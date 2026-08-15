@@ -372,16 +372,4 @@ require __DIR__ . '/inc/header.php';
   </div>
 </section>
 
-<section class="cta-band cta-plain">
-  <div class="wrap cta-inner">
-    <h2>Book a Samsung specialist now</h2>
-    <p>24/7 customer service, a 1 hour response on emergency call-outs, and a 90 day warranty on repairing.</p>
-    <a class="cta-phone" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 26) ?><?= htmlspecialchars(BIZ_PHONE) ?></a>
-    <div class="cta-actions">
-      <a class="btn btn-white" href="<?= url('/contact/') ?>">Book a repair</a>
-      <a class="btn btn-outline" href="https://wa.me/<?= BIZ_WHATSAPP ?>" rel="noopener">WhatsApp</a>
-    </div>
-  </div>
-</section>
-
 <?php require __DIR__ . '/inc/footer.php'; ?>
