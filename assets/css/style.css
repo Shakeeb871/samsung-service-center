@@ -1599,3 +1599,51 @@ ul { margin: 0; }
   /* One set of controls, not two stacked in the same corner. */
   .floats { display: none; }
 }
+
+
+/* ------------------------------------------------------------------
+   About page
+   ------------------------------------------------------------------ */
+
+/* --- Problem / solution, without the accordion ----------------------
+   Three of them, not eleven, and all three are the point of the section
+   — so they are open cards rather than rows that have to be pressed.
+   Same card as a fault, minus the <details>. */
+
+.fault.is-static {
+  border-color: var(--primary-line);
+  box-shadow: var(--shadow-sm);
+}
+.fault-summary {
+  display: grid; grid-template-columns: auto 1fr;
+  align-items: center; gap: 16px;
+  padding: 18px 22px;
+}
+.fault.is-static .fault-n { opacity: 1; }
+
+/* --- Repair departments ---------------------------------------------
+   Five of them. Flex rather than grid so the last two centre themselves
+   instead of sitting under the first column. */
+
+.dept-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+.dept {
+  flex: 1 1 330px; max-width: 380px;
+  background: #fff; border: 1px solid var(--line); border-radius: var(--r);
+  border-top: 3px solid var(--primary);
+  padding: 26px 26px 24px;
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow .2s, transform .2s;
+}
+.dept:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.dept > .ico { color: var(--primary-ink); stroke-width: 1.4; margin-bottom: 14px; }
+.dept h3 { margin-bottom: .5em; font-size: 1.02rem; line-height: 1.4; }
+.dept p { font-size: .87rem; line-height: 1.75; margin: 0; }
+
+/* The values list carries its heading and copy in a wrapper here, where
+   the service pages put them straight into the row. */
+.reason-list li > div { min-width: 0; }
+
+@media (max-width: 600px) {
+  .fault-summary { padding: 15px 16px; gap: 12px; align-items: start; }
+  .dept { padding: 22px 20px 20px; }
+}
