@@ -132,7 +132,7 @@
   }
 
   document.addEventListener('click', function (e) {
-    var link = e.target.closest ? e.target.closest('.code-index a') : null;
+    var link = e.target.closest ? e.target.closest('.code-index a, .quick-jump a') : null;
     if (!link) return;
     var target = openFault(link.getAttribute('href'));
     if (!target) return;

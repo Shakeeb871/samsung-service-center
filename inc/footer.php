@@ -64,6 +64,19 @@
   </div>
 </footer>
 
+<?php /* Phones only. The page runs to nineteen screens; without this
+         the number is reachable at four points in that whole run, and the
+         visitor has to scroll back to find one. The floating buttons below
+         are hidden at this width so the two do not stack up. */ ?>
+<div class="callbar">
+  <a class="callbar-btn callbar-call" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 18) ?>Call now</a>
+  <a class="callbar-btn callbar-wa" href="https://wa.me/<?= BIZ_WHATSAPP ?>" rel="noopener">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.02c-.25.69-1.45 1.32-1.99 1.37-.53.05-1.03.24-3.47-.72-2.92-1.15-4.77-4.13-4.91-4.32-.14-.19-1.17-1.55-1.17-2.96s.74-2.1 1-2.39c.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.57.81 1.98.88 2.12.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.72 1.18 1.54 1.91 1.06.94 1.95 1.24 2.23 1.38.28.14.44.12.6-.07.17-.19.69-.8.87-1.08.18-.28.36-.23.61-.14.25.09 1.58.75 1.85.88.27.14.45.21.52.33.07.11.07.66-.18 1.35z"/>
+    </svg>WhatsApp
+  </a>
+</div>
+
 <div class="floats">
   <a class="float float-wa" href="https://wa.me/<?= BIZ_WHATSAPP ?>" rel="noopener" aria-label="Chat on WhatsApp">
     <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">

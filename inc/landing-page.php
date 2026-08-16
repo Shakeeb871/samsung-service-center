@@ -62,6 +62,24 @@ page_hero(
   </div>
 </div>
 
+<?php /* Straight under the banner, phones only.
+         On a desktop the fault index sits beside the list and is on screen
+         the whole way down it. On a phone that index is five and a half
+         screens away, and the visitor who searched their symptom has to
+         read four sections about us before reaching their own answer.
+         Most of them leave first. This is the same list of symptoms put
+         where the question is asked, so the answer is one tap away. */ ?>
+<nav class="quick-jump" aria-label="<?= htmlspecialchars($LP['index_label']) ?>">
+  <div class="wrap">
+    <p class="quick-jump-lead"><?= htmlspecialchars($LP['index_h3']) ?></p>
+    <ul>
+      <?php foreach ($LP['faults'] as $f): ?>
+      <li><a href="#fault-<?= $f['id'] ?>"><?= htmlspecialchars($f['chip']) ?></a></li>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+</nav>
+
 <section class="section wm-open-sec">
   <div class="wrap wm-open">
     <div class="wm-open-copy">
