@@ -1,5 +1,5 @@
 <?php
-$page_title = 'Samsung Service Center - Get Official UAE Contact';
+$page_title = 'Samsung Service Center Dubai - Appliances Repair Abu Dhabi Sharjah';
 $page_desc  = 'Samsung service center across the UAE. 24/7 customer service, an experienced Samsung specialist at your door within 1 hour, an upfront quote on every repair and a full 90 day warranty.';
 $page_path  = '/';
 require __DIR__ . '/inc/header.php';
