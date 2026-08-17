@@ -337,6 +337,14 @@ ul { margin: 0; }
 .section-dark .callout p,
 .section-dark .card p { color: #c4c4d2; }
 .section-dark strong { color: #fff; }
+
+/* Every other dark ground on the site. The default strong is near-black
+   for white pages; landing on the banner or the call band it disappears
+   into the background, which is exactly what emboldening a phrase is
+   supposed to prevent. */
+.hero strong,
+.page-hero strong,
+.cta-band strong { color: #fff; }
 .section-dark .phone-big { color: #6fb0ff; }
 
 /* The accent under each heading. With the eyebrow gone this is the only
