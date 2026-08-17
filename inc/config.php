@@ -104,7 +104,21 @@ define('SITE_ICON',   'Samsung Service Center Site Icon');
 define('PAGE_HERO_IMAGE', 'Samsung Authorise Service Centre In UAE - Official Repair Centre');
 define('CTA_IMAGE',   'Call Our Experts Now for Fast, Affordable, and Professional Support in the UAE');
 
-define('SITE_URL', $__scheme . '://' . ($_SERVER['HTTP_HOST'] ?? LIVE_HOST) . BASE);
+/**
+ * The address the site calls its own.
+ *
+ * Live, this is always LIVE_HOST — never the host the visitor happened to
+ * type. Reached at www, the page would otherwise declare itself canonical
+ * at www while the non-www copy declares itself canonical too, and a
+ * search engine then has two pages competing over one piece of content.
+ * .htaccess redirects www away; this is the belt to that pair of braces,
+ * and it also keeps the sitemap and robots.txt on one address.
+ *
+ * On staging the real host is kept, so the preview links to itself.
+ */
+define('SITE_URL', IS_STAGING
+    ? $__scheme . '://' . ($_SERVER['HTTP_HOST'] ?? LIVE_HOST) . BASE
+    : 'https://' . LIVE_HOST . BASE);
 
 // --- Business details -------------------------------------------------
 define('BIZ_NAME',    'Samsung Service Center');

@@ -18,6 +18,17 @@ Options -Indexes -MultiViews
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  # --- One address ---------------------------------------------------
+  # www and non-www are two different addresses as far as a search engine
+  # is concerned, and a site reachable at both splits its own ranking
+  # between them. Everything is sent to the version without www.
+  #
+  # This rule sends straight to https as well, so www over http arrives in
+  # a single redirect rather than being bounced twice. Each extra hop is
+  # another round trip before the page starts loading.
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
   # --- HTTPS ---------------------------------------------------------
   # The forwarded header is checked too: behind a proxy that terminates
   # TLS, %{HTTPS} reads "off" and this becomes a redirect loop without it.
