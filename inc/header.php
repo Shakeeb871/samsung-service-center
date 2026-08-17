@@ -103,7 +103,6 @@ $canonical  = SITE_URL . $page_path;
           <?php foreach ($SERVICES as $slug => $s): ?>
           <li><a href="<?= url('/services/' . $slug . '/') ?>"><?= $s['title'] ?></a></li>
           <?php endforeach; ?>
-          <li class="sub-all"><a href="<?= url('/services/') ?>">All services</a></li>
         </ul>
       </div>
 
