@@ -3,15 +3,15 @@
 # GitHub Pages does not run PHP, so the PHP in this repository never
 # reaches the web. build.php renders every page once and writes plain
 # HTML into dist/, and that is what gets published.
-#
-# Every push to main republishes. Nothing to click.
 
 name: Deploy to GitHub Pages
 
+# Run by hand only. The domain is served from PHP hosting, which pulls
+# this repository directly, so an automatic Pages deploy on every push
+# would only produce failure mail. Switch the push trigger back on if the
+# site ever moves to Pages.
 on:
-  push:
-    branches: [main]
-  workflow_dispatch:      # lets you rerun it by hand from the Actions tab
+  workflow_dispatch:
 
 permissions:
   contents: read

@@ -37,6 +37,12 @@ Options -Indexes -MultiViews
   # config.php holds the business details; header and footer are partials.
   RewriteRule ^inc/ - [F,L]
 
+  # The repository is cloned straight into the web root on PHP hosting,
+  # so the files that only matter to development end up public with it.
+  # build.php in particular would start a PHP server if anyone fetched it.
+  RewriteRule ^(build\.php|DEPLOY\.md|README\.md|\.gitignore)$ - [F,L]
+  RewriteRule ^(\.github|dist)/ - [F,L]
+
   # --- Branded 404 ---------------------------------------------------
   # A relative target, so it resolves inside whatever folder this file is
   # in. 404.php sets the 404 status itself.
