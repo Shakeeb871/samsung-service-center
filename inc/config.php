@@ -5,12 +5,21 @@
  */
 
 // ---------------------------------------------------------------------
-// Staging switch. While true, every page sends noindex. The site is on a
-// subdomain of aiqonquickcool.com.my, which is not its final address —
-// indexing it now puts a second copy of this content into Google that
-// later competes with the real domain.
+// The live address. Anything else serving these files — the staging
+// subdomain, a preview host, localhost — is treated as staging and sends
+// noindex on every page.
+//
+// This is worked out from the host rather than set by hand, because the
+// same files sit on both. A single true/false switch would mean either
+// the staging copy gets indexed and competes with the real domain for
+// its own content, or the real domain goes live still telling Google to
+// stay away. Neither is recoverable in an afternoon.
 // ---------------------------------------------------------------------
-define('IS_STAGING', true);
+define('LIVE_HOST', 'samsung-servicecenterdubai.com');
+
+$__host = strtolower($_SERVER['HTTP_HOST'] ?? LIVE_HOST);
+$__host = preg_replace('/:\d+$/', '', $__host);          // drop any :8080
+define('IS_STAGING', $__host !== LIVE_HOST && $__host !== 'www.' . LIVE_HOST);
 
 /**
  * Cache-busting asset URL.
@@ -89,7 +98,7 @@ define('SITE_ICON',   'Samsung Service Center Site Icon');
 define('PAGE_HERO_IMAGE', 'Samsung Authorise Service Centre In UAE - Official Repair Centre');
 define('CTA_IMAGE',   'Call Our Experts Now for Fast, Affordable, and Professional Support in the UAE');
 
-define('SITE_URL', $__scheme . '://' . ($_SERVER['HTTP_HOST'] ?? 'samsung.aiqonquickcool.com.my') . BASE);
+define('SITE_URL', $__scheme . '://' . ($_SERVER['HTTP_HOST'] ?? LIVE_HOST) . BASE);
 
 // --- Business details -------------------------------------------------
 define('BIZ_NAME',    'Samsung Service Center');
