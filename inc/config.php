@@ -17,6 +17,12 @@
 // ---------------------------------------------------------------------
 define('LIVE_HOST', 'samsung-servicecenterdubai.com');
 
+/* Set by build.php while it renders the static copy. On PHP hosting it
+   is never defined, so the site behaves exactly as it always has. */
+if (!defined('IS_STATIC')) {
+    define('IS_STATIC', (bool) getenv('STATIC_BUILD'));
+}
+
 $__host = strtolower($_SERVER['HTTP_HOST'] ?? LIVE_HOST);
 $__host = preg_replace('/:\d+$/', '', $__host);          // drop any :8080
 define('IS_STAGING', $__host !== LIVE_HOST && $__host !== 'www.' . LIVE_HOST);
@@ -110,6 +116,33 @@ define('BIZ_WHATSAPP',   '971506191442');
 
 // REPLACE — the enquiry form delivers here.
 define('BIZ_EMAIL', 'info@example.com');
+
+/**
+ * Where the enquiry forms post.
+ *
+ * On PHP hosting this is api/contact.php and nothing else is needed. On
+ * GitHub Pages there is no PHP, so it has to be an external endpoint —
+ * a Formspree form URL, for example:
+ *
+ *   define('FORM_ENDPOINT', 'https://formspree.io/f/xxxxxxx');
+ *
+ * Left empty on a static build, the forms are not printed at all and
+ * their place is taken by the call and WhatsApp panel. A form that
+ * silently throws messages away is worse than no form.
+ */
+define('FORM_ENDPOINT', getenv('FORM_ENDPOINT') ?: '');
+
+/** True when the build has nowhere to send a form. */
+function forms_enabled(): bool
+{
+    return !IS_STATIC || FORM_ENDPOINT !== '';
+}
+
+/** Where a form should post. */
+function form_action(): string
+{
+    return FORM_ENDPOINT !== '' ? FORM_ENDPOINT : url('/api/contact.php');
+}
 
 // REPLACE — or remove the address row from the footer if there is no
 // walk-in office.

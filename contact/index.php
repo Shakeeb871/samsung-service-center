@@ -51,7 +51,8 @@ require __DIR__ . '/../inc/header.php';
     </div>
 
     <div>
-      <form class="form-card" id="enquiry-form" action="<?= url('/api/contact.php') ?>" method="post">
+      <?php if (forms_enabled()): ?>
+      <form class="form-card" id="enquiry-form" action="<?= form_action() ?>" method="post">
 
         <div class="field">
           <label for="name">Your name</label>
@@ -104,6 +105,22 @@ require __DIR__ . '/../inc/header.php';
         <button class="btn" type="submit">Send enquiry</button>
         <p class="form-status" role="status" aria-live="polite"></p>
       </form>
+      <?php else: ?>
+      <?php /* Nowhere to post on this build, so the page offers the two
+               routes that reach a person directly instead. */ ?>
+      <div class="form-card contact-direct">
+        <h2>Reach us directly</h2>
+        <p>
+          The fastest route is a call or a WhatsApp message with the model number and a line about
+          what the appliance is doing. Our lines are open 24 hours.
+        </p>
+        <a class="call-card-num" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 22) ?><?= htmlspecialchars(BIZ_PHONE) ?></a>
+        <div class="contact-direct-actions">
+          <a class="btn" href="https://wa.me/<?= BIZ_WHATSAPP ?>" rel="noopener">WhatsApp us</a>
+          <a class="btn btn-dark" href="mailto:<?= BIZ_EMAIL ?>">Email us</a>
+        </div>
+      </div>
+      <?php endif; ?>
     </div>
 
   </div>

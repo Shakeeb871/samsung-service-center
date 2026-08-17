@@ -1647,3 +1647,26 @@ ul { margin: 0; }
   .fault-summary { padding: 15px 16px; gap: 12px; align-items: start; }
   .dept { padding: 22px 20px 20px; }
 }
+
+/* --- Direct contact, when a build has no form endpoint --------------- */
+
+.enquiry-direct {
+  background: #fff; border-radius: var(--r) var(--r) 0 0;
+  box-shadow: var(--shadow-lg);
+  padding: 22px 26px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 26px;
+}
+.enquiry-direct strong { display: block; color: var(--secondary); font-size: 1rem; }
+.enquiry-direct span { display: block; font-size: .86rem; color: var(--text); line-height: 1.6; }
+.enquiry-direct-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.contact-direct h2 { font-size: 1.3rem; margin-bottom: .5em; }
+.contact-direct p { font-size: .92rem; }
+.contact-direct .call-card-num { color: var(--primary-ink); margin: 4px 0 20px; }
+.contact-direct .call-card-num:hover { color: var(--primary-dark); }
+.contact-direct-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+@media (max-width: 600px) {
+  .enquiry-direct { padding: 20px; }
+  .enquiry-direct-actions .btn, .contact-direct-actions .btn { flex: 1 1 100%; }
+}

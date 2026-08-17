@@ -41,7 +41,8 @@ require __DIR__ . '/inc/header.php';
     </div>
 
     <div class="enquiry-bar" id="book">
-      <form id="enquiry-form" action="<?= url('/api/contact.php') ?>" method="post">
+      <?php if (forms_enabled()): ?>
+      <form id="enquiry-form" action="<?= form_action() ?>" method="post">
         <input type="text" name="name" placeholder="Your Name" required maxlength="80" autocomplete="name" aria-label="Your name">
         <input type="tel" name="phone" placeholder="Phone" required maxlength="30" autocomplete="tel" aria-label="Phone">
         <input type="email" name="email" placeholder="Your Email" maxlength="120" autocomplete="email" aria-label="Email">
@@ -57,6 +58,21 @@ require __DIR__ . '/inc/header.php';
         <button class="btn" type="submit">Submit</button>
         <p class="form-status" role="status" aria-live="polite"></p>
       </form>
+      <?php else: ?>
+      <?php /* No endpoint to post to on this build. The number and the
+               WhatsApp thread are what this bar was competing with
+               anyway. */ ?>
+      <div class="enquiry-direct">
+        <div>
+          <strong>Tell us what the appliance is doing</strong>
+          <span>Call or send the model number on WhatsApp &mdash; lines open 24 hours.</span>
+        </div>
+        <div class="enquiry-direct-actions">
+          <a class="btn" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 15) ?>Call <?= htmlspecialchars(BIZ_PHONE) ?></a>
+          <a class="btn btn-dark" href="https://wa.me/<?= BIZ_WHATSAPP ?>" rel="noopener">WhatsApp us</a>
+        </div>
+      </div>
+      <?php endif; ?>
     </div>
   </div>
 </section>
