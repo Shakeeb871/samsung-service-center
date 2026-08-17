@@ -1,3 +1,4 @@
+<?php echo emphasise(ob_get_clean()); ?>
 </main>
 
 <footer class="site-foot">

@@ -149,8 +149,8 @@ page_hero(
         <h2>Our Foundation And Why We Started Our Journey</h2>
       </div>
       <p>
-        Operating under the trusted operational standards of Art Works LLC, we saw a huge problem
-        in the UAE appliance repair industry many years ago. The market was completely flooded with
+        We saw a huge problem in the UAE appliance repair industry many years ago. The market was
+        completely flooded with
         uncertified mechanics and unreliable repair companies. Customers were tired of technicians
         arriving late, making false promises, and causing more damage to expensive appliances due
         to a lack of proper training.

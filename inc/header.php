@@ -4,6 +4,7 @@ require_once __DIR__ . '/icons.php';
 require_once __DIR__ . '/logo.php';
 require_once __DIR__ . '/media.php';
 require_once __DIR__ . '/page-hero.php';
+require_once __DIR__ . '/emphasis.php';
 
 /**
  * Pages set $page_title, $page_desc and $page_path before including this.
@@ -114,3 +115,8 @@ $canonical  = SITE_URL . $page_path;
 </header>
 
 <main id="main">
+<?php /* Everything between here and the closing tag is buffered so the
+         keyword, authority and fault terms can be bolded in one place
+         rather than by hand in nine files. Only text inside <p> is
+         touched — see inc/emphasis.php. */ ?>
+<?php ob_start(); ?>
