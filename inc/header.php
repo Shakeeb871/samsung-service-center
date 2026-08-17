@@ -47,6 +47,19 @@ $canonical  = SITE_URL . $page_path;
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <?= site_icon_tags() ?>
 <link rel="stylesheet" href="<?= asset('/assets/css/style.css') ?>">
+
+<?php /* Ownership proofs for Search Console and Ahrefs. Both are only
+         read on the live domain, but they cost nothing on any other host
+         and removing them by accident means re-verifying from scratch. */ ?>
+<meta name="google-site-verification" content="hEQA4aFrGiP4SnvUOcxb9uXtik_TFaYHJja5Hpmvw2o">
+<meta name="ahrefs-site-verification" content="6c2c62e6a56a85308447df139442f5fa77929f1323546085ffd413ca2fb1c878">
+
+<?php if (!IS_STAGING): ?>
+<?php /* Live only. On the staging subdomain this would report preview and
+         test traffic into the same figures as real visitors, and there is
+         no way to separate them again afterwards. */ ?>
+<script src="https://analytics.ahrefs.com/analytics.js" data-key="BZr4ZQue83Ra1wOouZBk/w" async></script>
+<?php endif; ?>
 </head>
 <body>
 <!-- build <?= build_id() ?> -->
