@@ -112,6 +112,13 @@ foreach ($generated as $route => $name) {
 copy_tree($root . '/assets', $dist . '/assets');
 echo "  assets/ copied\n";
 
+/* Google asks for /favicon.ico by that exact path, so it has to be a real
+   file at the root of the build too, not only inside assets/. */
+if (is_file($root . '/favicon.ico')) {
+    copy($root . '/favicon.ico', $dist . '/favicon.ico');
+    echo "  favicon.ico copied\n";
+}
+
 /* GitHub Pages reads the custom domain out of this file, and would
    otherwise drop the domain every time the branch is republished. */
 write_file($dist . '/CNAME', $host . "\n");

@@ -105,22 +105,46 @@ function hero_bg(): string
  * 3. apple-touch-icon at 180px. iOS ignores rel="icon" completely and
  *    screenshots the page instead when this is missing.
  *
+ * 4. A real file at /favicon.ico. Google requests that path directly no
+ *    matter what the page declares, and with no file there the request
+ *    fell through to the 404 page.
+ *
  * Nothing here is generated per request — the PNGs are committed files.
  */
 function site_icon_tags(): string
 {
     $out = [];
 
-    // Converted PNGs first. Whichever exists is authoritative.
+    /* Icon URLs carry no ?v= stamp. Everything else on the site does,
+       because a stale stylesheet is a broken page — but Google caches a
+       favicon by URL and refetches it rarely, so a URL that changes
+       whenever the file's timestamp does is a favicon it has to discover
+       all over again. These files change about once. */
+    $plain = function (string $path): string {
+        $enc = implode('/', array_map('rawurlencode', explode('/', ltrim($path, '/'))));
+        return url('/' . $enc);
+    };
+
+    /* 4. The root /favicon.ico. Google asks for this path directly,
+          whatever the page declares, and until it existed that request
+          fell through the rewrite rules and was answered with the HTML
+          404 page — an error document where an icon should be. It holds
+          16, 32 and 48 in one file; 48 is the size Google's guidance
+          names. */
+    if (is_file(dirname(__DIR__) . '/favicon.ico')) {
+        $out[] = '<link rel="icon" href="' . $plain('/favicon.ico') . '" sizes="48x48">';
+    }
+
+    // Converted PNGs next. Whichever exists is authoritative.
     $png96  = find_image('/assets/img', 'favicon-96');
     $png192 = find_image('/assets/img', 'favicon-192');
     $apple  = find_image('/assets/img', 'apple-touch-icon');
 
     if ($png96 !== null) {
-        $out[] = '<link rel="icon" type="image/png" sizes="96x96" href="' . asset($png96) . '">';
+        $out[] = '<link rel="icon" type="image/png" sizes="96x96" href="' . $plain($png96) . '">';
     }
     if ($png192 !== null) {
-        $out[] = '<link rel="icon" type="image/png" sizes="192x192" href="' . asset($png192) . '">';
+        $out[] = '<link rel="icon" type="image/png" sizes="192x192" href="' . $plain($png192) . '">';
     }
 
     // Only if no PNG was produced does the original upload stand in, and
@@ -131,14 +155,14 @@ function site_icon_tags(): string
             $ext  = strtolower(pathinfo($found, PATHINFO_EXTENSION));
             $mime = ['jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png',
                      'webp' => 'image/webp', 'avif' => 'image/avif'][$ext] ?? '';
-            $out[] = '<link rel="icon"' . ($mime ? ' type="' . $mime . '"' : '') . ' sizes="any" href="' . asset($found) . '">';
+            $out[] = '<link rel="icon"' . ($mime ? ' type="' . $mime . '"' : '') . ' sizes="any" href="' . $plain($found) . '">';
         } elseif (is_file(dirname(__DIR__) . '/assets/img/favicon.svg')) {
-            $out[] = '<link rel="icon" type="image/svg+xml" href="' . asset('/assets/img/favicon.svg') . '">';
+            $out[] = '<link rel="icon" type="image/svg+xml" href="' . $plain('/assets/img/favicon.svg') . '">';
         }
     }
 
     if ($apple !== null) {
-        $out[] = '<link rel="apple-touch-icon" sizes="180x180" href="' . asset($apple) . '">';
+        $out[] = '<link rel="apple-touch-icon" sizes="180x180" href="' . $plain($apple) . '">';
     }
 
     return implode("\n", $out);
