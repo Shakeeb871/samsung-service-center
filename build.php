@@ -114,9 +114,11 @@ echo "  assets/ copied\n";
 
 /* Google asks for /favicon.ico by that exact path, so it has to be a real
    file at the root of the build too, not only inside assets/. */
-if (is_file($root . '/favicon.ico')) {
-    copy($root . '/favicon.ico', $dist . '/favicon.ico');
-    echo "  favicon.ico copied\n";
+foreach (['favicon.ico', 'site.webmanifest'] as $f) {
+    if (is_file($root . '/' . $f)) {
+        copy($root . '/' . $f, $dist . '/' . $f);
+        echo "  $f copied\n";
+    }
 }
 
 /* GitHub Pages reads the custom domain out of this file, and would
