@@ -54,6 +54,14 @@ Options -Indexes -MultiViews
   RewriteRule ^(build\.php|DEPLOY\.md|README\.md|\.gitignore)$ - [F,L]
   RewriteRule ^(\.github|dist)/ - [F,L]
 
+  # --- The icon is never a web page ----------------------------------
+  # Browsers and Google both fetch /favicon.ico by that exact path. If the
+  # file were ever missing here, the rule below would answer it with the
+  # branded 404 — an HTML page where an icon is expected — and the tab
+  # would quietly go blank rather than anything failing visibly. A plain
+  # 404 on the icon is the honest answer and the easier one to spot.
+  RewriteRule ^(favicon\.ico|site\.webmanifest)$ - [L]
+
   # --- Branded 404 ---------------------------------------------------
   # A relative target, so it resolves inside whatever folder this file is
   # in. 404.php sets the 404 status itself.

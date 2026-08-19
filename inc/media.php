@@ -92,10 +92,22 @@ function hero_bg(): string
  * Three rules decide what goes here, and each of them was a real problem
  * before:
  *
- * 1. ONE rel="icon", full stop. Google supports one favicon per site and
- *    chooses by heuristic when a page declares several — so the page
- *    declares one, the root ICO, and the larger sizes live in the web
- *    manifest where they cannot compete with it.
+ * 1. The root ICO first, and a PNG behind it.
+ *
+ *    This was briefly cut down to the ICO alone, on the reasoning that
+ *    Google picks one favicon per site and should not be given a choice.
+ *    That was the wrong trade. Google picking between declarations is not
+ *    an error — it only mattered back when the declarations pointed at
+ *    DIFFERENT artwork, the uploaded logo against a gear this file used to
+ *    draw. Every icon here is now the same picture, so there is nothing to
+ *    pick wrongly.
+ *
+ *    What the single declaration did cost was the browser's fallback: with
+ *    one ICO declared and nothing behind it, any host that fails to serve
+ *    /favicon.ico leaves the tab blank. Shared hosting fails that request
+ *    in several ordinary ways — a rewrite catching it, the file not
+ *    deploying, the wrong content type meeting nosniff. A PNG behind it
+ *    costs one line and removes the whole class of failure.
  *
  * 2. PNG, not WebP. Google documents ICO, PNG, GIF, JPEG and SVG for
  *    favicons; WebP is not among them, and Safari and Firefox do not
@@ -126,36 +138,53 @@ function site_icon_tags(): string
         return url('/' . $enc);
     };
 
-    /* EXACTLY ONE rel="icon", and it is the root ICO.
-       Google documents one favicon per site: given several declarations it
-       picks between them by heuristic, and this site was giving it three
-       to choose from. One file, one URL, nothing to choose.
-       The ICO carries 16, 32 and 48 — 48 being the size Google's guidance
-       names — so a single declaration still covers every use. */
+    /* The root ICO. Google requests /favicon.ico by that exact path
+       whatever the page declares, so declaring it keeps the tag and the
+       fetch pointing at one URL. It carries 16, 32 and 48 in the one file;
+       48 is the size Google's guidance names. */
     $ico   = is_file(dirname(__DIR__) . '/favicon.ico');
     $apple = find_image('/assets/img', 'apple-touch-icon');
 
     if ($ico) {
-        $out[] = '<link rel="icon" href="' . $plain('/favicon.ico') . '" sizes="any">';
+        $out[] = '<link rel="icon" href="' . $plain('/favicon.ico') . '" sizes="48x48">';
     }
 
-    // Only if the ICO is missing does anything else claim rel="icon".
-    if (!$ico) {
-        $found = find_image('/assets/img', [SITE_ICON, 'site-icon', 'favicon', 'icon']);
-        if ($found !== null) {
-            $ext  = strtolower(pathinfo($found, PATHINFO_EXTENSION));
-            $mime = ['jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png',
-                     'webp' => 'image/webp', 'avif' => 'image/avif'][$ext] ?? '';
-            $out[] = '<link rel="icon"' . ($mime ? ' type="' . $mime . '"' : '') . ' sizes="any" href="' . $plain($found) . '">';
-        } elseif (is_file(dirname(__DIR__) . '/assets/img/favicon.svg')) {
-            $out[] = '<link rel="icon" type="image/svg+xml" href="' . $plain('/assets/img/favicon.svg') . '">';
+    /* The PNG behind it, so a tab is never blank because one file on one
+       host failed to serve. Declared with its real type and size rather
+       than sizes="any": a browser then knows what it is without fetching
+       it, and picks between this and the ICO on the size it needs.
+       Same artwork either way, so either choice is the right one. */
+    /* Named outright, largest first. find_image() would answer from the
+       directory's own order, which sorts favicon-192 before favicon-48 and
+       would hand back whichever it met first — and the size in the tag has
+       to be the size of the file it points at. */
+    $png = null;
+    foreach (['96' => 'favicon-96.png', '48' => 'favicon-48.png'] as $dim => $file) {
+        if (is_file(dirname(__DIR__) . '/assets/img/' . $file)) {
+            $png   = '/assets/img/' . $file;
+            $out[] = '<link rel="icon" type="image/png" sizes="' . $dim . 'x' . $dim
+                   . '" href="' . $plain($png) . '">';
+            break;
         }
     }
 
-    /* Different rel, so neither of these competes with the icon above.
+    /* Only with no ICO and no PNG at all does anything else claim the rel.
+       Note favicon.svg is deliberately not in this list — it is the gear
+       this project used to draw, not the uploaded logo, and declaring it
+       is how the site ends up showing two different icons again. */
+    if (!$ico && $png === null) {
+        $found = find_image('/assets/img', [SITE_ICON, 'site-icon', 'favicon', 'icon'], ['png', 'jpg', 'jpeg', 'gif']);
+        if ($found !== null) {
+            $ext  = strtolower(pathinfo($found, PATHINFO_EXTENSION));
+            $mime = ['jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg',
+                     'png' => 'image/png', 'gif' => 'image/gif'][$ext] ?? '';
+            $out[] = '<link rel="icon"' . ($mime ? ' type="' . $mime . '"' : '') . ' sizes="any" href="' . $plain($found) . '">';
+        }
+    }
+
+    /* Different rel, so neither of these competes with the icons above.
        apple-touch-icon is what iOS uses; the manifest is where the 192 and
-       512 live for the Android home screen, rather than as extra rel="icon"
-       declarations Google would have to choose between. */
+       512 live for the Android home screen. */
     if ($apple !== null) {
         $out[] = '<link rel="apple-touch-icon" sizes="180x180" href="' . $plain($apple) . '">';
     }
