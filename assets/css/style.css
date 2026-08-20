@@ -45,6 +45,11 @@
   --logo-blue:   #1b4fa8;
   --logo-orange: #f4771f;
 
+  /* Samsung's own corporate blue. Kept to the FAQ band and nothing else —
+     it is a manufacturer's colour, not this site's, and the interface
+     still runs on --primary everywhere. */
+  --samsung-blue: #1428a0;
+
   --secondary:      #232333;
   --secondary-soft: #32324a;
   --secondary-deep: #1a1a26;
@@ -1753,14 +1758,14 @@ ul { margin: 0; }
 
 /* --- FAQ ------------------------------------------------------------ */
 
-/* The band is the brand blue itself rather than one of the tints, which
-   is the one place on the page that happens.
-   White on #2d8cff measures about 3:1. That passes AA for large text and
-   fails it for body text, so the only thing sitting directly on the blue
-   is the heading — every answer is on a white card. That is why there is
-   no lead paragraph here: it would have been the one line on the page
-   nobody with low vision could read. */
-.faq-band { background: var(--primary); }
+/* Samsung's own corporate blue, and the one band on the site that is not
+   painted in this site's palette.
+   Going dark bought more than a colour: white on #1428a0 measures 11.4:1,
+   against about 3:1 on the lighter --primary. The lighter blue passed AA
+   for a heading and failed it for body text, which is why nothing but the
+   heading was allowed to sit on it. That ceiling is gone — any text can
+   go directly on this band now. */
+.faq-band { background: var(--samsung-blue); }
 .faq-band .section-head h2 { color: #fff; }
 
 /* The rule under the heading is brand blue everywhere else, which would
@@ -1812,7 +1817,7 @@ ul { margin: 0; }
    "active" state asked for, and the same colour as the band it sits on so
    the section reads as one thing rather than a stack of white boxes with
    a blue one in the middle. */
-.faq[open] > summary { background: var(--primary); }
+.faq[open] > summary { background: var(--samsung-blue); }
 .faq[open] > summary .faq-q { color: #fff; }
 
 /* A plus that becomes a minus. Two bars, one rotated out of the way —
