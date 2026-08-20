@@ -14,8 +14,9 @@ $page_path  = '/';
 require_once __DIR__ . '/inc/config.php';
 require_once __DIR__ . '/inc/media.php';
 require_once __DIR__ . '/inc/schema.php';
+require_once __DIR__ . '/inc/faqs.php';
 $page_schema_extra = array_merge(
-    [schema_service_list(SITE_URL . '/#services')],
+    [schema_service_list(SITE_URL . '/#services'), schema_faq($FAQS)],
     schema_all_services()
 );
 
@@ -332,7 +333,7 @@ require __DIR__ . '/inc/header.php';
   <div class="wrap reasons-grid">
 
     <div class="reasons-intro">
-      <h2>Reasons To Pick Our Samsung Service Center</h2>
+      <h2>Why Homeowners Trust UAE Samsung?</h2>
       <p>
         We are proud of our work and always endeavour to find ways to improve our services and,
         most importantly, the relationship with our customers. We guarantee to offer the same
@@ -438,6 +439,40 @@ require __DIR__ . '/inc/header.php';
         </div>
       </li>
     </ul>
+
+  </div>
+</section>
+
+<?php /* The questions, from inc/faqs.php — the same array the FAQPage
+         markup is built from, so the two can never describe different
+         things.
+
+         <details> rather than a div and a class: it opens with the script
+         off, the keyboard drives it without a single tabindex, find-in-page
+         reaches the closed answers, and Google indexes them. The animation
+         in main.js is layered on top of that, not holding it up. */ ?>
+<section class="section faq-band" aria-labelledby="faq-h2">
+  <div class="wrap">
+
+    <div class="section-head center">
+      <h2 id="faq-h2">What UAE Customers Ask About Samsung Appliance Repairs</h2>
+    </div>
+
+    <div class="faq-list">
+      <?php foreach ($FAQS as $i => list($q, $a)): ?>
+      <details class="faq"<?= $i === 0 ? ' open' : '' ?>>
+        <summary>
+          <span class="faq-q"><?= $q ?></span>
+          <span class="faq-mark" aria-hidden="true"></span>
+        </summary>
+        <div class="faq-body">
+          <div class="faq-inner">
+            <p><?= $a ?></p>
+          </div>
+        </div>
+      </details>
+      <?php endforeach; ?>
+    </div>
 
   </div>
 </section>

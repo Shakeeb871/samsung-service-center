@@ -64,17 +64,78 @@
   });
 
   // --- FAQ accordion --------------------------------------------------
-  // The answers are in the HTML and visible without JS; this only collapses
-  // them once the script runs, so a failed script leaves content readable.
-  var faqs = document.querySelectorAll('.faq-item');
-  Array.prototype.forEach.call(faqs, function (item) {
-    var q = item.querySelector('.faq-q');
-    if (!q) return;
-    item.classList.add('is-collapsed');
-    q.setAttribute('aria-expanded', 'false');
-    q.addEventListener('click', function () {
-      var open = !item.classList.toggle('is-collapsed');
-      q.setAttribute('aria-expanded', String(open));
+  // The accordion is a <details>, so it opens, closes, takes the keyboard
+  // and gets found by find-in-page with this script removed entirely. All
+  // this adds is the height animation, which <details> has no way to do
+  // on its own — the native element jumps.
+  //
+  // Everything below therefore bails out to the native behaviour rather
+  // than to a broken one: no Web Animations API, reduced motion asked for,
+  // or a row missing its panel, and the click is left alone.
+  var faqs = document.querySelectorAll('.faq');
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  Array.prototype.forEach.call(faqs, function (row) {
+    var summary = row.querySelector('summary');
+    var panel = row.querySelector('.faq-body');
+    if (!summary || !panel || !panel.animate) return;
+
+    var anim = null;
+    var closing = false;
+
+    // Every handler checks it is still the current animation before
+    // touching shared state. Without that check a cancelled animation's
+    // handler runs AFTER its replacement has started and clears the
+    // reference to it — so the next click finds nothing to cancel, the
+    // old animation runs to completion, and its onfinish closes a row the
+    // visitor has just reopened. That leaves details.open false with the
+    // panel still at full height: shut according to the DOM, open on the
+    // screen. Three fast clicks was enough to reproduce it.
+    function play(from, to, fade, duration, done) {
+      var previous = anim;
+      var current = panel.animate(
+        { height: [from + 'px', to + 'px'], opacity: fade },
+        { duration: duration, easing: 'cubic-bezier(.4, 0, .2, 1)' }
+      );
+
+      anim = current;
+      if (previous) previous.cancel();
+
+      current.onfinish = function () {
+        if (anim !== current) return;     // superseded — not ours to finish
+        anim = null;
+        if (done) done();
+      };
+      current.oncancel = function () {
+        if (anim === current) anim = null;
+      };
+    }
+
+    summary.addEventListener('click', function (e) {
+      if (reduceMotion && reduceMotion.matches) return;   // native jump, by request
+
+      e.preventDefault();
+
+      // Where the panel is right now, so an interrupted animation carries
+      // on from where it stopped instead of snapping to one end first.
+      var here = anim ? panel.getBoundingClientRect().height : (row.open ? null : 0);
+
+      // `closing` matters because the element is still open while the
+      // close animation runs: without it a second click reads as "close
+      // it again" and the row sticks shut.
+      if (!row.open || closing) {
+        closing = false;
+        row.open = true;                  // has to render before it can be measured
+        if (here === null) here = 0;
+        play(here, panel.scrollHeight, [here ? 1 : 0, 1], 260, null);
+      } else {
+        closing = true;
+        if (here === null) here = panel.scrollHeight;
+        play(here, 0, [1, 0], 220, function () {
+          row.open = false;
+          closing = false;
+        });
+      }
     });
   });
 

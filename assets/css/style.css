@@ -789,14 +789,11 @@ ul { margin: 0; }
 .info-list strong, .info-list a { color: var(--secondary); font-size: .94rem; text-decoration: none; font-weight: 500; }
 .info-list a:hover { color: var(--primary-ink); }
 
-/* --- FAQ ----------------------------------------------------------- */
-
-.faq-item { border-bottom: 1px solid var(--line); }
-.faq-q { width: 100%; text-align: left; background: none; border: 0; cursor: pointer; font: inherit; font-weight: 500; color: var(--secondary); padding: 18px 40px 18px 0; position: relative; }
-.faq-q::after { content: "+"; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 1.4rem; font-weight: 300; color: var(--primary-ink); }
-.faq-item:not(.is-collapsed) .faq-q::after { content: "\2212"; }
-.faq-a { padding-bottom: 18px; font-size: .89rem; }
-.faq-item.is-collapsed .faq-a { display: none; }
+/* The FAQ styles that used to sit here were for a .faq-item markup no
+   page has ever produced — and one of them, a .faq-q with its own "+"
+   drawn in ::after, would have printed a second plus sign next to the
+   real one on the new accordion. The live rules are at the end of this
+   file, under FAQ. */
 
 /* --- Page banner ---------------------------------------------------
    Every page except the homepage opens the same way: heading, one line,
@@ -1752,4 +1749,121 @@ ul { margin: 0; }
 @media (max-width: 600px) {
   .enquiry-direct { padding: 20px; }
   .enquiry-direct-actions .btn, .contact-direct-actions .btn { flex: 1 1 100%; }
+}
+
+/* --- FAQ ------------------------------------------------------------ */
+
+/* The band is the brand blue itself rather than one of the tints, which
+   is the one place on the page that happens.
+   White on #2d8cff measures about 3:1. That passes AA for large text and
+   fails it for body text, so the only thing sitting directly on the blue
+   is the heading — every answer is on a white card. That is why there is
+   no lead paragraph here: it would have been the one line on the page
+   nobody with low vision could read. */
+.faq-band { background: var(--primary); }
+.faq-band .section-head h2 { color: #fff; }
+
+/* The rule under the heading is brand blue everywhere else, which would
+   be invisible here. */
+.faq-band .section-head h2::after { background: rgba(255,255,255,.55); }
+
+.faq-list {
+  display: grid;
+  gap: 12px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.faq {
+  background: #fff;
+  border-radius: var(--r);
+  overflow: hidden;                  /* keeps the open row's fill inside the radius */
+  box-shadow: 0 1px 2px rgba(35,35,51,.06), 0 6px 18px rgba(35,35,51,.08);
+}
+
+.faq summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  cursor: pointer;
+  list-style: none;
+  transition: background-color .22s ease, color .22s ease;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::marker { content: ""; }
+
+.faq summary:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px rgba(35,35,51,.35);
+}
+
+.faq-q {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+  font-size: .98rem;
+  line-height: 1.5;
+  color: var(--secondary);
+  transition: color .22s ease;
+}
+
+/* The open row takes the brand blue and its text goes white — the
+   "active" state asked for, and the same colour as the band it sits on so
+   the section reads as one thing rather than a stack of white boxes with
+   a blue one in the middle. */
+.faq[open] > summary { background: var(--primary); }
+.faq[open] > summary .faq-q { color: #fff; }
+
+/* A plus that becomes a minus. Two bars, one rotated out of the way —
+   no icon font, no second SVG, and the rotation is the animation. */
+.faq-mark {
+  position: relative;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--r);
+  background: var(--primary-tint);
+  transition: background-color .22s ease, transform .28s cubic-bezier(.4, 0, .2, 1);
+}
+.faq-mark::before,
+.faq-mark::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--primary-ink);
+  border-radius: 1px;
+  transform: translate(-50%, -50%);
+  transition: background-color .22s ease, opacity .2s ease, transform .28s cubic-bezier(.4, 0, .2, 1);
+}
+.faq-mark::before { width: 12px; height: 2px; }
+.faq-mark::after  { width: 2px;  height: 12px; }
+
+.faq[open] > summary .faq-mark { background: rgba(255,255,255,.2); transform: rotate(180deg); }
+.faq[open] > summary .faq-mark::before { background: #fff; }
+.faq[open] > summary .faq-mark::after  { background: #fff; transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+
+/* main.js animates this element's height, so the padding has to live on
+   the child — height 0 with padding on the same box leaves a visible
+   band of white before the answer starts moving. */
+.faq-body { overflow: hidden; }
+.faq-inner { padding: 20px 22px 22px; border-top: 1px solid var(--line); }
+.faq-inner p { margin: 0; font-size: .92rem; line-height: 1.8; }
+
+/* Without a pointer, the whole row is the target and 44px is the size a
+   thumb actually hits. */
+@media (max-width: 600px) {
+  .faq-band { padding: 48px 0; }
+  .faq summary { padding: 15px 16px; gap: 12px; min-height: 44px; }
+  .faq-q { font-size: .92rem; }
+  .faq-inner { padding: 16px 16px 18px; }
+}
+
+/* The mark still turns; only the height animation in main.js is skipped,
+   and that check lives there. */
+@media (prefers-reduced-motion: reduce) {
+  .faq summary, .faq-q, .faq-mark, .faq-mark::before, .faq-mark::after {
+    transition-duration: .01ms;
+  }
 }

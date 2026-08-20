@@ -17,10 +17,9 @@
  * result are worth having; they are not worth inventing. The moment there
  * are real reviews with real authors, they belong here.
  *
- * FAQPage. There are no FAQ sections on these pages. Marking up questions
- * that a visitor cannot see is an invalid-markup penalty waiting to
- * happen — the rule is that structured data describes what is on the
- * page, not what could be.
+ * (FAQPage used to be on this list for the same reason — there were no FAQ
+ * sections. The homepage has one now, so schema_faq() below describes it,
+ * built from the same array the accordion is built from.)
  *
  * priceRange. No prices are published, so there is nothing honest to put
  * in it.
@@ -241,6 +240,46 @@ function social_image_plain(): ?string
           ?? find_image('/assets/img', [ABOUT_IMAGE, HERO_IMAGE, 'about', 'hero']);
 
     return schema_file_url($found);
+}
+
+/**
+ * The FAQ section, as FAQPage.
+ *
+ * Built from the same $FAQS the accordion is built from. That is not
+ * tidiness — it is the rule this markup lives under. Structured data has
+ * to describe what is on the page, and a question edited in one of two
+ * places is markup describing an answer the visitor cannot read.
+ *
+ * Worth being straight about what this does and does not buy. Google
+ * narrowed the FAQ rich result in 2023 to government and health sites, so
+ * this will almost certainly not draw dropdowns under the search result
+ * the way it once did. It is still read: it states plainly which text on
+ * the page is a question and which is its answer, and the assistants that
+ * now sit between a search and a click read exactly that.
+ *
+ * @param array $faqs [[question, answer], …] — HTML entities and all
+ */
+function schema_faq(array $faqs): array
+{
+    $items = [];
+    foreach ($faqs as $i => list($q, $a)) {
+        $items[] = [
+            '@type'          => 'Question',
+            '@id'            => SITE_URL . '/#faq-' . ($i + 1),
+            'name'           => schema_text($q),
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text'  => schema_text($a),
+            ],
+        ];
+    }
+
+    return [
+        '@type'      => 'FAQPage',
+        '@id'        => SITE_URL . '/#faq',
+        'mainEntity' => $items,
+        'inLanguage' => 'en-AE',
+    ];
 }
 
 /**
