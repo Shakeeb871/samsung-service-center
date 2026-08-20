@@ -33,7 +33,7 @@ require __DIR__ . '/inc/header.php';
           <span>Samsung appliance specialists across the UAE</span>
         </div>
 
-        <h1>Trusted Samsung Service Center for Expert Appliance Repairs</h1>
+        <h1>Trusted Samsung Appliance Repair Experts Serving UAE Homes</h1>
 
         <p>
           Samsung innovation makes everyday home life smooth, but when an appliance stops
@@ -137,7 +137,7 @@ require __DIR__ . '/inc/header.php';
 
     <div>
       <div class="section-head">
-        <h2>Best Samsung Service Center In United Arab Emirates</h2>
+        <h2>Reliable Samsung Appliance Repair Services Across the UAE</h2>
       </div>
       <p>
         Are you tired of repair services taking your appliance away for a &ldquo;simple
@@ -174,7 +174,7 @@ require __DIR__ . '/inc/header.php';
 <section class="section">
   <div class="wrap">
     <div class="section-head center">
-      <h2>Provide Comprehensive Samsung Appliances Repair Services</h2>
+      <h2>Complete Repair Solutions for Samsung Home Appliances</h2>
       <p>
         A failing appliance can cause endless hassle when technicians cannot diagnose the issue
         correctly. Our qualified technicians find the true root cause of the fault across all
@@ -192,7 +192,7 @@ require __DIR__ . '/inc/header.php';
           <?= service_photo($slug, $s) ?>
         </div>
         <div class="svc-body">
-          <h3><a href="<?= url('/services/' . $slug . '/') ?>"><?= $s['title'] ?></a></h3>
+          <h3><a href="<?= url('/services/' . $slug . '/') ?>"><?= $s['card'] ?? $s['title'] ?></a></h3>
           <p><?= $s['body'] ?></p>
           <a class="btn btn-block" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 16) ?>Call Us Now!</a>
         </div>
@@ -206,7 +206,7 @@ require __DIR__ . '/inc/header.php';
   <div class="cta-band-inner">
     <div class="cta-copy">
       <div class="cta-copy-inner">
-        <h2>Call Our Experts Now for Fast, Affordable, and Professional Support in the UAE</h2>
+        <h2>Get Professional Samsung Appliance Repair Support When You Need It</h2>
         <p>Expert repairs for home and commercial Samsung appliances, every day of the week.</p>
         <a class="cta-phone" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 26) ?><?= htmlspecialchars(BIZ_PHONE) ?></a>
       </div>
@@ -220,7 +220,7 @@ require __DIR__ . '/inc/header.php';
 <section class="section">
   <div class="wrap">
     <div class="section-head center">
-      <h2>We Cover Every State In UAE (Dubai, Abu Dhabi, Sharjah)</h2>
+      <h2>Samsung Appliance Repair Services Across Dubai, Abu Dhabi &amp; Sharjah</h2>
       <p>
         We cover every state in UAE no matter where you are located. Whether you need a
         Samsung service center Dubai, a Samsung service center Abu Dhabi, or service in
@@ -265,28 +265,28 @@ require __DIR__ . '/inc/header.php';
 <section class="section section-grey">
   <div class="wrap">
     <div class="section-head center">
-      <h2>How Our Samsung Service Center Works</h2>
+      <h2>How Our Samsung Appliance Repair Process Works</h2>
     </div>
 
     <ol class="flow">
       <li class="flow-step">
         <span class="flow-num">01</span>
-        <h3>Contact us 24/7</h3>
+        <h3>Tell Us About Your Samsung Appliance Problem</h3>
         <p>Our call centre is available 24/7 and our friendly team can advise and help you day or night.</p>
       </li>
       <li class="flow-step">
         <span class="flow-num">02</span>
-        <h3>1 hour</h3>
+        <h3>Get a Quick Response From Our Service Team</h3>
         <p>We aim to respond to emergency call-outs within an hour, subject to availability.</p>
       </li>
       <li class="flow-step">
         <span class="flow-num">03</span>
-        <h3>Issue, sorted</h3>
+        <h3>Our Technician Identifies the Cause of the Problem</h3>
         <p>Our engineers and property maintenance team will arrive on site to resolve the issues.</p>
       </li>
       <li class="flow-step">
         <span class="flow-num">04</span>
-        <h3>Problem, solved</h3>
+        <h3>Your Appliance Is Repaired and Thoroughly Tested</h3>
         <p>We cover every part of property maintenance and leave your home clean and tidy.</p>
       </li>
     </ol>
@@ -296,7 +296,7 @@ require __DIR__ . '/inc/header.php';
 <section class="section section-dark">
   <div class="wrap split">
     <div>
-      <h2>We Provide Honest 24/7 Samsung Customer Support</h2>
+      <h2>Samsung Appliance Support Available Around the Clock</h2>
       <p>
         Unresponsive customer care and unhandled complaints make appliance repairs stressful.
         Many companies ignore follow-up calls once they leave your home, leaving you confused if
@@ -312,7 +312,7 @@ require __DIR__ . '/inc/header.php';
     </div>
 
     <div class="callout">
-      <h3>For Complaint &amp; Other Issues Then Contact Our Official Number</h3>
+      <h3>Need Help After Your Repair? Speak With Our Support Team</h3>
       <p>
         Dealing with a technical complaint or a careless repair job from an unreliable service
         can feel helpless when no one takes responsibility.
@@ -333,7 +333,7 @@ require __DIR__ . '/inc/header.php';
   <div class="wrap reasons-grid">
 
     <div class="reasons-intro">
-      <h2>Why Homeowners Trust UAE Samsung?</h2>
+      <h2>Why UAE Homeowners Choose Our Samsung Repair Services</h2>
       <p>
         We are proud of our work and always endeavour to find ways to improve our services and,
         most importantly, the relationship with our customers. We guarantee to offer the same
@@ -352,7 +352,7 @@ require __DIR__ . '/inc/header.php';
       <li>
         <?= icon('clock', 34) ?>
         <div>
-          <h3>Our Specialist Arrive On Time</h3>
+          <h3>Technicians Ready for Your Scheduled Service Visit</h3>
           <p>
             We guarantee punctual visits by our certified specialists strictly within your agreed
             time slot. This prompt action prevents a minor appliance glitch from escalating into
@@ -364,7 +364,7 @@ require __DIR__ . '/inc/header.php';
       <li>
         <?= icon('chat', 34) ?>
         <div>
-          <h3>Professional Communication</h3>
+          <h3>Clear Communication From Diagnosis to Completion</h3>
           <p>
             Our dedicated communication department provides direct and honest updates with an
             instant response time. This ensures you stay fully informed at every stage of the
@@ -377,7 +377,7 @@ require __DIR__ . '/inc/header.php';
       <li>
         <?= icon('wallet', 34) ?>
         <div>
-          <h3>Honest Pricing (Clear Cost)</h3>
+          <h3>Clear Repair Costs Before the Work Begins</h3>
           <p>
             We provide transparent upfront quotes and supply genuine Samsung spare parts backed by
             a proper official invoice. This straightforward approach guarantees that you will never
@@ -390,7 +390,7 @@ require __DIR__ . '/inc/header.php';
       <li>
         <?= icon('shield', 34) ?>
         <div>
-          <h3>Trustworthy Samsung Repair Team</h3>
+          <h3>Experienced Technicians Who Understand Samsung Appliances</h3>
           <p>
             Our highly experienced technicians know every Samsung appliance inside out,
             specializing in both mechanical and electrical components. They accurately solve
@@ -403,7 +403,7 @@ require __DIR__ . '/inc/header.php';
       <li>
         <?= icon('gauge', 34) ?>
         <div>
-          <h3>Best Diagnostic Devices &amp; Tools</h3>
+          <h3>Professional Tools for Accurate Appliance Diagnosis</h3>
           <p>
             Our team utilizes advanced digital diagnostic devices and automated error scanners
             during every inspection. These modern tools pinpoint the exact root cause of any
@@ -416,7 +416,7 @@ require __DIR__ . '/inc/header.php';
       <li>
         <?= icon('phone', 34) ?>
         <div>
-          <h3>We Provide 24/7 Best Customer Support In The UAE</h3>
+          <h3>Ongoing Customer Support for Samsung Appliance Services</h3>
           <p>
             We run a dedicated 24/7 customer care service desk that covers all regions across the
             UAE. This round-the-clock availability ensures an immediate call response to handle any
@@ -428,7 +428,7 @@ require __DIR__ . '/inc/header.php';
       <li>
         <?= icon('tools', 34) ?>
         <div>
-          <h3>Successful Job</h3>
+          <h3>Every Repair Is Checked Before the Job Is Complete</h3>
           <p>
             We perform comprehensive on-site testing and thorough post-repair quality checks after
             every single job. This strict testing process proves that the appliance operates
@@ -455,7 +455,7 @@ require __DIR__ . '/inc/header.php';
   <div class="wrap">
 
     <div class="section-head center">
-      <h2 id="faq-h2">What UAE Customers Ask About Samsung Appliance Repairs</h2>
+      <h2 id="faq-h2">Frequently Asked Questions About Samsung Appliance Repairs in the UAE</h2>
     </div>
 
     <div class="faq-list">

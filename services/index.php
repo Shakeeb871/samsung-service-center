@@ -40,7 +40,10 @@ require __DIR__ . '/../inc/header.php';
           <?= service_photo($slug, $s) ?>
         </div>
         <div class="svc-body">
-          <h3><a href="<?= url('/services/' . $slug . '/') ?>"><?= $s['title'] ?></a></h3>
+          <?php /* The same card heading as the homepage. These are the
+                   same seven cards; a visitor moving between the two
+                   pages should not find them renamed. */ ?>
+          <h3><a href="<?= url('/services/' . $slug . '/') ?>"><?= $s['card'] ?? $s['title'] ?></a></h3>
           <p><?= $s['body'] ?></p>
           <a class="btn btn-block" href="tel:<?= BIZ_PHONE_LINK ?>"><?= icon('phone', 16) ?>Call Us Now!</a>
         </div>

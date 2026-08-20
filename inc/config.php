@@ -277,12 +277,20 @@ $EMIRATES = array_keys($AREAS);
 //          names describe the service rather than matching the slug,
 //          which is better for image search — so the slug is not assumed
 //          and the real name is recorded here.
+//   title  the service's name. Short on purpose — it is what the nav
+//          dropdown, the schema Service name, the sitemap image titles
+//          and llms.txt all read, and none of those wants a phrase.
+//   card   the heading printed on the service card, written long for the
+//          search terms it covers. Separate from title precisely so the
+//          menu is not sixty characters wide; falls back to title.
+//   short  one or two words, for the footer links and the enquiry select
 //   icon   key in inc/icons.php, drawn only if no photograph is found
 //   body   the copy that appears on the service card
 $SERVICES = [
   'samsung-washing-machine-repair' => [
     'image' => 'Samsung Washing Machine Repair',
     'title' => 'Samsung Washing Machine Repair',
+    'card'  => 'Samsung Washing Machine Repair for Water, Spin &amp; Error Code Issues',
     'short' => 'Washing Machine',
     'icon'  => 'washer',
     'body'  => 'Is your washer facing spinning failures, a drain malfunction, or showing error code E3, 4C, DE, or SE error in Samsung washing machine? A locked door or sudden stoppage can freeze your household work. Our Samsung washing machine service center diagnoses the exact issue on site. Whether you need to unlock Samsung washing machine controls, clear a 4C water inlet fault, or repair the drain pump, our certified technicians fix it instantly using genuine parts.',
@@ -290,6 +298,7 @@ $SERVICES = [
   'samsung-refrigerator-repair' => [
     'image' => 'Samsung Fridge Repair',
     'title' => 'Samsung Fridge &amp; Refrigerator Repair',
+    'card'  => 'Samsung Refrigerator Repair for Cooling &amp; Temperature Problems',
     'short' => 'Fridge &amp; Refrigerator',
     'icon'  => 'fridge',
     'body'  => 'Warm food, water pooling at the bottom, or excessive frost build-up indicates a serious cooling failure in your refrigerator. Delaying a repair risks spoiling hundreds of Dirhams in groceries. Our Samsung Fridge &amp; Refrigerator service center provides rapid emergency support. Our specialists check the inverter compressor, defrost sensors, and refrigerant lines to solve the fault quickly and restore optimal cooling.',
@@ -297,6 +306,7 @@ $SERVICES = [
   'samsung-dishwasher-repair' => [
     'image' => 'Samsung Dishwasher Repair',
     'title' => 'Samsung Dishwasher Repair',
+    'card'  => 'Samsung Dishwasher Repair for Drainage, Water &amp; Cleaning Issues',
     'short' => 'Dishwasher',
     'icon'  => 'dishwasher',
     'body'  => 'Dirty dishes after a cycle, standing water in the tub, or sudden power tripping means your dishwasher needs immediate expert attention. Our Samsung Dishwasher service center checks water inlet valves, spray arms, and drainage pumps directly at your home. We fix the root cause and restore perfect cleaning performance without unnecessary part replacements.',
@@ -304,6 +314,7 @@ $SERVICES = [
   'samsung-dryer-repair' => [
     'image' => 'Samsung Dryer Repair',
     'title' => 'Samsung Tumble Dryer Repair',
+    'card'  => 'Samsung Tumble Dryer Repair for Heating &amp; Drying Problems',
     'short' => 'Tumble Dryer',
     'icon'  => 'dryer',
     'body'  => 'A dryer that runs without heating, takes double the time to dry clothes, or makes loud drum noises ruins your laundry routine. Our Samsung Tumble Dryer service center inspects heating elements, thermal fuses, and belt drives. We complete on-site repairs swiftly for your samsung dryer service, ensuring your appliance operates safely and efficiently.',
@@ -311,6 +322,7 @@ $SERVICES = [
   'samsung-cooker-repair' => [
     'image' => 'Samsung Cooker Repair',
     'title' => 'Samsung Cooker Repair',
+    'card'  => 'Samsung Cooker Repair for Heating, Ignition &amp; Cooking Issues',
     'short' => 'Cooker',
     'icon'  => 'cooker',
     'body'  => 'Burners that refuse to ignite, uneven oven heating, or broken temperature controls make daily meal preparation unsafe and difficult. Our Samsung Cooker service center tests ignition modules, thermostats, and heating elements. We resolve electrical and gas faults on the spot so you can cook with complete confidence.',
@@ -318,6 +330,7 @@ $SERVICES = [
   'samsung-hood-repair' => [
     'image' => 'Samsung Hood Repair',
     'title' => 'Samsung Hood Repair',
+    'card'  => 'Samsung Cooker Hood Repair for Ventilation &amp; Motor Problems',
     'short' => 'Hood',
     'icon'  => 'hood',
     'body'  => 'Weak smoke extraction, harsh motor noise, or broken control buttons leave unpleasant odors and grease inside your kitchen. Our Samsung Hood service center inspects blower motors, duct connections, and filters. We clear airflow blockages and replace worn components to keep your kitchen air clean and fresh.',
@@ -325,6 +338,7 @@ $SERVICES = [
   'samsung-ac-repair' => [
     'image' => 'Samsung Air Conditioner Repair & Service',
     'title' => 'Samsung Air Conditioner Service &amp; Repair',
+    'card'  => 'Samsung AC Repair &amp; Servicing for Cooling &amp; Performance Issues',
     'short' => 'Air Conditioner',
     'icon'  => 'ac',
     'body'  => 'An AC leaking water, blowing warm air, or failing to start during the hot UAE summer creates unbearable indoor discomfort. Our Samsung Air Conditioner service center provides fast diagnostic checks for capacitors, PCB boards, and refrigerant levels. We perform precise servicing and repairs to restore powerful cooling quickly.',
