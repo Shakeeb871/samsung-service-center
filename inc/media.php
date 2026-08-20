@@ -138,33 +138,41 @@ function site_icon_tags(): string
         return url('/' . $enc);
     };
 
-    /* The root ICO. Google requests /favicon.ico by that exact path
+    /* The root ICO first. Google requests /favicon.ico by that exact path
        whatever the page declares, so declaring it keeps the tag and the
-       fetch pointing at one URL. It carries 16, 32 and 48 in the one file;
-       48 is the size Google's guidance names. */
+       fetch pointing at one URL.
+
+       sizes lists all three the file really holds rather than only the
+       largest. The attribute describes what is inside the file, and this
+       one genuinely carries 16, 32 and 48 — verified by parsing its own
+       directory. type is spelled out too: a browser then knows what it is
+       without fetching it first. */
     $ico   = is_file(dirname(__DIR__) . '/favicon.ico');
     $apple = find_image('/assets/img', 'apple-touch-icon');
 
     if ($ico) {
-        $out[] = '<link rel="icon" href="' . $plain('/favicon.ico') . '" sizes="48x48">';
+        $out[] = '<link rel="icon" type="image/x-icon" href="' . $plain('/favicon.ico')
+               . '" sizes="48x48 32x32 16x16">';
     }
 
-    /* The PNG behind it, so a tab is never blank because one file on one
-       host failed to serve. Declared with its real type and size rather
-       than sizes="any": a browser then knows what it is without fetching
-       it, and picks between this and the ICO on the size it needs.
-       Same artwork either way, so either choice is the right one. */
-    /* Named outright, largest first. find_image() would answer from the
-       directory's own order, which sorts favicon-192 before favicon-48 and
-       would hand back whichever it met first — and the size in the tag has
-       to be the size of the file it points at. */
+    /* PNGs behind it, smallest first, so a tab is never blank because one
+       file on one host failed to serve.
+
+       Each is declared at the size the file actually is — never
+       sizes="any" — so a browser picks the one closest to what it needs
+       and scales nothing. Every file is the same artwork, so whichever it
+       picks is the right one; there is nothing here to choose wrongly.
+
+       Named outright rather than looked up: find_image() answers from the
+       directory's own order, which sorts favicon-144 before favicon-48,
+       and the size in the tag has to be the size of the file it points at. */
     $png = null;
-    foreach (['96' => 'favicon-96.png', '48' => 'favicon-48.png'] as $dim => $file) {
-        if (is_file(dirname(__DIR__) . '/assets/img/' . $file)) {
-            $png   = '/assets/img/' . $file;
+    foreach ([48, 96, 144] as $dim) {
+        $file = '/assets/img/favicon-' . $dim . '.png';
+        if (is_file(dirname(__DIR__) . $file)) {
+            $png   = $file;
             $out[] = '<link rel="icon" type="image/png" sizes="' . $dim . 'x' . $dim
-                   . '" href="' . $plain($png) . '">';
-            break;
+                   . '" href="' . $plain($file) . '">';
         }
     }
 
