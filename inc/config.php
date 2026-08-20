@@ -175,6 +175,49 @@ define('BIZ_ADDRESS', 'Dubai, United Arab Emirates');
 
 define('BIZ_HOURS', '24/7 customer support');
 
+// --- Credentials ------------------------------------------------------
+//
+// The facts a search engine cannot work out from the copy, and that carry
+// weight precisely because they are checkable by someone who doubts them.
+// Each is empty until there is a real value; inc/schema.php omits any
+// property whose value is blank rather than publishing an empty one.
+//
+// FILL THESE IN. They are the difference between a site that says it is
+// established and a site that can be verified as established.
+
+// The year trading began. The copy says "over a decade" and "over 10
+// years"; this is the actual number behind that. Format: '2013'.
+define('BIZ_FOUNDED', '');
+
+// UAE trade licence number, and the emirate that issued it. This is the
+// single strongest thing on this list: it is a public record anyone can
+// look up, which is exactly what makes a claim of being established worth
+// anything. Example: '1234567' / 'Dubai'.
+define('BIZ_LICENCE',           '');
+define('BIZ_LICENCE_AUTHORITY', '');
+
+// Tax Registration Number, if VAT-registered. Another public record.
+define('BIZ_TRN', '');
+
+// How many engineers. The counter on the homepage says 20+, so this
+// matches it; change both together or they contradict each other.
+define('BIZ_TECHNICIANS', 20);
+
+/**
+ * Profiles the business also appears on, as full URLs.
+ *
+ * sameAs is how a search engine joins this website to the Google Business
+ * Profile, the Facebook page and the Instagram account and concludes they
+ * are one business rather than four. It is also the only honest way to
+ * support a claim of being authorized: a link to a page that says so and
+ * that the business does not control.
+ *
+ *   'https://www.google.com/maps/place/…'
+ *   'https://www.facebook.com/…'
+ *   'https://www.instagram.com/…'
+ */
+$SOCIAL_PROFILES = [];
+
 // Areas covered, by emirate. The coverage section reads this, and
 // $EMIRATES below is derived from it so the two can never drift apart.
 $AREAS = [

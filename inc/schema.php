@@ -163,7 +163,60 @@ function schema_business(): array
             'name'           => 'Samsung appliance repair services',
             'itemListElement' => schema_service_offers(),
         ],
+
+        /* What the business is expert in. Not a ranking switch — it is
+           how a search engine works out which subject this site belongs
+           to, and the list is the seven services so it cannot claim
+           expertise in anything the site does not offer. */
+        'knowsAbout' => schema_knows_about(),
+
+        'slogan' => schema_text(BIZ_TAGLINE),
     ];
+
+    /* --- Credentials -------------------------------------------------
+       Everything below is published only when there is a real value in
+       config. An empty foundingDate or a blank licence number is worse
+       than no property: it is a claim with nothing behind it, and it is
+       the kind of thing that gets a whole graph discounted. */
+
+    if (BIZ_FOUNDED !== '') {
+        $node['foundingDate'] = BIZ_FOUNDED;
+    }
+
+    if (BIZ_TECHNICIANS > 0) {
+        /* minValue rather than value, because the page says "20+" and
+           that is a floor, not a count. QuantitativeValue is what
+           schema.org provides for saying exactly that. */
+        $node['numberOfEmployees'] = [
+            '@type'    => 'QuantitativeValue',
+            'minValue' => (int) BIZ_TECHNICIANS,
+            'unitText' => 'technicians',
+        ];
+    }
+
+    /* A trade licence is a public record. That is the whole point of
+       putting it here: an established business is one whose claim to be
+       established can be looked up by somebody who doubts it. */
+    if (BIZ_LICENCE !== '') {
+        $node['identifier'] = [
+            '@type'                => 'PropertyValue',
+            'name'                 => 'UAE trade licence',
+            'propertyID'           => 'tradeLicense',
+            'value'                => BIZ_LICENCE,
+        ] + (BIZ_LICENCE_AUTHORITY !== ''
+            ? ['description' => 'Issued by ' . schema_text(BIZ_LICENCE_AUTHORITY)]
+            : []);
+    }
+
+    if (BIZ_TRN !== '') {
+        $node['vatID'] = BIZ_TRN;
+    }
+
+    /* The only honest support for a claim of being authorized: links to
+       pages that say so and that this business does not control. */
+    if ($GLOBALS['SOCIAL_PROFILES']) {
+        $node['sameAs'] = array_values($GLOBALS['SOCIAL_PROFILES']);
+    }
 
     if ($logo = schema_file_url(find_image('/assets/img', 'favicon-512', ['png']) ?: null)) {
         $node['logo'] = ['@type' => 'ImageObject', 'url' => $logo, 'width' => 512, 'height' => 512];
@@ -188,6 +241,27 @@ function social_image_plain(): ?string
           ?? find_image('/assets/img', [ABOUT_IMAGE, HERO_IMAGE, 'about', 'hero']);
 
     return schema_file_url($found);
+}
+
+/**
+ * The subjects the business is expert in.
+ *
+ * Built from $SERVICES rather than written out, so it can never claim
+ * expertise in something the site does not offer — which is the only way
+ * this property is worth anything.
+ */
+function schema_knows_about(): array
+{
+    global $SERVICES;
+
+    $out = [];
+    foreach ($SERVICES as $svc) {
+        $out[] = schema_text($svc['title']);
+    }
+    $out[] = 'Samsung home appliance repair';
+    $out[] = 'Genuine Samsung spare parts';
+
+    return $out;
 }
 
 /** One Offer per service, for the catalogue above. */
