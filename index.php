@@ -5,6 +5,20 @@
 $page_title = 'Samsung Authorized Service Center In UAE - Official Repairs';
 $page_desc  = 'Samsung service center across the UAE. 24/7 customer service, an experienced Samsung specialist at your door within 1 hour, an upfront quote on every repair and a full 90 day warranty.';
 $page_path  = '/';
+
+/* The homepage prints the same seven service cards the hub does — same
+   titles, same photographs, same copy — so it carries the same seven
+   Service nodes, plus its own ItemList. Each node keeps the @id of the
+   page that service lives on, so this is the same seven things described
+   twice rather than fourteen things. */
+require_once __DIR__ . '/inc/config.php';
+require_once __DIR__ . '/inc/media.php';
+require_once __DIR__ . '/inc/schema.php';
+$page_schema_extra = array_merge(
+    [schema_service_list(SITE_URL . '/#services')],
+    schema_all_services()
+);
+
 require __DIR__ . '/inc/header.php';
 ?>
 

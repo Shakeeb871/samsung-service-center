@@ -245,9 +245,16 @@ function schema_webpage(string $type, string $canonical, string $title, string $
  * a Service is the thing a search engine matches against "samsung fridge
  * repair dubai" and the place has to be on the node being matched.
  */
-function schema_service(string $slug, array $svc, string $canonical): array
+function schema_service(string $slug, array $svc, ?string $canonical = null): array
 {
     global $EMIRATES;
+
+    /* The service's own page is its canonical home wherever the node is
+       printed. The hub describes all seven, but each @id still points at
+       the page that service lives on, so the node the hub emits and the
+       node that page emits are the same node rather than two rival
+       descriptions of one service. */
+    $canonical = $canonical ?? SITE_URL . '/services/' . $slug . '/';
 
     $node = [
         '@type'       => 'Service',
@@ -273,8 +280,38 @@ function schema_service(string $slug, array $svc, string $canonical): array
     return $node;
 }
 
-/** The services hub: a list of the seven pages, in the order shown. */
-function schema_service_list(): array
+/**
+ * All seven services, described in full.
+ *
+ * For the pages that show every service rather than one: the hub and the
+ * homepage both print the seven cards with the same titles, photographs
+ * and copy, so a full Service node for each of them describes what is on
+ * the page rather than adding anything to it.
+ *
+ * Each node keeps the @id of its own page. A graph is keyed on @id, so
+ * the hub's copy of "Samsung Cooker Repair" and the cooker page's copy
+ * are one thing seen twice, not two things that have to agree.
+ */
+function schema_all_services(): array
+{
+    global $SERVICES;
+
+    $out = [];
+    foreach ($SERVICES as $slug => $svc) {
+        $out[] = schema_service($slug, $svc);
+    }
+    return $out;
+}
+
+/**
+ * The list of services, in the order shown.
+ *
+ * @param string|null $id  the @id to publish it under. Two pages carry
+ *                         this list — the hub and the homepage — and each
+ *                         needs its own, or the second is a duplicate
+ *                         declaration of the first.
+ */
+function schema_service_list(?string $id = null): array
 {
     global $SERVICES;
 
@@ -291,7 +328,7 @@ function schema_service_list(): array
 
     return [
         '@type'           => 'ItemList',
-        '@id'             => SITE_URL . '/services/#list',
+        '@id'             => $id ?? SITE_URL . '/services/#list',
         'name'            => 'Samsung appliance repair services',
         'numberOfItems'   => count($items),
         'itemListElement' => $items,
