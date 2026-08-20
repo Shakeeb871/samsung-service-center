@@ -40,6 +40,7 @@ foreach ($SERVICES as $slug => $_) {
 $generated = [
     '/robots.php'  => 'robots.txt',
     '/sitemap.php' => 'sitemap.xml',
+    '/llms.php'    => 'llms.txt',
     '/404.php'     => '404.html',
 ];
 

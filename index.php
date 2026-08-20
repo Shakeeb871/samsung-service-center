@@ -1,5 +1,8 @@
 <?php
-$page_title = 'Samsung Service Center Dubai - Appliances Repair Abu Dhabi Sharjah';
+/* Spelled Samsung. The title was supplied as "Samsnug" — the one word on
+   this page that cannot carry a typo, since it is the brand being
+   searched for and nobody searches the misspelling. */
+$page_title = 'Samsung Authorized Service Center In UAE - Official Repairs';
 $page_desc  = 'Samsung service center across the UAE. 24/7 customer service, an experienced Samsung specialist at your door within 1 hour, an upfront quote on every repair and a full 90 day warranty.';
 $page_path  = '/';
 require __DIR__ . '/inc/header.php';
@@ -74,6 +77,43 @@ require __DIR__ . '/inc/header.php';
       </div>
       <?php endif; ?>
     </div>
+  </div>
+</section>
+
+<?php /* The four figures, straight under the hero.
+         A <dl> rather than a list of divs: each one is a term and the
+         value that answers it, which is what a description list is, and a
+         screen reader then reads "appliances repaired, five thousand
+         plus" instead of two unrelated fragments.
+         The number is printed first in all four even where it was written
+         the other way round, because a row of counters is scanned down
+         the numbers — a column where two start with a figure and two
+         start with a word has nothing to scan. */ ?>
+<section class="counters" aria-label="Our record">
+  <div class="wrap">
+    <dl class="count-grid">
+      <?php /* Label first in the markup, number first on the screen. A
+               description list has to be written term-then-value to be
+               valid, and that is also the order it should be read aloud
+               in — "appliances repaired, five thousand plus". The eye
+               wants the opposite, so the flip is done in CSS. */ ?>
+      <div class="count">
+        <dt class="count-label">Appliances repaired</dt>
+        <dd class="count-n">5000<span>+</span></dd>
+      </div>
+      <div class="count">
+        <dt class="count-label">Technicians</dt>
+        <dd class="count-n">20<span>+</span></dd>
+      </div>
+      <div class="count">
+        <dt class="count-label">Customer satisfaction</dt>
+        <dd class="count-n">100<span>%</span></dd>
+      </div>
+      <div class="count">
+        <dt class="count-label">Available</dt>
+        <dd class="count-n">24/7</dd>
+      </div>
+    </dl>
   </div>
 </section>
 

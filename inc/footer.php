@@ -51,9 +51,16 @@
         <?= icon('phone', 20) ?>
         <div><span>Call Us</span><a href="tel:<?= BIZ_PHONE_LINK ?>"><?= htmlspecialchars(BIZ_PHONE) ?></a></div>
       </li>
-      <li>
+      <li class="is-stacked">
         <?= icon('mail', 20) ?>
-        <div><span>Email</span><a href="mailto:<?= BIZ_EMAIL ?>"><?= htmlspecialchars(BIZ_EMAIL) ?></a></div>
+        <?php /* Both addresses, stacked. The label stays singular in the
+                 eye and the two lines read as one contact route rather
+                 than as two rows competing for the same icon. */ ?>
+        <div class="foot-mails">
+          <span>Email</span>
+          <a href="mailto:<?= BIZ_EMAIL ?>"><?= htmlspecialchars(BIZ_EMAIL) ?></a>
+          <a href="mailto:<?= BIZ_EMAIL_SUPPORT ?>"><?= htmlspecialchars(BIZ_EMAIL_SUPPORT) ?></a>
+        </div>
       </li>
     </ul>
 

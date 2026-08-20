@@ -5,15 +5,25 @@ require_once __DIR__ . '/logo.php';
 require_once __DIR__ . '/media.php';
 require_once __DIR__ . '/page-hero.php';
 require_once __DIR__ . '/emphasis.php';
+require_once __DIR__ . '/schema.php';
 
 /**
  * Pages set $page_title, $page_desc and $page_path before including this.
  * $page_path is the canonical path with a leading slash.
+ *
+ * Two more are optional and drive the structured data:
+ *   $page_schema        WebPage (the default), ContactPage, AboutPage or
+ *                       CollectionPage — what kind of page this is
+ *   $page_schema_extra  extra nodes for this page's graph, e.g. the
+ *                       Service that a service page describes
  */
 $page_title = $page_title ?? BIZ_NAME;
 $page_desc  = $page_desc  ?? BIZ_TAGLINE;
 $page_path  = $page_path  ?? '/';
 $canonical  = SITE_URL . $page_path;
+
+$page_schema       = $page_schema       ?? 'WebPage';
+$page_schema_extra = $page_schema_extra ?? [];
 ?>
 <!doctype html>
 <html lang="en">
@@ -54,6 +64,10 @@ $canonical  = SITE_URL . $page_path;
          and removing them by accident means re-verifying from scratch. */ ?>
 <meta name="google-site-verification" content="hEQA4aFrGiP4SnvUOcxb9uXtik_TFaYHJja5Hpmvw2o">
 <meta name="ahrefs-site-verification" content="6c2c62e6a56a85308447df139442f5fa77929f1323546085ffd413ca2fb1c878">
+
+<?php /* Structured data. One graph per page — see inc/schema.php for what
+         is in it and, more to the point, what is deliberately left out. */ ?>
+<?= schema_tag($page_schema, $canonical, $page_title, $page_desc, $page_schema_extra) ?>
 
 <?php if (!IS_STAGING): ?>
 <?php /* Live only. On the staging subdomain this would report preview and

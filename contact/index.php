@@ -2,6 +2,7 @@
 $page_title = 'Contact Us | Samsung Service Center';
 $page_desc  = 'Book a Samsung appliance repair anywhere in the UAE. Send the model number and the fault, and get a response from our 24/7 call centre.';
 $page_path  = '/contact/';
+$page_schema = 'ContactPage';
 require __DIR__ . '/../inc/header.php';
 ?>
 
@@ -37,7 +38,15 @@ require __DIR__ . '/../inc/header.php';
         </li>
         <li>
           <?= icon('mail', 20) ?>
-          <div><span>Email</span><a href="mailto:<?= BIZ_EMAIL ?>"><?= htmlspecialchars(BIZ_EMAIL) ?></a></div>
+          <div><span>New enquiries</span><a href="mailto:<?= BIZ_EMAIL ?>"><?= htmlspecialchars(BIZ_EMAIL) ?></a></div>
+        </li>
+        <?php /* Two rows rather than two addresses on one, because this is
+                 the page whose whole job is sending the reader to the
+                 right place. The label is what does that work — the
+                 address on its own does not say which one to use. */ ?>
+        <li>
+          <?= icon('mail', 20) ?>
+          <div><span>Existing repairs</span><a href="mailto:<?= BIZ_EMAIL_SUPPORT ?>"><?= htmlspecialchars(BIZ_EMAIL_SUPPORT) ?></a></div>
         </li>
         <li>
           <?= icon('clock', 20) ?>

@@ -32,6 +32,17 @@
  */
 
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/media.php';
+require_once __DIR__ . '/schema.php';
+
+/* Every one of these pages describes exactly one Service, and the node is
+   built from $SERVICES rather than from $LP — so the markup, the card on
+   the hub and the menu entry cannot end up describing it differently.
+   header.php reads this, so it has to exist before the include. */
+$page_schema_extra = isset($SERVICES[$LP['slug']])
+    ? [schema_service($LP['slug'], $SERVICES[$LP['slug']], SITE_URL . $page_path)]
+    : [];
+
 require __DIR__ . '/header.php';
 
 page_hero(

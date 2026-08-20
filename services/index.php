@@ -2,6 +2,15 @@
 $page_title = 'Samsung Appliance Repair Services in the UAE';
 $page_desc  = 'Every Samsung appliance repair covered — washing machines, refrigerators, dishwashers, tumble dryers, cookers, hoods and air conditioners. 24/7 support and a specialist at your door within 1 hour.';
 $page_path  = '/services/';
+
+/* A hub whose subject is the list of pages under it, so it carries the
+   ItemList as well — same seven, same order the visitor sees. */
+$page_schema = 'CollectionPage';
+require_once __DIR__ . '/../inc/config.php';
+require_once __DIR__ . '/../inc/media.php';
+require_once __DIR__ . '/../inc/schema.php';
+$page_schema_extra = [schema_service_list()];
+
 require __DIR__ . '/../inc/header.php';
 ?>
 

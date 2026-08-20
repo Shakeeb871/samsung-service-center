@@ -13,6 +13,7 @@
 $page_title = 'About Us | The Most Trusted Samsung Service Center In The UAE';
 $page_desc  = 'A certified and authorized Samsung service center operating across the UAE for over a decade. Genuine parts, upfront pricing, punctual visits and a 90-day warranty on every repair.';
 $page_path  = '/about/';
+$page_schema = 'AboutPage';
 
 require __DIR__ . '/../inc/header.php';
 

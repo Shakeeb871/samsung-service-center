@@ -128,8 +128,19 @@ define('BIZ_PHONE',      '+971 50 619 1442');
 define('BIZ_PHONE_LINK', '+971506191442');
 define('BIZ_WHATSAPP',   '971506191442');
 
-// REPLACE — the enquiry form delivers here.
-define('BIZ_EMAIL', 'info@example.com');
+/**
+ * Two addresses, and the split is deliberate.
+ *
+ * BIZ_EMAIL is the general one and the only one the enquiry form delivers
+ * to — a form that fans out to two inboxes is a message two people each
+ * assume the other answered.
+ *
+ * BIZ_EMAIL_SUPPORT is printed beside it for someone who already has a job
+ * open and needs the engineer who did it, not the booking desk. Both are
+ * real mailboxes on the domain; neither is a placeholder any more.
+ */
+define('BIZ_EMAIL',         'info@samsung-servicecenterdubai.com');
+define('BIZ_EMAIL_SUPPORT', 'support@samsung-servicecenterdubai.com');
 
 /**
  * Where the enquiry forms post.
