@@ -23,5 +23,6 @@ Allow: /
 Disallow: /api/
 Disallow: /inc/
 Disallow: /deploy-check.php
+Disallow: /icon-check.php
 
 Sitemap: <?= SITE_URL ?>/sitemap.xml
