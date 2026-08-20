@@ -18,7 +18,7 @@ require __DIR__ . '/inc/header.php';
           <span>Samsung appliance specialists across the UAE</span>
         </div>
 
-        <h1>Samsung Service Center - Get Official UAE Contact</h1>
+        <h1>Trusted Samsung Service Center for Expert Appliance Repairs</h1>
 
         <p>
           Samsung innovation makes everyday home life smooth, but when an appliance stops
